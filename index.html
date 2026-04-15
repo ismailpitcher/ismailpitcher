@@ -908,7 +908,7 @@ async function triggerWorkflow(token, inputs) {
 }
 
 async function pollResult(runId, token, onStatus) {
-  const maxWait = 4 * 60 * 1000; // 4 minutes
+  const maxWait = 8 * 60 * 1000; // 8 minutes
   const start = Date.now();
 
   while(Date.now() - start < maxWait) {
@@ -937,7 +937,7 @@ async function pollResult(runId, token, onStatus) {
       }
     } catch(e) { /* not ready yet */ }
   }
-  throw new Error('Analysis timed out after 4 minutes. Check GitHub Actions tab for details.');
+  throw new Error('Analysis timed out after 8 minutes. Check GitHub Actions tab for details.');
 }
 
 async function run() {
