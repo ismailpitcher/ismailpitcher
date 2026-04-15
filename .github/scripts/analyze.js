@@ -10,7 +10,17 @@ const path = require('path');
 const SKILL    = process.env.SKILL;
 const TARGET   = process.env.TARGET;
 const CONTEXT  = process.env.CONTEXT || '';
-const MODEL    = process.env.MODEL || 'claude-sonnet-4-6';
+const MODEL_INPUT = process.env.MODEL || 'claude-sonnet-4-6';
+
+// Fallback chain — tries each model until one works
+const MODEL_CHAIN = [
+  MODEL_INPUT,
+  'claude-sonnet-4-6',
+  'claude-opus-4-6',
+  'claude-haiku-4-5-20251001',
+  'claude-3-7-sonnet-20250219',
+  'claude-3-5-sonnet-20241022',
+].filter((v, i, a) => a.indexOf(v) === i); // deduplicate
 const RUN_ID   = process.env.RUN_ID;
 const API_KEY  = process.env.ANTHROPIC_API_KEY;
 
@@ -228,57 +238,76 @@ async function main() {
   }
 
   console.log(`\n🎯 Pitcher AI Sales Analysis`);
-  console.log(`   Skill:  ${SKILL}`);
-  console.log(`   Target: ${TARGET}`);
-  console.log(`   Model:  ${MODEL}`);
-  console.log(`   Run ID: ${RUN_ID}\n`);
+  console.log(`   Skill:    ${SKILL}`);
+  console.log(`   Target:   ${TARGET}`);
+  console.log(`   Models:   ${MODEL_CHAIN.join(' → ')}`);
+  console.log(`   Run ID:   ${RUN_ID}\n`);
 
   const client = new Anthropic({ apiKey: API_KEY });
 
   const startTime = Date.now();
   let output = '';
+  let usedModel = '';
 
-  try {
-    const stream = await client.messages.stream({
-      model: MODEL,
-      max_tokens: 8096,
-      system: sk.sys,
-      messages: [{ role: 'user', content: sk.usr(TARGET, CONTEXT) }]
-    });
+  // Try each model in fallback chain
+  for (const model of MODEL_CHAIN) {
+    try {
+      console.log(`Trying model: ${model}`);
+      const stream = await client.messages.stream({
+        model,
+        max_tokens: 8096,
+        system: sk.sys,
+        messages: [{ role: 'user', content: sk.usr(TARGET, CONTEXT) }]
+      });
 
-    process.stdout.write('Streaming: ');
-    for await (const chunk of stream) {
-      if (chunk.type === 'content_block_delta' && chunk.delta.type === 'text_delta') {
-        output += chunk.delta.text;
-        process.stdout.write('.');
+      process.stdout.write('Streaming: ');
+      for await (const chunk of stream) {
+        if (chunk.type === 'content_block_delta' && chunk.delta.type === 'text_delta') {
+          output += chunk.delta.text;
+          process.stdout.write('.');
+        }
       }
-    }
-    console.log(' done.\n');
+      console.log(' done.\n');
+      usedModel = model;
+      break; // success — stop trying
 
-  } catch (err) {
-    const result = {
-      status: 'error',
-      run_id: RUN_ID,
-      skill: SKILL,
-      target: TARGET,
-      error: err.message,
-      timestamp: new Date().toISOString()
-    };
+    } catch (err) {
+      const isNotFound = err.status === 404 || (err.message && err.message.includes('not_found'));
+      if (isNotFound) {
+        console.log(`  ↳ Model not found, trying next...`);
+        continue;
+      }
+      // Non-404 error — save error result and exit
+      fs.mkdirSync('data/results', { recursive: true });
+      fs.writeFileSync(`data/results/${RUN_ID}.json`, JSON.stringify({
+        status: 'error', run_id: RUN_ID, skill: SKILL, target: TARGET,
+        error: err.message, timestamp: new Date().toISOString()
+      }, null, 2));
+      console.error('API error:', err.message);
+      process.exit(1);
+    }
+  }
+
+  if (!usedModel) {
+    const msg = `No working model found from chain: ${MODEL_CHAIN.join(', ')}`;
     fs.mkdirSync('data/results', { recursive: true });
-    fs.writeFileSync(`data/results/${RUN_ID}.json`, JSON.stringify(result, null, 2));
-    console.error('API error:', err.message);
+    fs.writeFileSync(`data/results/${RUN_ID}.json`, JSON.stringify({
+      status: 'error', run_id: RUN_ID, skill: SKILL, target: TARGET,
+      error: msg, timestamp: new Date().toISOString()
+    }, null, 2));
+    console.error(msg);
     process.exit(1);
   }
 
   const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
-  console.log(`✓ Analysis complete in ${elapsed}s (${output.length} chars)`);
+  console.log(`✓ Done in ${elapsed}s with ${usedModel} (${output.length} chars)`);
 
   const result = {
     status: 'done',
     run_id: RUN_ID,
     skill: SKILL,
     target: TARGET,
-    model: MODEL,
+    model: usedModel,
     output,
     elapsed: parseFloat(elapsed),
     timestamp: new Date().toISOString()
