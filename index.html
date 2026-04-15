@@ -217,19 +217,22 @@ select.hd-sel:focus{border-color:var(--blue);color:var(--text)}
     <h2>⚙️ Settings</h2>
     <p>Add your Anthropic API key to start analyzing prospects.</p>
     <div class="key-st no" id="key-banner">✗ No API key set</div>
-    <label>Anthropic API Key</label>
-    <input type="password" id="key-inp" placeholder="sk-ant-api03-…" autocomplete="off">
-    <label>Proxy URL <span style="color:var(--td);font-weight:400;text-transform:none;letter-spacing:0">(CORS fix — see README)</span></label>
-    <input type="text" id="proxy-inp" placeholder="https://your-worker.workers.dev" autocomplete="off">
+    <label>GitHub Personal Access Token</label>
+    <input type="password" id="key-inp" placeholder="ghp_…" autocomplete="off">
     <label>Default Model</label>
     <select id="mdl-sel-mo">
       <option value="claude-opus-4-5-20251001">Claude Opus 4 — Most capable</option>
       <option value="claude-sonnet-4-5-20251001" selected>Claude Sonnet 4 — Balanced (recommended)</option>
       <option value="claude-haiku-4-5-20251001">Claude Haiku 4 — Fastest</option>
     </select>
-    <div class="mo-info">🔒 Your API key is stored locally in your browser — never shared with anyone.<br>
-    Get your key: <a href="https://console.anthropic.com/settings/keys" target="_blank">console.anthropic.com</a><br>
-    Proxy needed? Deploy <strong>proxy/worker.js</strong> to <a href="https://workers.cloudflare.com" target="_blank">Cloudflare Workers</a> (free) and paste the URL above.</div>
+    <div class="mo-info">
+      🔒 Token is stored in your browser only — never shared.<br>
+      Required scopes: <strong>repo</strong> + <strong>workflow</strong><br>
+      Create: <a href="https://github.com/settings/tokens/new?scopes=repo,workflow" target="_blank">github.com/settings/tokens</a>
+      <br><br>
+      Also add <strong>ANTHROPIC_API_KEY</strong> as a repository secret:<br>
+      <a href="https://github.com/ismailpitcher/ismailpitcher/settings/secrets/actions/new" target="_blank">github.com/ismailpitcher/ismailpitcher/settings/secrets/actions</a>
+    </div>
     <div class="mo-acts">
       <button class="btn-ca" onclick="closeSettings()">Cancel</button>
       <button class="btn-pr" onclick="saveSettings()">Save</button>
@@ -861,101 +864,124 @@ function updateAPIStatus() {
   const banner = document.getElementById('key-banner');
   if(key) {
     dot.style.color = '#22c55e';
-    st.textContent = 'API Key Set';
-    if(banner){ banner.className='key-st ok'; banner.textContent=`✓ Key saved (…${key.slice(-4)})`; }
+    st.textContent = 'GitHub Token Set';
+    if(banner){ banner.className='key-st ok'; banner.textContent=`✓ Token saved (…${key.slice(-4)})`; }
   } else {
     dot.style.color = '#ef4444';
-    st.textContent = 'No API Key';
-    if(banner){ banner.className='key-st no'; banner.textContent='✗ No API key set'; }
+    st.textContent = 'No GitHub Token';
+    if(banner){ banner.className='key-st no'; banner.textContent='✗ No GitHub token set'; }
   }
 }
 
-// ── MAIN ANALYSIS ──────────────────────────────────────────────────────────────
+// ── GITHUB ACTIONS ANALYSIS ────────────────────────────────────────────────────
+const REPO = 'ismailpitcher/ismailpitcher';
+
+function genRunId() {
+  return `${Date.now()}-${Math.random().toString(36).slice(2,8)}`;
+}
+
+async function triggerWorkflow(token, inputs) {
+  const resp = await fetch(
+    `https://api.github.com/repos/${REPO}/actions/workflows/analyze.yml/dispatches`,
+    {
+      method: 'POST',
+      headers: {
+        'Authorization': `token ${token}`,
+        'Accept': 'application/vnd.github.v3+json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ ref: 'main', inputs })
+    }
+  );
+  if(!resp.ok) {
+    const err = await resp.json().catch(()=>({}));
+    throw new Error(err.message || `GitHub error ${resp.status} — check your token has repo + workflow scopes`);
+  }
+}
+
+async function pollResult(runId, token, onStatus) {
+  const maxWait = 4 * 60 * 1000; // 4 minutes
+  const start = Date.now();
+
+  while(Date.now() - start < maxWait) {
+    await new Promise(r => setTimeout(r, 5000));
+    const elapsed = Math.round((Date.now() - start) / 1000);
+    onStatus(elapsed < 35
+      ? `⏳ Waiting for Actions to start… (${elapsed}s)`
+      : `⚙️ Claude is analyzing… (${elapsed}s)`
+    );
+
+    try {
+      const resp = await fetch(
+        `https://api.github.com/repos/${REPO}/contents/data/results/${runId}.json?t=${Date.now()}`,
+        {
+          headers: {
+            'Authorization': `token ${token}`,
+            'Accept': 'application/vnd.github.v3+json',
+            'Cache-Control': 'no-cache'
+          }
+        }
+      );
+      if(resp.ok) {
+        const data = await resp.json();
+        const content = atob(data.content.replace(/\n/g,''));
+        return JSON.parse(content);
+      }
+    } catch(e) { /* not ready yet */ }
+  }
+  throw new Error('Analysis timed out after 4 minutes. Check GitHub Actions tab for details.');
+}
+
 async function run() {
   const target = document.getElementById('ti').value.trim();
   const context = document.getElementById('ctx').value.trim();
-  const apiKey = localStorage.getItem('p_key');
+  const token = localStorage.getItem('p_key');
   const model = document.getElementById('mdl-sel').value;
 
   if(!target) { toast('Enter a company name or URL','err'); document.getElementById('ti').focus(); return; }
-  if(!apiKey) { toast('Add your API key in ⚙️ Settings first','err'); openSettings(); return; }
+  if(!token) { toast('Add your GitHub token in ⚙️ Settings first','err'); openSettings(); return; }
 
   const sk = SKILLS.find(s => s.id === S.skill);
   S.streaming = true;
   S.output = '';
 
   showOutput(sk, target);
-  setStatus('Preparing analysis…');
-
   const runBtn = document.getElementById('run-btn');
   runBtn.disabled = true;
   runBtn.textContent = '⏳ Analyzing…';
 
-  try {
-    const proxyUrl = localStorage.getItem('p_proxy');
-    const endpoint = proxyUrl ? proxyUrl.replace(/\/$/, '') : 'https://api.anthropic.com/v1/messages';
+  const runId = genRunId();
 
-    const resp = await fetch(endpoint, {
-      method: 'POST',
-      headers: {
-        'x-api-key': apiKey,
-        'anthropic-version': '2023-06-01',
-        'content-type': 'application/json',
-        ...(!proxyUrl && {'anthropic-dangerous-allow-browser': 'true'})
-      },
-      body: JSON.stringify({
-        model,
-        max_tokens: 8096,
-        stream: true,
-        system: sk.sys,
-        messages: [{ role: 'user', content: sk.usr(target, context) }]
-      })
+  try {
+    setStatus('🚀 Triggering GitHub Actions…');
+
+    await triggerWorkflow(token, {
+      skill: S.skill,
+      target,
+      context: context || '',
+      model,
+      run_id: runId
     });
 
-    if(!resp.ok) {
-      const err = await resp.json();
-      hideStatus();
-      showError(err.error?.message || `API error ${resp.status}`);
-      return;
-    }
+    setStatus('⏳ Waiting for Actions to start… (0s)');
 
-    const reader = resp.body.getReader();
-    const dec = new TextDecoder();
-    let buf = '';
+    const result = await pollResult(runId, token, msg => setStatus(msg));
 
     hideStatus();
 
-    while(true) {
-      const {done, value} = await reader.read();
-      if(done) break;
-      buf += dec.decode(value, {stream:true});
-      const lines = buf.split('\n');
-      buf = lines.pop();
-
-      for(const line of lines) {
-        if(!line.startsWith('data: ')) continue;
-        const raw = line.slice(6).trim();
-        if(raw === '[DONE]') continue;
-        try {
-          const msg = JSON.parse(raw);
-          if(msg.type==='content_block_delta' && msg.delta?.type==='text_delta') {
-            S.output += msg.delta.text;
-            renderMD(S.output, true);
-          }
-          if(msg.type==='message_stop') {
-            renderMD(S.output, false);
-            saveHistory(sk, target);
-            setMeta(sk, target);
-            toast(`${sk.icon} Done!`, 'ok');
-          }
-          if(msg.type==='error') { showError(msg.error?.message || 'API error'); }
-        } catch(e) {}
-      }
+    if(result.status === 'error') {
+      showError(result.error || 'Analysis failed in GitHub Actions');
+    } else {
+      S.output = result.output;
+      renderMD(S.output, false);
+      saveHistory(sk, target);
+      setMeta(sk, target, result.elapsed);
+      toast(`${sk.icon} Done in ${result.elapsed}s!`, 'ok');
     }
 
   } catch(e) {
     hideStatus();
-    showError(e.message || 'Network error — check your connection.');
+    showError(e.message || 'Something went wrong.');
   }
 
   S.streaming = false;
@@ -999,9 +1025,10 @@ function showError(msg) {
   document.getElementById('run-btn').textContent = '▶ Analyze';
 }
 
-function setMeta(sk, target) {
+function setMeta(sk, target, elapsed) {
   const t = new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
-  document.getElementById('o-meta').textContent = `${sk.label} · ${target} · ${t}`;
+  const dur = elapsed ? ` · ${elapsed}s` : '';
+  document.getElementById('o-meta').textContent = `${sk.label} · ${target} · ${t}${dur}`;
 }
 
 // ── STATUS ─────────────────────────────────────────────────────────────────────
@@ -1061,7 +1088,6 @@ function openSettings() {
   inp.value = key ? '●'.repeat(24)+key.slice(-4) : '';
   inp.dataset.orig = key;
   inp.addEventListener('focus', function h(){ if(this.value.includes('●')) this.value=''; inp.removeEventListener('focus',h); }, {once:true});
-  document.getElementById('proxy-inp').value = localStorage.getItem('p_proxy')||'';
   document.getElementById('set-mo').classList.add('open');
   updateAPIStatus();
 }
@@ -1071,11 +1097,9 @@ function closeSettings() { document.getElementById('set-mo').classList.remove('o
 function saveSettings() {
   const raw = document.getElementById('key-inp').value.trim();
   const key = raw.includes('●') ? (document.getElementById('key-inp').dataset.orig||'') : raw;
-  const proxy = document.getElementById('proxy-inp').value.trim();
   const mdl = document.getElementById('mdl-sel-mo').value;
   document.getElementById('mdl-sel').value = mdl;
   if(key) localStorage.setItem('p_key', key); else localStorage.removeItem('p_key');
-  if(proxy) localStorage.setItem('p_proxy', proxy); else localStorage.removeItem('p_proxy');
   toast('Settings saved ✓', 'ok');
   closeSettings();
   updateAPIStatus();
