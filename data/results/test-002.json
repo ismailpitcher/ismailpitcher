@@ -1,0 +1,10 @@
+{
+  "status": "done",
+  "run_id": "test-002",
+  "skill": "quick",
+  "target": "Salesforce",
+  "model": "claude-sonnet-4-6",
+  "output": "# ⚡ Quick Snapshot: Salesforce\n**Fit Score: 72/100 · Grade: B+ · Scale demands smarter rep enablement**\n\n| Industry | Size | Key DM | Top Pain | Current Solution | Best Pitcher Angle |\n|---|---|---|---|---|---|\n| Enterprise SaaS | 70,000+ employees | EVP/VP Sales Enablement | Reps overwhelmed by content sprawl across clouds | Highspot / internal tools | Unified mobile-first enablement tied to CRM data |\n\n---\n\n## 🎯 Top 3 Reasons to Pursue\n\n1. **Ironic tension** — Salesforce sells CRM but struggles to activate consistent, compliant sales content across its own massive distributed field force\n2. **Global scale** — 70K+ employees across 30+ countries = massive ROI on standardized, localized content delivery\n3. **CRM-native pitch** — Pitcher's Salesforce integration is a natural conversation starter; speak their language, literally\n\n---\n\n## ⚠️ Biggest Risk\n\n**They build, don't buy.** Salesforce has deep internal dev resources and a \"why buy what we can build\" culture. Expect heavy NIH (Not Invented Here) resistance. Also — they may view Pitcher as competitive to Salesforce Enablement (formerly Allego acquisition territory).\n\n---\n\n## ✉️ Subject Lines to Test\n\n- *\"Your reps have Salesforce. Do they have the content to close?\"*\n- *\"70,000 sellers. One content experience?\"*\n- *\"The enablement gap inside the world's #1 CRM company\"*\n\n---\n\n## ▶️ Next Step\n\nTarget **VP of Global Sales Enablement** via LinkedIn. Lead with a benchmark stat on rep content utilization. Request a 20-min discovery call framed around field sales consistency — not technology. Avoid pitching *against* their stack; pitch *alongside* it.\n\n---\n*~280 words*",
+  "elapsed": 12.5,
+  "timestamp": "2026-04-15T18:03:16.723Z"
+}
