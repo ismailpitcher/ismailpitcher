@@ -47,14 +47,14 @@ Full analysis saved to PROSPECT-ANALYSIS.md
 ### One-Command Install
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/zubair-trabzada/ai-sales-team-claude/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/ismailpitcher/ismailpitcher/main/install.sh | bash
 ```
 
 ### Manual Install
 
 ```bash
-git clone https://github.com/zubair-trabzada/ai-sales-team-claude.git
-cd ai-sales-team-claude
+git clone https://github.com/ismailpitcher/ismailpitcher.git
+cd ismailpitcher
 ./install.sh
 ```
 
@@ -369,7 +369,7 @@ Output: MEETING-PREP.md
 ## Project Structure
 
 ```
-ai-sales-team-claude/
+ismailpitcher/
 │
 ├── sales/SKILL.md                     ← Main orchestrator (routes all /sales commands)
 │
@@ -493,7 +493,7 @@ ai-sales-team-claude/
 ./uninstall.sh
 
 # Or remotely
-curl -fsSL https://raw.githubusercontent.com/zubair-trabzada/ai-sales-team-claude/main/uninstall.sh | bash
+curl -fsSL https://raw.githubusercontent.com/ismailpitcher/ismailpitcher/main/uninstall.sh | bash
 ```
 
 Removes all skills, agents, scripts, and templates from `~/.claude/`. Python packages are not removed.
@@ -501,8 +501,8 @@ Removes all skills, agents, scripts, and templates from `~/.claude/`. Python pac
 ---
 
 <p align="center">
-  <strong>MIT License</strong> · Copyright (c) 2026 Zubair Trabzada
+  <strong>MIT License</strong> · Copyright (c) 2026 Ismail Egilmez · Pitcher AG
   <br><br>
-  <a href="https://github.com/zubair-trabzada/ai-sales-team-claude/issues">Report Bug</a> ·
-  <a href="https://github.com/zubair-trabzada/ai-sales-team-claude/issues">Request Feature</a>
+  <a href="https://github.com/ismailpitcher/ismailpitcher/issues">Report Bug</a> ·
+  <a href="https://github.com/ismailpitcher/ismailpitcher/issues">Request Feature</a>
 </p>

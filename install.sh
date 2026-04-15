@@ -25,7 +25,7 @@ echo ""
 # ---------------------------------------------------------------------------
 # Detect script directory (handle both local and curl | bash)
 # ---------------------------------------------------------------------------
-GITHUB_REPO="zubair-trabzada/ai-sales-team-claude"
+GITHUB_REPO="ismailpitcher/ismailpitcher"
 TEMP_DIR=""
 
 if [ -n "${BASH_SOURCE[0]}" ] && [ "${BASH_SOURCE[0]}" != "bash" ]; then
