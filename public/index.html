@@ -1,0 +1,1370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pitcher AI Sales Team</title>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+  /* ================================================================
+     BASE & RESET
+  ================================================================ */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:       #09102a;
+    --bg2:      #0f1a35;
+    --bg3:      #162040;
+    --bg4:      #1e2d56;
+    --border:   #243058;
+    --blue:     #3b82f6;
+    --blue-d:   #2563eb;
+    --purple:   #8b5cf6;
+    --green:    #22c55e;
+    --orange:   #f59e0b;
+    --red:      #ef4444;
+    --text:     #e2e8f0;
+    --text-m:   #94a3b8;
+    --text-d:   #64748b;
+    --font:     'Inter', 'Segoe UI', system-ui, sans-serif;
+    --mono:     'SF Mono', 'Fira Code', Consolas, monospace;
+    --r:        10px;
+    --r-sm:     6px;
+  }
+
+  html, body {
+    height: 100%;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font);
+    font-size: 14px;
+    line-height: 1.6;
+    overflow: hidden;
+  }
+
+  /* ================================================================
+     LAYOUT
+  ================================================================ */
+  #app {
+    display: grid;
+    grid-template-rows: 56px 1fr;
+    grid-template-columns: 300px 1fr;
+    grid-template-areas:
+      "header header"
+      "sidebar main";
+    height: 100vh;
+  }
+
+  /* ================================================================
+     HEADER
+  ================================================================ */
+  #header {
+    grid-area: header;
+    background: var(--bg2);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    gap: 16px;
+    z-index: 100;
+  }
+
+  .header-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+  }
+
+  .logo-icon {
+    width: 32px;
+    height: 32px;
+    background: linear-gradient(135deg, var(--blue), var(--purple));
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  .logo-text {
+    font-size: 15px;
+    font-weight: 700;
+    background: linear-gradient(90deg, #60a5fa, #a78bfa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    white-space: nowrap;
+  }
+
+  .logo-sub {
+    font-size: 11px;
+    color: var(--text-d);
+    font-weight: 400;
+  }
+
+  .header-spacer { flex: 1; }
+
+  .header-badge {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 11px;
+    color: var(--text-m);
+    white-space: nowrap;
+  }
+
+  .header-badge span { color: var(--green); }
+
+  #model-select {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: var(--r-sm);
+    color: var(--text-m);
+    font-size: 12px;
+    padding: 5px 10px;
+    cursor: pointer;
+    outline: none;
+    font-family: var(--font);
+  }
+
+  #model-select:focus { border-color: var(--blue); color: var(--text); }
+
+  .btn-icon {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: var(--r-sm);
+    color: var(--text-m);
+    font-size: 16px;
+    width: 34px;
+    height: 34px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s;
+    flex-shrink: 0;
+  }
+  .btn-icon:hover { background: var(--bg4); color: var(--text); border-color: var(--blue); }
+
+  /* ================================================================
+     SIDEBAR
+  ================================================================ */
+  #sidebar {
+    grid-area: sidebar;
+    background: var(--bg2);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .sidebar-section {
+    padding: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .sidebar-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-d);
+    margin-bottom: 10px;
+  }
+
+  #target-input {
+    width: 100%;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: var(--r-sm);
+    color: var(--text);
+    font-size: 13px;
+    padding: 9px 12px;
+    outline: none;
+    font-family: var(--font);
+    transition: border-color 0.15s;
+  }
+  #target-input:focus { border-color: var(--blue); }
+  #target-input::placeholder { color: var(--text-d); }
+
+  #analyze-btn {
+    width: 100%;
+    margin-top: 10px;
+    padding: 10px;
+    background: linear-gradient(135deg, var(--blue), var(--purple));
+    border: none;
+    border-radius: var(--r-sm);
+    color: white;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.15s, transform 0.1s;
+    font-family: var(--font);
+  }
+  #analyze-btn:hover { opacity: 0.9; }
+  #analyze-btn:active { transform: scale(0.98); }
+  #analyze-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  /* Skills list */
+  #skills-scroll {
+    flex: 1;
+    overflow-y: auto;
+    padding: 8px;
+  }
+
+  #skills-scroll::-webkit-scrollbar { width: 4px; }
+  #skills-scroll::-webkit-scrollbar-track { background: transparent; }
+  #skills-scroll::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+  .skill-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 12px;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: var(--r-sm);
+    cursor: pointer;
+    transition: all 0.15s;
+    text-align: left;
+    margin-bottom: 2px;
+  }
+  .skill-btn:hover {
+    background: var(--bg3);
+    border-color: var(--border);
+  }
+  .skill-btn.active {
+    background: var(--bg4);
+    border-color: var(--blue);
+  }
+
+  .skill-icon {
+    font-size: 18px;
+    width: 26px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+
+  .skill-info { flex: 1; min-width: 0; }
+
+  .skill-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    display: block;
+  }
+  .skill-btn.active .skill-name { color: #60a5fa; }
+
+  .skill-desc {
+    font-size: 11px;
+    color: var(--text-d);
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* History */
+  .sidebar-history {
+    border-top: 1px solid var(--border);
+    padding: 12px;
+    max-height: 180px;
+    overflow-y: auto;
+  }
+
+  .history-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 8px;
+    border-radius: var(--r-sm);
+    cursor: pointer;
+    transition: background 0.1s;
+    font-size: 12px;
+    color: var(--text-m);
+  }
+  .history-item:hover { background: var(--bg3); color: var(--text); }
+  .history-item .hi-icon { font-size: 14px; }
+  .history-item .hi-text { flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+  /* ================================================================
+     MAIN CONTENT
+  ================================================================ */
+  #main {
+    grid-area: main;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* Welcome state */
+  #welcome {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    gap: 32px;
+  }
+
+  .welcome-hero {
+    text-align: center;
+  }
+
+  .welcome-hero h1 {
+    font-size: 32px;
+    font-weight: 800;
+    background: linear-gradient(90deg, #60a5fa, #a78bfa, #34d399);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 8px;
+  }
+
+  .welcome-hero p {
+    font-size: 16px;
+    color: var(--text-m);
+    max-width: 500px;
+  }
+
+  .welcome-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+    max-width: 900px;
+    width: 100%;
+  }
+
+  .welcome-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    padding: 16px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .welcome-card:hover {
+    background: var(--bg3);
+    border-color: var(--blue);
+    transform: translateY(-1px);
+  }
+
+  .wc-icon { font-size: 24px; margin-bottom: 8px; }
+  .wc-name { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+  .wc-desc { font-size: 12px; color: var(--text-m); }
+
+  /* Output area */
+  #output-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .output-header {
+    padding: 14px 20px;
+    background: var(--bg2);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+  }
+
+  .output-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    flex: 1;
+  }
+
+  .output-meta { font-size: 12px; color: var(--text-d); }
+
+  .btn-sm {
+    padding: 5px 12px;
+    border-radius: var(--r-sm);
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s;
+    font-family: var(--font);
+    white-space: nowrap;
+  }
+
+  .btn-outline {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-m);
+  }
+  .btn-outline:hover { border-color: var(--blue); color: var(--text); }
+
+  .btn-ghost {
+    background: transparent;
+    border: none;
+    color: var(--text-d);
+  }
+  .btn-ghost:hover { color: var(--red); }
+
+  /* Status bar */
+  #status-bar {
+    padding: 8px 20px;
+    background: var(--bg3);
+    border-bottom: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--text-m);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  #status-bar.hidden { display: none; }
+
+  .spinner {
+    width: 14px;
+    height: 14px;
+    border: 2px solid var(--border);
+    border-top-color: var(--blue);
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    flex-shrink: 0;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* Markdown output */
+  #output-scroll {
+    flex: 1;
+    overflow-y: auto;
+    padding: 28px 36px;
+  }
+
+  #output-scroll::-webkit-scrollbar { width: 6px; }
+  #output-scroll::-webkit-scrollbar-track { background: transparent; }
+  #output-scroll::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+  #output-content {
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  /* Markdown styles */
+  #output-content h1 {
+    font-size: 24px;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 6px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  #output-content h2 {
+    font-size: 17px;
+    font-weight: 700;
+    color: #e2e8f0;
+    margin-top: 28px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  #output-content h3 {
+    font-size: 14px;
+    font-weight: 700;
+    color: #cbd5e1;
+    margin-top: 20px;
+    margin-bottom: 8px;
+  }
+
+  #output-content p {
+    color: #cbd5e1;
+    margin-bottom: 14px;
+    line-height: 1.8;
+  }
+
+  #output-content ul, #output-content ol {
+    padding-left: 20px;
+    margin-bottom: 14px;
+    color: #cbd5e1;
+    line-height: 1.8;
+  }
+
+  #output-content li { margin-bottom: 4px; }
+
+  #output-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    font-size: 13px;
+  }
+
+  #output-content th {
+    background: var(--bg3);
+    color: #94a3b8;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    padding: 8px 12px;
+    text-align: left;
+    border-bottom: 2px solid var(--border);
+  }
+
+  #output-content td {
+    padding: 9px 12px;
+    border-bottom: 1px solid var(--border);
+    color: #cbd5e1;
+    vertical-align: top;
+  }
+
+  #output-content tr:hover td { background: rgba(59, 130, 246, 0.04); }
+
+  #output-content code {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2px 6px;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: #93c5fd;
+  }
+
+  #output-content pre {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: var(--r-sm);
+    padding: 16px;
+    overflow-x: auto;
+    margin-bottom: 16px;
+  }
+
+  #output-content pre code {
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: 13px;
+    color: #e2e8f0;
+  }
+
+  #output-content blockquote {
+    border-left: 3px solid var(--blue);
+    padding: 8px 16px;
+    margin-bottom: 14px;
+    background: rgba(59, 130, 246, 0.06);
+    border-radius: 0 var(--r-sm) var(--r-sm) 0;
+    color: #94a3b8;
+  }
+
+  #output-content hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 24px 0;
+  }
+
+  #output-content strong { color: #e2e8f0; font-weight: 600; }
+  #output-content em { color: #a5b4fc; }
+
+  /* Score badge (auto-highlighted in output) */
+  .score-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 14px;
+    font-weight: 700;
+    margin: 12px 0;
+  }
+
+  /* Cursor blink during streaming */
+  .cursor {
+    display: inline-block;
+    width: 2px;
+    height: 16px;
+    background: var(--blue);
+    margin-left: 2px;
+    animation: blink 1s step-end infinite;
+    vertical-align: middle;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  /* ================================================================
+     SETTINGS MODAL
+  ================================================================ */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+  }
+  .modal-overlay.open { display: flex; }
+
+  .modal {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 28px;
+    width: 460px;
+    max-width: 95vw;
+  }
+
+  .modal h2 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  .modal p {
+    font-size: 13px;
+    color: var(--text-m);
+    margin-bottom: 20px;
+  }
+
+  .modal label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-m);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+  }
+
+  .modal input, .modal select {
+    width: 100%;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: var(--r-sm);
+    color: var(--text);
+    font-size: 13px;
+    padding: 10px 12px;
+    outline: none;
+    font-family: var(--font);
+    margin-bottom: 16px;
+    transition: border-color 0.15s;
+  }
+  .modal input:focus, .modal select:focus { border-color: var(--blue); }
+
+  .modal-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-top: 8px;
+  }
+
+  .btn-primary {
+    padding: 9px 20px;
+    background: linear-gradient(135deg, var(--blue), var(--purple));
+    border: none;
+    border-radius: var(--r-sm);
+    color: white;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: var(--font);
+  }
+  .btn-primary:hover { opacity: 0.9; }
+
+  .btn-cancel {
+    padding: 9px 20px;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: var(--r-sm);
+    color: var(--text-m);
+    font-size: 13px;
+    cursor: pointer;
+    font-family: var(--font);
+  }
+  .btn-cancel:hover { border-color: var(--text-m); color: var(--text); }
+
+  .api-key-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    padding: 8px 12px;
+    border-radius: var(--r-sm);
+    margin-bottom: 16px;
+  }
+  .api-key-status.set { background: rgba(34, 197, 94, 0.1); color: var(--green); }
+  .api-key-status.unset { background: rgba(239, 68, 68, 0.1); color: #fca5a5; }
+
+  /* ================================================================
+     TOAST
+  ================================================================ */
+  #toast {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: var(--r-sm);
+    padding: 10px 16px;
+    font-size: 13px;
+    color: var(--text);
+    z-index: 9999;
+    transform: translateY(80px);
+    opacity: 0;
+    transition: all 0.3s;
+    max-width: 320px;
+  }
+  #toast.show { transform: translateY(0); opacity: 1; }
+  #toast.success { border-color: var(--green); }
+  #toast.error { border-color: var(--red); }
+
+  /* ================================================================
+     RESPONSIVE
+  ================================================================ */
+  @media (max-width: 768px) {
+    #app {
+      grid-template-columns: 1fr;
+      grid-template-areas:
+        "header"
+        "main";
+    }
+    #sidebar { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div id="app">
+
+  <!-- ============================================================
+       HEADER
+  ============================================================ -->
+  <header id="header">
+    <div class="header-logo">
+      <div class="logo-icon">🎯</div>
+      <div>
+        <div class="logo-text">Pitcher AI Sales Team</div>
+        <div class="logo-sub">by Ismail Egilmez · Pitcher AG</div>
+      </div>
+    </div>
+
+    <div class="header-spacer"></div>
+
+    <div class="header-badge" id="api-status-badge">
+      <span id="api-dot">●</span> <span id="api-status-text">Checking...</span>
+    </div>
+
+    <select id="model-select" title="Claude model">
+      <option value="claude-opus-4-5-20251001">Opus 4 (Best)</option>
+      <option value="claude-sonnet-4-5-20251001" selected>Sonnet 4 (Fast)</option>
+      <option value="claude-haiku-4-5-20251001">Haiku 4 (Fastest)</option>
+    </select>
+
+    <button class="btn-icon" id="settings-btn" title="API Key Settings">⚙️</button>
+  </header>
+
+  <!-- ============================================================
+       SIDEBAR
+  ============================================================ -->
+  <aside id="sidebar">
+
+    <!-- Target input -->
+    <div class="sidebar-section">
+      <div class="sidebar-label">Company or URL</div>
+      <input
+        type="text"
+        id="target-input"
+        placeholder="e.g. stripe.com or Stripe Inc."
+        autocomplete="off"
+        spellcheck="false"
+      >
+      <button id="analyze-btn">▶ Analyze</button>
+    </div>
+
+    <!-- Skills -->
+    <div class="sidebar-label" style="padding: 12px 16px 4px; font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:var(--text-d);">Skills</div>
+    <div id="skills-scroll">
+      <!-- Populated by JS -->
+    </div>
+
+    <!-- History -->
+    <div class="sidebar-history" id="history-panel">
+      <div class="sidebar-label">Recent</div>
+      <div id="history-list">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+
+  </aside>
+
+  <!-- ============================================================
+       MAIN
+  ============================================================ -->
+  <main id="main">
+
+    <!-- Welcome screen -->
+    <div id="welcome">
+      <div class="welcome-hero">
+        <h1>AI-Powered Sales Intelligence</h1>
+        <p>Enter any company URL or name in the sidebar, choose a skill, and get instant B2B sales intelligence.</p>
+      </div>
+
+      <div class="welcome-grid" id="quick-skills-grid">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+
+    <!-- Output area (hidden initially) -->
+    <div id="output-wrapper" style="display:none;">
+
+      <div class="output-header">
+        <div id="output-icon" style="font-size:18px;"></div>
+        <div>
+          <div class="output-title" id="output-title">Analysis</div>
+          <div class="output-meta" id="output-meta"></div>
+        </div>
+        <div style="flex:1;"></div>
+        <button class="btn-sm btn-outline" id="copy-btn" onclick="copyOutput()">📋 Copy</button>
+        <button class="btn-sm btn-outline" id="export-btn" onclick="exportMarkdown()">💾 Export</button>
+        <button class="btn-sm btn-ghost" onclick="showWelcome()">✕</button>
+      </div>
+
+      <div id="status-bar" class="hidden">
+        <div class="spinner"></div>
+        <span id="status-text">Analyzing...</span>
+      </div>
+
+      <div id="output-scroll">
+        <div id="output-content"></div>
+      </div>
+
+    </div>
+
+  </main>
+
+</div>
+
+<!-- ============================================================
+     SETTINGS MODAL
+============================================================ -->
+<div class="modal-overlay" id="settings-modal">
+  <div class="modal">
+    <h2>⚙️ Settings</h2>
+    <p>Configure your Anthropic API key to use the AI Sales Team.</p>
+
+    <div id="key-status-banner" class="api-key-status unset">
+      ✗ No API key set
+    </div>
+
+    <label>Anthropic API Key</label>
+    <input
+      type="password"
+      id="api-key-input"
+      placeholder="sk-ant-api03-..."
+      autocomplete="off"
+    >
+
+    <label>Default Model</label>
+    <select id="model-select-modal">
+      <option value="claude-opus-4-5-20251001">Claude Opus 4 — Most capable (slower)</option>
+      <option value="claude-sonnet-4-5-20251001" selected>Claude Sonnet 4 — Balanced (recommended)</option>
+      <option value="claude-haiku-4-5-20251001">Claude Haiku 4 — Fastest (basic tasks)</option>
+    </select>
+
+    <div style="font-size:12px;color:var(--text-d);padding:10px;background:var(--bg3);border-radius:var(--r-sm);margin-bottom:16px;">
+      🔒 Your API key is stored locally in your browser and never sent anywhere except Anthropic's API.
+      Get your key at <a href="https://console.anthropic.com" target="_blank" style="color:var(--blue);">console.anthropic.com</a>
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeSettings()">Cancel</button>
+      <button class="btn-primary" onclick="saveSettings()">Save Settings</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div id="toast"></div>
+
+<script>
+// ================================================================
+// STATE
+// ================================================================
+const state = {
+  activeSkill: 'prospect',
+  currentOutput: '',
+  isStreaming: false,
+  skills: [],
+  history: JSON.parse(localStorage.getItem('pitcher_history') || '[]')
+};
+
+// ================================================================
+// INIT
+// ================================================================
+document.addEventListener('DOMContentLoaded', async () => {
+  await loadSkills();
+  renderSkills();
+  renderHistory();
+  checkAPIStatus();
+  loadSettings();
+
+  // Enter key on input
+  document.getElementById('target-input').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && !state.isStreaming) analyze();
+  });
+
+  document.getElementById('analyze-btn').addEventListener('click', () => {
+    if (!state.isStreaming) analyze();
+  });
+
+  document.getElementById('settings-btn').addEventListener('click', openSettings);
+  document.getElementById('settings-modal').addEventListener('click', (e) => {
+    if (e.target === e.currentTarget) closeSettings();
+  });
+});
+
+// ================================================================
+// LOAD SKILLS FROM SERVER
+// ================================================================
+async function loadSkills() {
+  try {
+    const res = await fetch('/api/skills');
+    state.skills = await res.json();
+  } catch (e) {
+    // Fallback skill list
+    state.skills = [
+      { id: 'prospect',   label: 'Full Prospect Audit',   icon: '🎯', description: 'Complete analysis with scoring' },
+      { id: 'quick',      label: 'Quick Snapshot',         icon: '⚡', description: '60-second prospect snapshot' },
+      { id: 'research',   label: 'Company Research',       icon: '🔬', description: 'Deep firmographics & intelligence' },
+      { id: 'qualify',    label: 'Lead Qualification',     icon: '📊', description: 'BANT + MEDDIC scoring' },
+      { id: 'contacts',   label: 'Decision Makers',        icon: '👥', description: 'Buying committee & org chart' },
+      { id: 'outreach',   label: 'Outreach Sequence',      icon: '📧', description: 'Cold email sequence (5 emails)' },
+      { id: 'followup',   label: 'Follow-Up Sequence',     icon: '🔄', description: 'Post-meeting follow-up emails' },
+      { id: 'prep',       label: 'Meeting Prep',           icon: '📋', description: 'Meeting brief & discovery questions' },
+      { id: 'proposal',   label: 'Client Proposal',        icon: '📄', description: 'Tailored client proposal' },
+      { id: 'objections', label: 'Objection Handling',     icon: '🛡️', description: 'Objection playbook' },
+      { id: 'icp',        label: 'ICP Builder',            icon: '🎯', description: 'Ideal Customer Profile' },
+      { id: 'competitors',label: 'Competitive Intel',      icon: '⚔️', description: 'Competitive landscape analysis' },
+      { id: 'report',     label: 'Pipeline Report',        icon: '📈', description: 'Sales pipeline analysis' }
+    ];
+  }
+}
+
+// ================================================================
+// RENDER SKILLS
+// ================================================================
+function renderSkills() {
+  const container = document.getElementById('skills-scroll');
+  const quickGrid = document.getElementById('quick-skills-grid');
+
+  container.innerHTML = '';
+  quickGrid.innerHTML = '';
+
+  state.skills.forEach(skill => {
+    // Sidebar button
+    const btn = document.createElement('button');
+    btn.className = `skill-btn ${skill.id === state.activeSkill ? 'active' : ''}`;
+    btn.dataset.skill = skill.id;
+    btn.innerHTML = `
+      <span class="skill-icon">${skill.icon}</span>
+      <span class="skill-info">
+        <span class="skill-name">${skill.label}</span>
+        <span class="skill-desc">${skill.description}</span>
+      </span>
+    `;
+    btn.addEventListener('click', () => selectSkill(skill.id));
+    container.appendChild(btn);
+
+    // Welcome grid card (first 8 skills only)
+    const idx = state.skills.indexOf(skill);
+    if (idx < 8) {
+      const card = document.createElement('div');
+      card.className = 'welcome-card';
+      card.innerHTML = `
+        <div class="wc-icon">${skill.icon}</div>
+        <div class="wc-name">${skill.label}</div>
+        <div class="wc-desc">${skill.description}</div>
+      `;
+      card.addEventListener('click', () => {
+        selectSkill(skill.id);
+        document.getElementById('target-input').focus();
+      });
+      quickGrid.appendChild(card);
+    }
+  });
+}
+
+function selectSkill(id) {
+  state.activeSkill = id;
+  document.querySelectorAll('.skill-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.skill === id);
+  });
+}
+
+// ================================================================
+// CHECK API STATUS
+// ================================================================
+async function checkAPIStatus() {
+  try {
+    const res = await fetch('/api/health');
+    const data = await res.json();
+    const hasKey = data.serverApiKey || !!localStorage.getItem('pitcher_api_key');
+
+    const dot = document.getElementById('api-dot');
+    const text = document.getElementById('api-status-text');
+    const banner = document.getElementById('key-status-banner');
+
+    if (hasKey) {
+      dot.style.color = '#22c55e';
+      text.textContent = 'API Key Set';
+      if (banner) {
+        banner.className = 'api-key-status set';
+        banner.textContent = '✓ API key configured';
+      }
+    } else {
+      dot.style.color = '#ef4444';
+      text.textContent = 'No API Key';
+    }
+  } catch (e) {
+    // Server might be starting
+  }
+}
+
+// ================================================================
+// MAIN ANALYZE FUNCTION
+// ================================================================
+async function analyze() {
+  const target = document.getElementById('target-input').value.trim();
+  if (!target) {
+    toast('Enter a company name or URL', 'error');
+    document.getElementById('target-input').focus();
+    return;
+  }
+
+  const apiKey = localStorage.getItem('pitcher_api_key') || '';
+  const skill = state.skills.find(s => s.id === state.activeSkill);
+  const model = document.getElementById('model-select').value;
+
+  state.isStreaming = true;
+  state.currentOutput = '';
+
+  // Show output area
+  showOutputArea(skill, target);
+
+  // Status
+  showStatus(`Preparing ${skill.label}...`);
+
+  try {
+    const res = await fetch('/api/analyze', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        skill: state.activeSkill,
+        target,
+        apiKey,
+        model,
+        fetchSite: true
+      })
+    });
+
+    if (!res.ok) {
+      const err = await res.json();
+      hideStatus();
+      showError(err.error || 'Analysis failed');
+      state.isStreaming = false;
+      return;
+    }
+
+    const reader = res.body.getReader();
+    const decoder = new TextDecoder();
+    let buffer = '';
+
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+
+      buffer += decoder.decode(value, { stream: true });
+      const lines = buffer.split('\n');
+      buffer = lines.pop();
+
+      for (const line of lines) {
+        if (!line.startsWith('data: ')) continue;
+        const raw = line.slice(6).trim();
+        if (!raw) continue;
+
+        try {
+          const msg = JSON.parse(raw);
+
+          if (msg.type === 'status') {
+            updateStatus(msg.message);
+          } else if (msg.type === 'text') {
+            hideStatus();
+            state.currentOutput += msg.text;
+            renderOutput(state.currentOutput, true);
+          } else if (msg.type === 'done') {
+            renderOutput(state.currentOutput, false);
+            saveToHistory(skill, target);
+            updateOutputMeta(skill, target);
+            toast(`${skill.icon} Analysis complete!`, 'success');
+          } else if (msg.type === 'error') {
+            hideStatus();
+            showError(msg.message);
+          }
+        } catch (e) { /* ignore parse errors */ }
+      }
+    }
+
+  } catch (err) {
+    hideStatus();
+    showError(err.message || 'Network error');
+  }
+
+  state.isStreaming = false;
+  document.getElementById('analyze-btn').disabled = false;
+  document.getElementById('analyze-btn').textContent = '▶ Analyze';
+}
+
+// ================================================================
+// OUTPUT RENDERING
+// ================================================================
+function showOutputArea(skill, target) {
+  document.getElementById('welcome').style.display = 'none';
+  document.getElementById('output-wrapper').style.display = 'flex';
+  document.getElementById('output-icon').textContent = skill.icon;
+  document.getElementById('output-title').textContent = `${skill.label}: ${target}`;
+  document.getElementById('output-meta').textContent = '';
+  document.getElementById('output-content').innerHTML = '';
+
+  document.getElementById('analyze-btn').disabled = true;
+  document.getElementById('analyze-btn').textContent = '⏳ Analyzing...';
+}
+
+function showWelcome() {
+  document.getElementById('welcome').style.display = 'flex';
+  document.getElementById('output-wrapper').style.display = 'none';
+  state.currentOutput = '';
+}
+
+function renderOutput(markdown, streaming) {
+  const content = document.getElementById('output-content');
+  const scroll = document.getElementById('output-scroll');
+
+  // Parse and render markdown
+  let html = marked.parse(markdown);
+  if (streaming) {
+    html += '<span class="cursor"></span>';
+  }
+  content.innerHTML = html;
+
+  // Auto-scroll to bottom while streaming
+  if (streaming) {
+    scroll.scrollTop = scroll.scrollHeight;
+  }
+}
+
+function showError(msg) {
+  const content = document.getElementById('output-content');
+  content.innerHTML = `
+    <div style="padding:24px;background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.3);border-radius:10px;color:#fca5a5;">
+      <strong style="font-size:16px;">⚠️ Error</strong>
+      <p style="margin-top:8px;color:#fca5a5;">${msg}</p>
+      ${!localStorage.getItem('pitcher_api_key') ? '<p style="margin-top:12px;font-size:13px;">👉 Click ⚙️ in the header to add your Anthropic API key.</p>' : ''}
+    </div>
+  `;
+  document.getElementById('analyze-btn').disabled = false;
+  document.getElementById('analyze-btn').textContent = '▶ Analyze';
+}
+
+function updateOutputMeta(skill, target) {
+  const now = new Date();
+  const time = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  document.getElementById('output-meta').textContent =
+    `${skill.label} · ${target} · ${time}`;
+}
+
+// ================================================================
+// STATUS BAR
+// ================================================================
+function showStatus(msg) {
+  const bar = document.getElementById('status-bar');
+  bar.classList.remove('hidden');
+  document.getElementById('status-text').textContent = msg;
+}
+
+function updateStatus(msg) {
+  document.getElementById('status-text').textContent = msg;
+}
+
+function hideStatus() {
+  document.getElementById('status-bar').classList.add('hidden');
+}
+
+// ================================================================
+// HISTORY
+// ================================================================
+function saveToHistory(skill, target) {
+  const item = {
+    skill: skill.id,
+    icon: skill.icon,
+    label: skill.label,
+    target,
+    output: state.currentOutput,
+    timestamp: Date.now()
+  };
+
+  state.history.unshift(item);
+  if (state.history.length > 20) state.history = state.history.slice(0, 20);
+  localStorage.setItem('pitcher_history', JSON.stringify(state.history));
+  renderHistory();
+}
+
+function renderHistory() {
+  const list = document.getElementById('history-list');
+  if (!list) return;
+
+  if (state.history.length === 0) {
+    list.innerHTML = '<div style="font-size:12px;color:var(--text-d);padding:4px 8px;">No recent analyses</div>';
+    return;
+  }
+
+  list.innerHTML = state.history.slice(0, 8).map((item, i) => `
+    <div class="history-item" onclick="loadHistory(${i})">
+      <span class="hi-icon">${item.icon}</span>
+      <span class="hi-text">${item.target}</span>
+    </div>
+  `).join('');
+}
+
+function loadHistory(index) {
+  const item = state.history[index];
+  if (!item) return;
+
+  const skill = state.skills.find(s => s.id === item.skill) || { icon: item.icon, label: item.label };
+  state.currentOutput = item.output;
+  state.activeSkill = item.skill;
+  selectSkill(item.skill);
+
+  document.getElementById('target-input').value = item.target;
+  showOutputArea(skill, item.target);
+  hideStatus();
+  renderOutput(item.output, false);
+  updateOutputMeta(skill, item.target);
+}
+
+// ================================================================
+// COPY & EXPORT
+// ================================================================
+function copyOutput() {
+  if (!state.currentOutput) return;
+  navigator.clipboard.writeText(state.currentOutput).then(() => {
+    toast('Copied to clipboard!', 'success');
+  });
+}
+
+function exportMarkdown() {
+  if (!state.currentOutput) return;
+  const target = document.getElementById('target-input').value.trim()
+    .replace(/[^a-zA-Z0-9]/g, '-').replace(/-+/g, '-').toLowerCase() || 'analysis';
+  const skill = state.activeSkill;
+  const filename = `Pitcher-${skill}-${target}-${Date.now()}.md`;
+
+  const blob = new Blob([state.currentOutput], { type: 'text/markdown' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  a.click();
+  URL.revokeObjectURL(url);
+  toast('Exported as Markdown!', 'success');
+}
+
+// ================================================================
+// SETTINGS
+// ================================================================
+function openSettings() {
+  const key = localStorage.getItem('pitcher_api_key') || '';
+  document.getElementById('api-key-input').value = key ? '●'.repeat(20) + key.slice(-4) : '';
+  document.getElementById('api-key-input').dataset.original = key;
+
+  const banner = document.getElementById('key-status-banner');
+  if (key) {
+    banner.className = 'api-key-status set';
+    banner.textContent = `✓ API key saved (•••• ${key.slice(-4)})`;
+  } else {
+    banner.className = 'api-key-status unset';
+    banner.textContent = '✗ No API key set';
+  }
+
+  const modal = document.getElementById('settings-modal');
+  modal.classList.add('open');
+
+  // Focus clears the masked value
+  const input = document.getElementById('api-key-input');
+  input.addEventListener('focus', function onFocus() {
+    if (this.value.includes('●')) this.value = '';
+    this.removeEventListener('focus', onFocus);
+  }, { once: true });
+}
+
+function closeSettings() {
+  document.getElementById('settings-modal').classList.remove('open');
+}
+
+function saveSettings() {
+  const rawValue = document.getElementById('api-key-input').value.trim();
+  const key = rawValue.includes('●') ? (document.getElementById('api-key-input').dataset.original || '') : rawValue;
+
+  // Sync model selection
+  const model = document.getElementById('model-select-modal').value;
+  document.getElementById('model-select').value = model;
+
+  if (key) {
+    localStorage.setItem('pitcher_api_key', key);
+    toast('Settings saved! API key stored.', 'success');
+  } else {
+    localStorage.removeItem('pitcher_api_key');
+    toast('API key cleared.', 'success');
+  }
+
+  closeSettings();
+  checkAPIStatus();
+}
+
+function loadSettings() {
+  const key = localStorage.getItem('pitcher_api_key');
+  // API key status is handled by checkAPIStatus
+}
+
+// ================================================================
+// TOAST
+// ================================================================
+function toast(msg, type = 'info') {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.className = `show ${type}`;
+  setTimeout(() => { el.className = ''; }, 3000);
+}
+
+// ================================================================
+// KEYBOARD SHORTCUTS
+// ================================================================
+document.addEventListener('keydown', (e) => {
+  // Escape closes modal
+  if (e.key === 'Escape') closeSettings();
+
+  // Cmd/Ctrl+K focuses search
+  if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+    e.preventDefault();
+    document.getElementById('target-input').focus();
+    document.getElementById('target-input').select();
+  }
+});
+</script>
+
+</body>
+</html>
