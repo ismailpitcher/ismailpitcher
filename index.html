@@ -812,6 +812,14 @@ const S = {
 
 // ── INIT ───────────────────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
+  // Auto-setup: ?setup=TOKEN in URL → save to localStorage, clean URL
+  const sp = new URLSearchParams(window.location.search);
+  const setupToken = sp.get('setup');
+  if (setupToken) {
+    localStorage.setItem('p_key', setupToken);
+    window.history.replaceState({}, '', window.location.pathname);
+  }
+
   renderSkills();
   renderHistory();
   updateAPIStatus();
