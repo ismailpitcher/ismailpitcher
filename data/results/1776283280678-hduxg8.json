@@ -1,0 +1,10 @@
+{
+  "status": "done",
+  "run_id": "1776283280678-hduxg8",
+  "skill": "quick",
+  "target": "Bayer",
+  "model": "claude-sonnet-4-6",
+  "output": "# ⚡ Quick Snapshot: Bayer AG\n**Fit Score: 88/100 · Grade: A · Global pharma needs sales excellence**\n\n| Industry | Size | Key DM | Top Pain | Current Solution | Best Pitcher Angle |\n|---|---|---|---|---|---|\n| Pharma/Life Sciences | 100K+ employees, €47B revenue | Chief Commercial Officer, VP Sales Ops | Rep compliance, complex product portfolios, HCP engagement | Likely Veeva CRM | Unified enablement layered on existing CRM |\n\n## 🎯 Top 3 Reasons to Pursue\n1. **Massive field force** — Thousands of pharma reps across 80+ countries need consistent, compliant content delivery. Pitcher's offline-first mobile app is built for exactly this.\n2. **Regulatory complexity** — MLR-approved content control is non-negotiable in pharma. Pitcher's content governance eliminates rogue materials in the field.\n3. **Veeva coexistence** — Bayer almost certainly runs Veeva CRM. Pitcher integrates cleanly, adding the engagement layer Veeva lacks without ripping out existing infrastructure.\n\n## ⚠️ Biggest Risk\nBayer is mid-restructure (divesting consumer health, cost-cutting aggressively). Budget freezes and long procurement cycles could stall momentum. Procurement gatekeepers will be fierce — need exec-level sponsorship early.\n\n## ✉️ Subject Lines to Test\n- *\"How Bayer's field reps could close the content compliance gap\"*\n- *\"What Veeva CRM can't do for your HCP conversations\"*\n- *\"3 minutes: Pitcher + Bayer field force fit\"*\n\n## ▶️ Next Step\nTarget the **VP of Sales Enablement or Commercial Excellence lead** in the Pharmaceuticals division (DACH or US). Reference a comparable pharma win (Roche, Novartis, Sanofi) in the opener. Request a 20-minute discovery call focused on field rep content compliance.",
+  "elapsed": 11.4,
+  "timestamp": "2026-04-15T20:01:41.121Z"
+}
