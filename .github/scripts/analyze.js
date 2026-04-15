@@ -10,7 +10,7 @@ const path = require('path');
 const SKILL    = process.env.SKILL;
 const TARGET   = process.env.TARGET;
 const CONTEXT  = process.env.CONTEXT || '';
-const MODEL    = process.env.MODEL || 'claude-sonnet-4-5-20251001';
+const MODEL    = process.env.MODEL || 'claude-sonnet-4-6';
 const RUN_ID   = process.env.RUN_ID;
 const API_KEY  = process.env.ANTHROPIC_API_KEY;
 

@@ -16,7 +16,7 @@ on:
       model:
         description: 'Claude model'
         required: false
-        default: 'claude-sonnet-4-5-20251001'
+        default: 'claude-sonnet-4-6'
       run_id:
         description: 'Unique run ID'
         required: true
