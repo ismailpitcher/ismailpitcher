@@ -1,0 +1,1904 @@
+{
+  "metadata": {
+    "fetchedAt": "2026-04-15T21:05:57.087Z",
+    "status": "ok",
+    "count": 105
+  },
+  "owners": {
+    "3987522": "Tyler Samani-Sprunk",
+    "14032261": "Mert Yentur",
+    "15808924": "Joan Soler",
+    "26136860": "PM Team North America",
+    "32105912": "PM Team Latam",
+    "39739461": "PM Team EMEA",
+    "46386929": "Automated Process",
+    "47929849": "Marc Schnabolk",
+    "75974046": "Jonathan Kohn",
+    "76143375": "Andrew Spedick",
+    "77771305": "Monika Klimkowska",
+    "79229525": "Pitcher Team",
+    "79422455": "Mark Swain",
+    "80166002": "PIA",
+    "81177819": "Jenny Reolfi",
+    "83038625": "Serdar Tokgoz",
+    "83259601": "Angela Kunz",
+    "83340100": "Jake Chapman",
+    "83687269": "Patrick O'Neil",
+    "83836738": "Joaquin Estrada",
+    "86056284": "doruk.ar@pitcher.com",
+    "86115999": "Caleb Chamberlain",
+    "86268003": "Kate Pobjoy",
+    "88958106": "gideon.schon@pitcher.com",
+    "89058004": "Abbi Jones",
+    "89313200": "Ismail Egilmez",
+    "94385208": "Sarah Leek",
+    "97049523": "Thomas Stone",
+    "139628101": "Dirk Abeel",
+    "155592063": "Orkun Bildir",
+    "184076353": "Greg Schottland",
+    "201852803": "Jim Franzel",
+    "221674775": "Anca Baiasu",
+    "322381990": "Aleksander Lipski",
+    "403009951": "Kris Dunn",
+    "414352017": "Bradford Griffin",
+    "561327962": "Clint Jackson",
+    "822026660": "Tom Aburrow-Newman",
+    "1146069861": "Dorota Popa",
+    "1252593517": "KEVIN CHEW",
+    "1808107048": "Eva DeBella",
+    "1844120064": "Jasmine Fleming",
+    "2084076925": "Brigid Ling"
+  },
+  "stages": {
+    "995739703": {
+      "label": "Stage 1 - Demo",
+      "displayOrder": 1,
+      "probability": 0.2,
+      "isClosed": false,
+      "pipelineId": "678921051",
+      "pipelineLabel": "New and Expansion Pipeline"
+    },
+    "995739704": {
+      "label": "Stage 3 - MEDDPICC",
+      "displayOrder": 3,
+      "probability": 0.6,
+      "isClosed": false,
+      "pipelineId": "678921051",
+      "pipelineLabel": "New and Expansion Pipeline"
+    },
+    "995739705": {
+      "label": "Stage 4 - Selected",
+      "displayOrder": 4,
+      "probability": 0.95,
+      "isClosed": false,
+      "pipelineId": "678921051",
+      "pipelineLabel": "New and Expansion Pipeline"
+    },
+    "995739708": {
+      "label": "Closed Won",
+      "displayOrder": 5,
+      "probability": 1,
+      "isClosed": true,
+      "pipelineId": "678921051",
+      "pipelineLabel": "New and Expansion Pipeline"
+    },
+    "995739709": {
+      "label": "Closed Lost",
+      "displayOrder": 6,
+      "probability": 0,
+      "isClosed": true,
+      "pipelineId": "678921051",
+      "pipelineLabel": "New and Expansion Pipeline"
+    },
+    "1006756883": {
+      "label": "Stage 0 - Discovery Meeting Scheduled",
+      "displayOrder": 0,
+      "probability": 0.05,
+      "isClosed": false,
+      "pipelineId": "678921051",
+      "pipelineLabel": "New and Expansion Pipeline"
+    },
+    "1009579862": {
+      "label": "Close Lost- Nurture",
+      "displayOrder": 7,
+      "probability": 0,
+      "isClosed": true,
+      "pipelineId": "678921051",
+      "pipelineLabel": "New and Expansion Pipeline"
+    },
+    "1022405800": {
+      "label": "90 Days from Renewal",
+      "displayOrder": 1,
+      "probability": 0.5,
+      "isClosed": false,
+      "pipelineId": "699588012",
+      "pipelineLabel": "Renewal Pipeline"
+    },
+    "1022405801": {
+      "label": "Contract Sent",
+      "displayOrder": 2,
+      "probability": 0.8,
+      "isClosed": false,
+      "pipelineId": "699588012",
+      "pipelineLabel": "Renewal Pipeline"
+    },
+    "1022425437": {
+      "label": "Upcoming Renewal",
+      "displayOrder": 0,
+      "probability": 0.5,
+      "isClosed": false,
+      "pipelineId": "699588012",
+      "pipelineLabel": "Renewal Pipeline"
+    },
+    "1022425438": {
+      "label": "Closed Won",
+      "displayOrder": 4,
+      "probability": 1,
+      "isClosed": true,
+      "pipelineId": "699588012",
+      "pipelineLabel": "Renewal Pipeline"
+    },
+    "1022425439": {
+      "label": "Closed Lost",
+      "displayOrder": 6,
+      "probability": 0,
+      "isClosed": true,
+      "pipelineId": "699588012",
+      "pipelineLabel": "Renewal Pipeline"
+    },
+    "1048001201": {
+      "label": "Contract Approved Awaiting Signature",
+      "displayOrder": 3,
+      "probability": 0.9,
+      "isClosed": false,
+      "pipelineId": "699588012",
+      "pipelineLabel": "Renewal Pipeline"
+    },
+    "1048095837": {
+      "label": "Ready for Invoicing",
+      "displayOrder": 5,
+      "probability": 1,
+      "isClosed": true,
+      "pipelineId": "699588012",
+      "pipelineLabel": "Renewal Pipeline"
+    },
+    "1142314253": {
+      "label": "Scoping Call",
+      "displayOrder": 0,
+      "probability": 0.2,
+      "isClosed": false,
+      "pipelineId": "781732165",
+      "pipelineLabel": "Professional Services"
+    },
+    "1142314254": {
+      "label": "LOE & Cost Shared",
+      "displayOrder": 1,
+      "probability": 0.4,
+      "isClosed": false,
+      "pipelineId": "781732165",
+      "pipelineLabel": "Professional Services"
+    },
+    "1142314256": {
+      "label": "Decision Maker Bought-In",
+      "displayOrder": 2,
+      "probability": 0.8,
+      "isClosed": false,
+      "pipelineId": "781732165",
+      "pipelineLabel": "Professional Services"
+    },
+    "1142314257": {
+      "label": "Contract Sent",
+      "displayOrder": 3,
+      "probability": 0.9,
+      "isClosed": false,
+      "pipelineId": "781732165",
+      "pipelineLabel": "Professional Services"
+    },
+    "1142314258": {
+      "label": "Closed Won",
+      "displayOrder": 4,
+      "probability": 1,
+      "isClosed": true,
+      "pipelineId": "781732165",
+      "pipelineLabel": "Professional Services"
+    },
+    "1142314259": {
+      "label": "Closed Lost",
+      "displayOrder": 5,
+      "probability": 0,
+      "isClosed": true,
+      "pipelineId": "781732165",
+      "pipelineLabel": "Professional Services"
+    },
+    "1341411669": {
+      "label": "Stage 2 - BANT",
+      "displayOrder": 2,
+      "probability": 0.4,
+      "isClosed": false,
+      "pipelineId": "678921051",
+      "pipelineLabel": "New and Expansion Pipeline"
+    }
+  },
+  "deals": [
+    {
+      "id": "53818854657",
+      "properties": {
+        "amount": "125000",
+        "bdr": "",
+        "closedate": "2026-06-19T17:56:58.643Z",
+        "createdate": "2026-01-14T16:23:47.126Z",
+        "dealname": "Virbac - New Deal",
+        "dealstage": "995739703",
+        "hs_deal_stage_probability": "0.5",
+        "hs_lastmodifieddate": "2026-04-15T21:01:09.261Z",
+        "hs_object_id": "53818854657",
+        "hubspot_owner_id": "83687269",
+        "pipeline": "678921051"
+      }
+    },
+    {
+      "id": "58634198791",
+      "properties": {
+        "amount": "49004.1",
+        "bdr": null,
+        "closedate": "2026-04-30T18:57:43.157Z",
+        "createdate": "2026-04-01T18:59:28.910Z",
+        "dealname": "Alcon - Insight Licenses",
+        "dealstage": "995739705",
+        "hs_deal_stage_probability": "1",
+        "hs_lastmodifieddate": "2026-04-15T19:51:51.433Z",
+        "hs_object_id": "58634198791",
+        "hubspot_owner_id": "79422455",
+        "pipeline": "678921051"
+      }
+    },
+    {
+      "id": "46958210916",
+      "properties": {
+        "amount": "34450",
+        "bdr": null,
+        "closedate": "2026-10-24T17:17:12.187Z",
+        "createdate": "2025-10-24T17:17:13.562Z",
+        "dealname": "Renewal - Rabobank",
+        "dealstage": "1022425437",
+        "hs_deal_stage_probability": "0.5",
+        "hs_lastmodifieddate": "2026-04-15T19:50:48.484Z",
+        "hs_object_id": "46958210916",
+        "hubspot_owner_id": "79422455",
+        "pipeline": "699588012"
+      }
+    },
+    {
+      "id": "58902455829",
+      "properties": {
+        "amount": "10000",
+        "bdr": "89313200",
+        "closedate": null,
+        "createdate": "2026-04-08T05:45:00.413Z",
+        "dealname": "Deva - Outbound - Ismail - 7Apr26",
+        "dealstage": "1006756883",
+        "hs_deal_stage_probability": "0.05000000000000000277555756156289135105907917022705078125",
+        "hs_lastmodifieddate": "2026-04-15T18:44:45.016Z",
+        "hs_object_id": "58902455829",
+        "hubspot_owner_id": "89313200",
+        "pipeline": "678921051"
+      }
+    },
+    {
+      "id": "54956373073",
+      "properties": {
+        "amount": "114100",
+        "bdr": null,
+        "closedate": "2026-06-30T20:12:45.625Z",
+        "createdate": "2026-01-28T19:52:48.900Z",
+        "dealname": "M10",
+        "dealstage": "1341411669",
+        "hs_deal_stage_probability": "0.3",
+        "hs_lastmodifieddate": "2026-04-15T18:43:27.653Z",
+        "hs_object_id": "54956373073",
+        "hubspot_owner_id": "83340100",
+        "pipeline": "678921051"
+      }
+    },
+    {
+      "id": "58208415488",
+      "properties": {
+        "amount": "75000",
+        "bdr": "89313200",
+        "closedate": "2026-10-16T15:30:15.738Z",
+        "createdate": "2026-03-23T15:26:35.417Z",
+        "dealname": "Novartis - Outbound - Ismail - 23Mar26",
+        "dealstage": "1006756883",
+        "hs_deal_stage_probability": "0.25",
+        "hs_lastmodifieddate": "2026-04-15T17:59:19.196Z",
+        "hs_object_id": "58208415488",
+        "hubspot_owner_id": "83687269",
+        "pipeline": "678921051"
+      }
+    },
+    {
+      "id": "28348656569",
+      "properties": {
+        "amount": "164776",
+        "bdr": "",
+        "closedate": "2026-11-27T18:58:31.257Z",
+        "createdate": "2024-10-25T09:06:27.069Z",
+        "dealname": "Lohmann & Rauscher",
+        "dealstage": "995739704",
+        "hs_deal_stage_probability": "0.2",
+        "hs_lastmodifieddate": "2026-04-15T17:57:29.696Z",
+        "hs_object_id": "28348656569",
+        "hubspot_owner_id": "83687269",
+        "pipeline": "678921051"
+      }
+    },
+    {
+      "id": "58686633042",
+      "properties": {
+        "amount": "31500",
+        "bdr": null,
+        "closedate": "2026-04-17T18:55:23.557Z",
+        "createdate": "2026-04-02T19:47:55.374Z",
+        "dealname": "Danone Nutrition - SF API Call Services (10K)",
+        "dealstage": "995739705",
+        "hs_deal_stage_probability": "0.75",
+        "hs_lastmodifieddate": "2026-04-15T16:06:38.226Z",
+        "hs_object_id": "58686633042",
+        "hubspot_owner_id": "79422455",
+        "pipeline": "678921051"
+      }
+    },
+    {
+      "id": "45144546869",
+      "properties": {
+        "amount": "100000",
+        "bdr": "",
+        "closedate": "2026-10-16T15:55:47.302Z",
+        "createdate": "2025-10-03T14:35:04.701Z",
+        "dealname": "Kellanova",
+        "dealstage": "1006756883",
+        "hs_deal_stage_probability": "0.05000000000000000277555756156289135105907917022705078125",
+        "hs_lastmodifieddate": "2026-04-15T15:31:44.287Z",
+        "hs_object_id": "45144546869",
+        "hubspot_owner_id": "83687269",
+        "pipeline": "678921051"
+      }
+    },
+    {
+      "id": "39150620243",
+      "properties": {
+        "amount": "75000",
+        "bdr": "",
+        "closedate": "2026-10-16T17:59:19.818Z",
+        "createdate": "2025-06-23T10:45:39.693Z",
+        "dealname": "Mars",
+        "dealstage": "1006756883",
+        "hs_deal_stage_probability": "0.05000000000000000277555756156289135105907917022705078125",
+        "hs_lastmodifieddate": "2026-04-15T15:29:43.940Z",
+        "hs_object_id": "39150620243",
+        "hubspot_owner_id": "83687269",
+        "pipeline": "678921051"
+      }
+    },
+    {
+      "id": "59186168335",
+      "properties": {
+        "amount": "10000",
+        "bdr": "89058004",
+        "closedate": "2026-08-18T15:25:43.772Z",
+        "createdate": "2026-04-15T15:25:05.948Z",
+        "dealname": "MANE RFI (inbound)",
+        "dealstage": "1006756883",
+        "hs_deal_stage_probability": "0.1",
+        "hs_lastmodifieddate": "2026-04-15T15:26:23Z",
+        "hs_object_id": "59186168335",
+        "hubspot_owner_id": "75974046",
+        "pipeline": "678921051"
+      }
+    },
+    {
+      "id": "56460950151",
+      "properties": {
+        "amount": "25000",
+        "bdr": null,
+        "closedate": "2026-07-31T17:51:53.300Z",
+        "createdate": "2026-02-18T14:33:10.395Z",
+        "dealname": "Victoria Bank ",
+        "dealstage": "1006756883",
+        "hs_deal_stage_probability": "0.05000000000000000277555756156289135105907917022705078125",
+        "hs_lastmodifieddate": "2026-04-15T15:16:15.299Z",
+        "hs_object_id": "56460950151",
+        "hubspot_owner_id": "83687269",
+        "pipeline": "678921051"
+      }
+    },
+    {
+      "id": "53818979181",
+      "properties": {
+        "amount": "53941.9",
+        "bdr": null,
+        "closedate": "2027-01-01T14:13:11.107Z",
+        "createdate": "2026-01-14T16:41:52.573Z",
+        "dealname": "Renewal - Straumann",
+        "dealstage": "1022425437",
+        "hs_deal_stage_probability": "0.5",
+        "hs_lastmodifieddate": "2026-04-15T15:12:33.808Z",
+        "hs_object_id": "53818979181",
+        "hubspot_owner_id": "86268003",
+        "pipeline": "699588012"
+      }
+    },
+    {
+      "id": "39490371653",
+      "properties": {
+        "amount": "5000",
+        "bdr": null,
+        "closedate": "2026-10-31T10:16:58.766Z",
+        "createdate": "2025-06-30T07:32:30.796Z",
+        "dealname": "Renewal - URGO Italy",
+        "dealstage": "1022425437",
+        "hs_deal_stage_probability": "0.5",
+        "hs_lastmodifieddate": "2026-04-15T15:08:34.032Z",
+        "hs_object_id": "39490371653",
+        "hubspot_owner_id": "86268003",
+        "pipeline": "699588012"
+      }
+    },
+    {
+      "id": "58332108811",
+      "properties": {
+        "amount": "50000",
+        "bdr": "89313200",
+        "closedate": "2026-06-30T14:48:13.212Z",
+        "createdate": "2026-03-26T09:07:18.478Z",
+        "dealname": "Imagicle - Inbound - Ismail - 25Mar26",
+        "dealstage": "1006756883",
+        "hs_deal_stage_probability": "0.1",
+        "hs_lastmodifieddate": "2026-04-15T15:02:11.380Z",
+        "hs_object_id": "58332108811",
+        "hubspot_owner_id": "83340100",
+        "pipeline": "678921051"
+      }
+    },
+    {
+      "id": "40589781265",
+      "properties": {
+        "amount": "57225",
+        "bdr": null,
+        "closedate": "2026-07-31T16:28:28.063Z",
+        "createdate": "2025-07-21T16:25:21.791Z",
+        "dealname": "Renewal - Exact Sciences - 2026 (1 Year)",
+        "dealstage": "1022425437",
+        "hs_deal_stage_probability": "0.5",
+        "hs_lastmodifieddate": "2026-04-15T14:33:13.068Z",
+        "hs_object_id": "40589781265",
+        "hubspot_owner_id": "79422455",
+        "pipeline": "699588012"
+      }
+    },
+    {
+      "id": "56896744261",
+      "properties": {
+        "amount": "662127.82",
+        "bdr": null,
+        "closedate": "2026-05-01T08:39:42.735Z",
+        "createdate": "2026-02-23T21:25:15.061Z",
+        "dealname": "Renewal - Zoetis - 2026",
+        "dealstage": "1022425437",
+        "hs_deal_stage_probability": "0.5",
+        "hs_lastmodifieddate": "2026-04-15T14:05:22.990Z",
+        "hs_object_id": "56896744261",
+        "hubspot_owner_id": "79422455",
+        "pipeline": "699588012"
+      }
+    },
+    {
+      "id": "40576531785",
+      "properties": {
+        "amount": "4800",
+        "bdr": null,
+        "closedate": "2025-07-21T16:37:07.333Z",
+        "createdate": "2025-07-21T16:36:40.599Z",
+        "dealname": "Exact Sciences Corporation - Professional Services",
+        "dealstage": "1142314253",
+        "hs_deal_stage_probability": "0.200000000000000011102230246251565404236316680908203125",
+        "hs_lastmodifieddate": "2026-04-15T14:01:56.811Z",
+        "hs_object_id": "40576531785",
+        "hubspot_owner_id": "79422455",
+        "pipeline": "781732165"
+      }
+    },
+    {
+      "id": "58289374239",
+      "properties": {
+        "amount": "683739.42",
+        "bdr": null,
+        "closedate": null,
+        "createdate": "2026-03-24T20:30:17.465Z",
+        "dealname": "Renewal - Zoetis - 2026",
+        "dealstage": "1022425437",
+        "hs_deal_stage_probability": "0.5",
+        "hs_lastmodifieddate": "2026-04-15T13:30:45.192Z",
+        "hs_object_id": "58289374239",
+        "hubspot_owner_id": "79422455",
+        "pipeline": "699588012"
+      }
+    },
+    {
+      "id": "38225967659",
+      "properties": {
+        "amount": "65750",
+        "bdr": null,
+        "closedate": "2026-08-01T20:10:11.593Z",
+        "createdate": "2025-05-30T07:36:42.476Z",
+        "dealname": "Multiyear - Demant - year 2 of 2",
+        "dealstage": "1022425437",
+        "hs_deal_stage_probability": "0.5",
+        "hs_lastmodifieddate": "2026-04-15T13:06:48.483Z",
+        "hs_object_id": "38225967659",
+        "hubspot_owner_id": "79422455",
+        "pipeline": "699588012"
+      }
+    },
+    {
+      "id": "38320085177",
+      "properties": {
+        "amount": "26100",
+        "bdr": null,
+        "closedate": "2026-06-02T14:47:43.725Z",
+        "createdate": "2025-06-02T14:47:45.492Z",
+        "dealname": "Renewal - URGO Spain",
+        "dealstage": "1022425437",
+        "hs_deal_stage_probability": "0.5",
+        "hs_lastmodifieddate": "2026-04-15T11:59:38.871Z",
+        "hs_object_id": "38320085177",
+        "hubspot_owner_id": "86268003",
+        "pipeline": "699588012"
+      }
+    },
+    {
+      "id": "38815293591",
+      "properties": {
+        "amount": null,
+        "bdr": "89058004",
+        "closedate": null,
+        "createdate": "2025-05-29T19:35:01.833Z",
+        "dealname": "HEINEKEN UK - New Deal",
+        "dealstage": "1006756883",
+        "hs_deal_stage_probability": "0.05000000000000000277555756156289135105907917022705078125",
+        "hs_lastmodifieddate": "2026-04-15T11:18:20.366Z",
+        "hs_object_id": "38815293591",
+        "hubspot_owner_id": "89058004",
+        "pipeline": "678921051"
+      }
+    },
+    {
+      "id": "59149449401",
+      "properties": {
+        "amount": "120000",
+        "bdr": "75974046",
+        "closedate": "2026-08-25T18:34:28.001Z",
+        "createdate": "2026-04-13T15:18:59.208Z",
+        "dealname": "Hikma Pharma (MENA)",
+        "dealstage": "1006756883",
+        "hs_deal_stage_probability": "0.35",
+        "hs_lastmodifieddate": "2026-04-15T11:02:44.678Z",
+        "hs_object_id": "59149449401",
+        "hubspot_owner_id": "75974046",
+        "pipeline": "678921051"
+      }
+    },
+    {
+      "id": "54223509606",
+      "properties": {
+        "amount": "34000",
+        "bdr": null,
+        "closedate": "2027-07-01T16:31:31.940Z",
+        "createdate": "2026-01-20T17:29:40.315Z",
+        "dealname": "Renewal 2027/2028 - Abbvie Aesthetics",
+        "dealstage": "1022425437",
+        "hs_deal_stage_probability": "0.5",
+        "hs_lastmodifieddate": "2026-04-15T10:49:40.848Z",
+        "hs_object_id": "54223509606",
+        "hubspot_owner_id": "79422455",
+        "pipeline": "699588012"
+      }
+    },
+    {
+      "id": "58798181200",
+      "properties": {
+        "amount": "200000",
+        "bdr": "89313200",
+        "closedate": "2026-11-10T19:23:17.364Z",
+        "createdate": "2026-04-07T11:22:47.603Z",
+        "dealname": "Viatris (MENA)",
+        "dealstage": "1006756883",
+        "hs_deal_stage_probability": "0.18",
+        "hs_lastmodifieddate": "2026-04-15T09:39:19.082Z",
+        "hs_object_id": "58798181200",
+        "hubspot_owner_id": "75974046",
+        "pipeline": "678921051"
+      }
+    },
+    {
+      "id": "53819039633",
+      "properties": {
+        "amount": "15000",
+        "bdr": "75973999",
+        "closedate": null,
+        "createdate": "2026-01-14T16:08:30.147Z",
+        "dealname": "Merz Pharma Benelux B.V. - New Deal",
+        "dealstage": "1006756883",
+        "hs_deal_stage_probability": "0.05000000000000000277555756156289135105907917022705078125",
+        "hs_lastmodifieddate": "2026-04-15T06:26:50.391Z",
+        "hs_object_id": "53819039633",
+        "hubspot_owner_id": "75974046",
+        "pipeline": "678921051"
+      }
+    },
+    {
+      "id": "54263386552",
+      "properties": {
+        "amount": "18000",
+        "bdr": null,
+        "closedate": "2027-06-01T16:22:21.645Z",
+        "createdate": "2026-01-20T17:21:57.680Z",
+        "dealname": "Renewal 2027/2028 - Abbvie Pharmaceutical OUS",
+        "dealstage": "1022425437",
+        "hs_deal_stage_probability": "0.5",
+        "hs_lastmodifieddate": "2026-04-15T06:20:05.409Z",
+        "hs_object_id": "54263386552",
+        "hubspot_owner_id": "79422455",
+        "pipeline": "699588012"
+      }
+    },
+    {
+      "id": "53956378887",
+      "properties": {
+        "amount": "8505",
+        "bdr": null,
+        "closedate": "2027-01-01T14:12:33.745Z",
+        "createdate": "2026-01-15T09:34:20.619Z",
+        "dealname": "Renewal - Xytide",
+        "dealstage": "1022425437",
+        "hs_deal_stage_probability": "0.5",
+        "hs_lastmodifieddate": "2026-04-15T03:41:43.543Z",
+        "hs_object_id": "53956378887",
+        "hubspot_owner_id": "86268003",
+        "pipeline": "699588012"
+      }
+    },
+    {
+      "id": "53441978402",
+      "properties": {
+        "amount": "140000",
+        "bdr": null,
+        "closedate": null,
+        "createdate": "2026-01-08T16:49:33.186Z",
+        "dealname": "Boston Scientific EMEA - Professional Services 2026",
+        "dealstage": "1142314257",
+        "hs_deal_stage_probability": "0.90000000000000002220446049250313080847263336181640625",
+        "hs_lastmodifieddate": "2026-04-15T01:55:37.681Z",
+        "hs_object_id": "53441978402",
+        "hubspot_owner_id": "86268003",
+        "pipeline": "781732165"
+      }
+    },
+    {
+      "id": "53697259013",
+      "properties": {
+        "amount": "354026.05",
+        "bdr": null,
+        "closedate": "2027-01-01T14:12:54.767Z",
+        "createdate": "2026-01-14T10:13:54.658Z",
+        "dealname": "Renewal - Essity",
+        "dealstage": "1022425437",
+        "hs_deal_stage_probability": "0.5",
+        "hs_lastmodifieddate": "2026-04-14T22:31:19.109Z",
+        "hs_object_id": "53697259013",
+        "hubspot_owner_id": "86268003",
+        "pipeline": "699588012"
+      }
+    },
+    {
+      "id": "41950370823",
+      "properties": {
+        "amount": "20000",
+        "bdr": null,
+        "closedate": "2027-01-01T15:39:22.897Z",
+        "createdate": "2025-08-13T12:40:18.345Z",
+        "dealname": "Essity - NG Migration",
+        "dealstage": "1006756883",
+        "hs_deal_stage_probability": "0.05000000000000000277555756156289135105907917022705078125",
+        "hs_lastmodifieddate": "2026-04-14T22:31:18.737Z",
+        "hs_object_id": "41950370823",
+        "hubspot_owner_id": "86268003",
+        "pipeline": "678921051"
+      }
+    },
+    {
+      "id": "56122119000",
+      "properties": {
+        "amount": "20000",
+        "bdr": "75974046",
+        "closedate": "2026-09-25T17:52:10.159Z",
+        "createdate": "2026-02-11T16:34:45.780Z",
+        "dealname": "Essity Expansion H1-26",
+        "dealstage": "1006756883",
+        "hs_deal_stage_probability": "0.05000000000000000277555756156289135105907917022705078125",
+        "hs_lastmodifieddate": "2026-04-14T22:31:18.008Z",
+        "hs_object_id": "56122119000",
+        "hubspot_owner_id": "83687269",
+        "pipeline": "678921051"
+      }
+    },
+    {
+      "id": "37485279326",
+      "properties": {
+        "amount": "75000",
+        "bdr": "89058004",
+        "closedate": "2026-08-21T22:46:43.649Z",
+        "createdate": "2025-05-20T15:17:44.477Z",
+        "dealname": "Johnson & Johnson Medical USA (Distributor Requirements)",
+        "dealstage": "1006756883",
+        "hs_deal_stage_probability": "0.05000000000000000277555756156289135105907917022705078125",
+        "hs_lastmodifieddate": "2026-04-14T21:44:39.232Z",
+        "hs_object_id": "37485279326",
+        "hubspot_owner_id": "75974046",
+        "pipeline": "678921051"
+      }
+    },
+    {
+      "id": "14894633372",
+      "properties": {
+        "amount": "58000",
+        "bdr": null,
+        "closedate": "2026-09-18T15:52:20.419Z",
+        "createdate": "2023-08-30T14:38:21.844Z",
+        "dealname": "Boston Scientific - Japan",
+        "dealstage": "995739703",
+        "hs_deal_stage_probability": "0.200000000000000011102230246251565404236316680908203125",
+        "hs_lastmodifieddate": "2026-04-14T21:31:26.565Z",
+        "hs_object_id": "14894633372",
+        "hubspot_owner_id": "83687269",
+        "pipeline": "678921051"
+      }
+    },
+    {
+      "id": "55818980018",
+      "properties": {
+        "amount": "1652.29",
+        "bdr": null,
+        "closedate": "2027-02-09T16:18:46.239Z",
+        "createdate": "2026-02-09T16:18:47.913Z",
+        "dealname": "Renewal - Abbott Nutrition EURISA",
+        "dealstage": "1022425437",
+        "hs_deal_stage_probability": "0.5",
+        "hs_lastmodifieddate": "2026-04-14T21:29:57.231Z",
+        "hs_object_id": "55818980018",
+        "hubspot_owner_id": "79422455",
+        "pipeline": "699588012"
+      }
+    },
+    {
+      "id": "59096326824",
+      "properties": {
+        "amount": "1166.67",
+        "bdr": null,
+        "closedate": "2026-12-01T16:09:51.731Z",
+        "createdate": "2026-04-10T08:15:38.624Z",
+        "dealname": "Abbott Rapid Diagnostics - Addition admin license",
+        "dealstage": "1022425437",
+        "hs_deal_stage_probability": "0.5",
+        "hs_lastmodifieddate": "2026-04-14T19:42:47.849Z",
+        "hs_object_id": "59096326824",
+        "hubspot_owner_id": "86268003",
+        "pipeline": "699588012"
+      }
+    },
+    {
+      "id": "36986133889",
+      "properties": {
+        "amount": "43275.5",
+        "bdr": null,
+        "closedate": "2026-11-30T17:01:35.052Z",
+        "createdate": "2025-05-09T04:29:59.495Z",
+        "dealname": "Renewal - Abbott Rapid Diagnostics",
+        "dealstage": "1022425437",
+        "hs_deal_stage_probability": "0.5",
+        "hs_lastmodifieddate": "2026-04-14T19:42:46.027Z",
+        "hs_object_id": "36986133889",
+        "hubspot_owner_id": "86268003",
+        "pipeline": "699588012"
+      }
+    },
+    {
+      "id": "47621733213",
+      "properties": {
+        "amount": "7000",
+        "bdr": null,
+        "closedate": "2026-10-29T16:56:41.367Z",
+        "createdate": "2025-10-29T16:56:43.445Z",
+        "dealname": "Renewal - Danone Nutrition",
+        "dealstage": "1022425437",
+        "hs_deal_stage_probability": "0.5",
+        "hs_lastmodifieddate": "2026-04-14T19:42:41.369Z",
+        "hs_object_id": "47621733213",
+        "hubspot_owner_id": "79422455",
+        "pipeline": "699588012"
+      }
+    },
+    {
+      "id": "47465111330",
+      "properties": {
+        "amount": "34291.2",
+        "bdr": null,
+        "closedate": "2026-10-20T14:55:46.687Z",
+        "createdate": "2025-10-29T13:36:35.875Z",
+        "dealname": "Renewal - Azurity Pharmaceuticals",
+        "dealstage": "1022425437",
+        "hs_deal_stage_probability": "0.5",
+        "hs_lastmodifieddate": "2026-04-14T19:42:35.054Z",
+        "hs_object_id": "47465111330",
+        "hubspot_owner_id": "79422455",
+        "pipeline": "699588012"
+      }
+    },
+    {
+      "id": "53943749468",
+      "properties": {
+        "amount": "40272.23",
+        "bdr": null,
+        "closedate": "2026-09-30T08:12:24.157Z",
+        "createdate": "2026-01-15T09:12:07.797Z",
+        "dealname": "Renewal - Ferrero ",
+        "dealstage": "1022425437",
+        "hs_deal_stage_probability": "0.5",
+        "hs_lastmodifieddate": "2026-04-14T19:42:32.927Z",
+        "hs_object_id": "53943749468",
+        "hubspot_owner_id": "86268003",
+        "pipeline": "699588012"
+      }
+    },
+    {
+      "id": "40704962697",
+      "properties": {
+        "amount": "21432",
+        "bdr": null,
+        "closedate": "2026-08-14T14:53:30.903Z",
+        "createdate": "2025-07-23T08:19:08.649Z",
+        "dealname": "Renewal - Azurity Pharmaceuticals (co-term with year end contract)",
+        "dealstage": "1022425437",
+        "hs_deal_stage_probability": "0.5",
+        "hs_lastmodifieddate": "2026-04-14T19:42:30.313Z",
+        "hs_object_id": "40704962697",
+        "hubspot_owner_id": "79422455",
+        "pipeline": "699588012"
+      }
+    },
+    {
+      "id": "39641915682",
+      "properties": {
+        "amount": "156000",
+        "bdr": null,
+        "closedate": "2026-07-03T09:32:54.494Z",
+        "createdate": "2025-07-03T09:32:55.440Z",
+        "dealname": "Renewal - Danone Nutricia",
+        "dealstage": "1022425437",
+        "hs_deal_stage_probability": "0.5",
+        "hs_lastmodifieddate": "2026-04-14T19:42:19.030Z",
+        "hs_object_id": "39641915682",
+        "hubspot_owner_id": "79422455",
+        "pipeline": "699588012"
+      }
+    },
+    {
+      "id": "54378947378",
+      "properties": {
+        "amount": "17215",
+        "bdr": null,
+        "closedate": "2026-05-31T08:15:34.944Z",
+        "createdate": "2026-01-23T09:15:27.861Z",
+        "dealname": "Renewal - Galexis- Renewal 2026- Impact,Admin",
+        "dealstage": "1022425437",
+        "hs_deal_stage_probability": "0.5",
+        "hs_lastmodifieddate": "2026-04-14T19:42:16.288Z",
+        "hs_object_id": "54378947378",
+        "hubspot_owner_id": "86268003",
+        "pipeline": "699588012"
+      }
+    },
+    {
+      "id": "38536234907",
+      "properties": {
+        "amount": "60000",
+        "bdr": null,
+        "closedate": "2026-06-06T12:26:40.759Z",
+        "createdate": "2025-06-06T12:26:42.584Z",
+        "dealname": "Renewal - Danone Global",
+        "dealstage": "1022425437",
+        "hs_deal_stage_probability": "0.5",
+        "hs_lastmodifieddate": "2026-04-14T19:39:37.335Z",
+        "hs_object_id": "38536234907",
+        "hubspot_owner_id": "79422455",
+        "pipeline": "699588012"
+      }
+    },
+    {
+      "id": "58986347321",
+      "properties": {
+        "amount": "250000",
+        "bdr": "75974046",
+        "closedate": "2026-11-16T19:16:36.548Z",
+        "createdate": "2026-04-08T19:01:55.799Z",
+        "dealname": "Organon (EU)",
+        "dealstage": "1006756883",
+        "hs_deal_stage_probability": "0.1",
+        "hs_lastmodifieddate": "2026-04-14T19:18:35.962Z",
+        "hs_object_id": "58986347321",
+        "hubspot_owner_id": "75974046",
+        "pipeline": "678921051"
+      }
+    },
+    {
+      "id": "58567509311",
+      "properties": {
+        "amount": "10000",
+        "bdr": "89313200",
+        "closedate": null,
+        "createdate": "2026-03-31T12:46:53.632Z",
+        "dealname": "Danone - Outbound - Ismail - 31Mar26",
+        "dealstage": "1006756883",
+        "hs_deal_stage_probability": "0.1",
+        "hs_lastmodifieddate": "2026-04-14T17:32:11.387Z",
+        "hs_object_id": "58567509311",
+        "hubspot_owner_id": "83687269",
+        "pipeline": "678921051"
+      }
+    },
+    {
+      "id": "59153601294",
+      "properties": {
+        "amount": "750000",
+        "bdr": "75974046",
+        "closedate": "2026-09-14T19:10:12.453Z",
+        "createdate": "2026-04-13T19:09:58.300Z",
+        "dealname": "Boticario Group",
+        "dealstage": "1006756883",
+        "hs_deal_stage_probability": "0.15",
+        "hs_lastmodifieddate": "2026-04-14T16:45:45.828Z",
+        "hs_object_id": "59153601294",
+        "hubspot_owner_id": "75974046",
+        "pipeline": "678921051"
+      }
+    },
+    {
+      "id": "53946245640",
+      "properties": {
+        "amount": "6609.54",
+        "bdr": null,
+        "closedate": "2027-01-01T14:12:29.403Z",
+        "createdate": "2026-01-15T09:27:50.478Z",
+        "dealname": "Renewal - Zambon",
+        "dealstage": "1022425437",
+        "hs_deal_stage_probability": "0.5",
+        "hs_lastmodifieddate": "2026-04-14T16:22:28.764Z",
+        "hs_object_id": "53946245640",
+        "hubspot_owner_id": "86268003",
+        "pipeline": "699588012"
+      }
+    },
+    {
+      "id": "53754303146",
+      "properties": {
+        "amount": "169443.75",
+        "bdr": null,
+        "closedate": "2027-01-01T14:12:50.422Z",
+        "createdate": "2026-01-14T11:18:26.215Z",
+        "dealname": "Renewal - Abbott Nutrition APAC",
+        "dealstage": "1022425437",
+        "hs_deal_stage_probability": "0.5",
+        "hs_lastmodifieddate": "2026-04-14T16:22:28.748Z",
+        "hs_object_id": "53754303146",
+        "hubspot_owner_id": "86268003",
+        "pipeline": "699588012"
+      }
+    },
+    {
+      "id": "53821705022",
+      "properties": {
+        "amount": "292800",
+        "bdr": null,
+        "closedate": "2027-01-01T14:12:42.768Z",
+        "createdate": "2026-01-14T15:58:31.892Z",
+        "dealname": "Renewal - Sika Information Systems AG",
+        "dealstage": "1022425437",
+        "hs_deal_stage_probability": "0.5",
+        "hs_lastmodifieddate": "2026-04-14T16:22:28.748Z",
+        "hs_object_id": "53821705022",
+        "hubspot_owner_id": "86268003",
+        "pipeline": "699588012"
+      }
+    },
+    {
+      "id": "53754302839",
+      "properties": {
+        "amount": "380457",
+        "bdr": null,
+        "closedate": "2027-01-01T14:12:52.772Z",
+        "createdate": "2026-01-14T11:03:08.711Z",
+        "dealname": "Renewal - Boston Scientific EMEA",
+        "dealstage": "1022425437",
+        "hs_deal_stage_probability": "0.5",
+        "hs_lastmodifieddate": "2026-04-14T16:22:28.738Z",
+        "hs_object_id": "53754302839",
+        "hubspot_owner_id": "86268003",
+        "pipeline": "699588012"
+      }
+    },
+    {
+      "id": "10197504539",
+      "properties": {
+        "amount": "75320",
+        "bdr": null,
+        "closedate": "2027-06-02T04:31:37.396Z",
+        "createdate": "2022-09-15T18:17:45.932Z",
+        "dealname": "Danone Nutrition South East Asia - 2026 - (Multi Modules See Opp)",
+        "dealstage": "995739703",
+        "hs_deal_stage_probability": "0.200000000000000011102230246251565404236316680908203125",
+        "hs_lastmodifieddate": "2026-04-14T16:22:28.698Z",
+        "hs_object_id": "10197504539",
+        "hubspot_owner_id": "79422455",
+        "pipeline": "678921051"
+      }
+    },
+    {
+      "id": "53818978565",
+      "properties": {
+        "amount": "145964.29",
+        "bdr": null,
+        "closedate": "2027-01-01T14:12:57.092Z",
+        "createdate": "2026-01-14T16:27:44.002Z",
+        "dealname": "Renewal - Abbott Nutrition EURISA",
+        "dealstage": "1022425437",
+        "hs_deal_stage_probability": "0.5",
+        "hs_lastmodifieddate": "2026-04-14T16:22:28.687Z",
+        "hs_object_id": "53818978565",
+        "hubspot_owner_id": "86268003",
+        "pipeline": "699588012"
+      }
+    },
+    {
+      "id": "53821766175",
+      "properties": {
+        "amount": "169443.75",
+        "bdr": null,
+        "closedate": "2027-01-01T14:12:40.007Z",
+        "createdate": "2026-01-14T15:44:02.141Z",
+        "dealname": "Renewal - Boston Scientific APAC",
+        "dealstage": "1022425437",
+        "hs_deal_stage_probability": "0.5",
+        "hs_lastmodifieddate": "2026-04-14T16:22:28.659Z",
+        "hs_object_id": "53821766175",
+        "hubspot_owner_id": "86268003",
+        "pipeline": "699588012"
+      }
+    },
+    {
+      "id": "56889307293",
+      "properties": {
+        "amount": "100000",
+        "bdr": "79422455",
+        "closedate": "2027-01-01T21:17:16.301Z",
+        "createdate": "2026-02-23T21:17:06.597Z",
+        "dealname": "Multiyear - Azurity Pharmaceuticals - year 3 of 3",
+        "dealstage": "1022425437",
+        "hs_deal_stage_probability": "0.5",
+        "hs_lastmodifieddate": "2026-04-14T16:22:28.631Z",
+        "hs_object_id": "56889307293",
+        "hubspot_owner_id": "79422455",
+        "pipeline": "699588012"
+      }
+    },
+    {
+      "id": "53818917752",
+      "properties": {
+        "amount": "103730.69",
+        "bdr": null,
+        "closedate": "2027-01-01T14:13:15.214Z",
+        "createdate": "2026-01-14T16:50:12.215Z",
+        "dealname": "Renewal - Abbott Nutrition MENAP",
+        "dealstage": "1022425437",
+        "hs_deal_stage_probability": "0.5",
+        "hs_lastmodifieddate": "2026-04-14T16:22:28.617Z",
+        "hs_object_id": "53818917752",
+        "hubspot_owner_id": "86268003",
+        "pipeline": "699588012"
+      }
+    },
+    {
+      "id": "10672065104",
+      "properties": {
+        "amount": "193570",
+        "bdr": null,
+        "closedate": "2027-04-01T03:00:47.175Z",
+        "createdate": "2022-10-24T09:24:46.111Z",
+        "dealname": "Danone Nutrition Turkey - 2026 - (Multi Modules See Opp)",
+        "dealstage": "995739703",
+        "hs_deal_stage_probability": "0.200000000000000011102230246251565404236316680908203125",
+        "hs_lastmodifieddate": "2026-04-14T16:22:28.562Z",
+        "hs_object_id": "10672065104",
+        "hubspot_owner_id": "79422455",
+        "pipeline": "678921051"
+      }
+    },
+    {
+      "id": "28869535664",
+      "properties": {
+        "amount": "134500",
+        "bdr": null,
+        "closedate": "2027-06-26T04:31:45.421Z",
+        "createdate": "2024-11-08T14:16:10.688Z",
+        "dealname": "Danone Nutrition CEE - 2026 - (Multi Modules See Opp)",
+        "dealstage": "995739703",
+        "hs_deal_stage_probability": "0.200000000000000011102230246251565404236316680908203125",
+        "hs_lastmodifieddate": "2026-04-14T16:22:28.542Z",
+        "hs_object_id": "28869535664",
+        "hubspot_owner_id": "79422455",
+        "pipeline": "678921051"
+      }
+    },
+    {
+      "id": "53697317176",
+      "properties": {
+        "amount": "1764011.55",
+        "bdr": null,
+        "closedate": "2027-01-01T14:12:37.201Z",
+        "createdate": "2026-01-14T09:42:34.268Z",
+        "dealname": "Renewal - Sandoz AG - 2026",
+        "dealstage": "1022425437",
+        "hs_deal_stage_probability": "0.5",
+        "hs_lastmodifieddate": "2026-04-14T16:22:28.510Z",
+        "hs_object_id": "53697317176",
+        "hubspot_owner_id": "86268003",
+        "pipeline": "699588012"
+      }
+    },
+    {
+      "id": "43896888389",
+      "properties": {
+        "amount": "1515650",
+        "bdr": null,
+        "closedate": "2026-08-14T18:00:46.419Z",
+        "createdate": "2022-10-27T13:59:37.697Z",
+        "dealname": "Roche - Diagnostics and Diabetes",
+        "dealstage": "995739703",
+        "hs_deal_stage_probability": "0.200000000000000011102230246251565404236316680908203125",
+        "hs_lastmodifieddate": "2026-04-14T16:22:28.450Z",
+        "hs_object_id": "43896888389",
+        "hubspot_owner_id": "83687269",
+        "pipeline": "678921051"
+      }
+    },
+    {
+      "id": "53697319255",
+      "properties": {
+        "amount": "309481",
+        "bdr": null,
+        "closedate": "2027-01-01T14:12:45.422Z",
+        "createdate": "2026-01-14T11:26:54.543Z",
+        "dealname": "Renewal - Abbott Nutrition LATAM",
+        "dealstage": "1022425437",
+        "hs_deal_stage_probability": "0.5",
+        "hs_lastmodifieddate": "2026-04-14T16:22:28.422Z",
+        "hs_object_id": "53697319255",
+        "hubspot_owner_id": "86268003",
+        "pipeline": "699588012"
+      }
+    },
+    {
+      "id": "57452184675",
+      "properties": {
+        "amount": "25000",
+        "bdr": null,
+        "closedate": "2026-08-17T18:35:10.183Z",
+        "createdate": "2026-03-04T14:11:54.892Z",
+        "dealname": "Abbvie Pharma (Russia Inbound)",
+        "dealstage": "1006756883",
+        "hs_deal_stage_probability": "0.1",
+        "hs_lastmodifieddate": "2026-04-14T14:34:47.755Z",
+        "hs_object_id": "57452184675",
+        "hubspot_owner_id": "75974046",
+        "pipeline": "678921051"
+      }
+    },
+    {
+      "id": "56549272483",
+      "properties": {
+        "amount": "600000",
+        "bdr": "75974046",
+        "closedate": "2028-02-25T19:17:53.024Z",
+        "createdate": "2026-02-17T17:33:54.651Z",
+        "dealname": "Travelport Inbound (Bigtincan/seismic replacement) ",
+        "dealstage": "1006756883",
+        "hs_deal_stage_probability": "0.15",
+        "hs_lastmodifieddate": "2026-04-14T14:34:33.172Z",
+        "hs_object_id": "56549272483",
+        "hubspot_owner_id": "75974046",
+        "pipeline": "678921051"
+      }
+    },
+    {
+      "id": "43827290287",
+      "properties": {
+        "amount": "150000",
+        "bdr": "75974046",
+        "closedate": "2027-10-14T18:19:46.986Z",
+        "createdate": "2025-09-17T22:21:16.804Z",
+        "dealname": "Kayne Anderson Rudnick - Seismic replacement ",
+        "dealstage": "1006756883",
+        "hs_deal_stage_probability": "0.15",
+        "hs_lastmodifieddate": "2026-04-14T14:34:32.125Z",
+        "hs_object_id": "43827290287",
+        "hubspot_owner_id": "75974046",
+        "pipeline": "678921051"
+      }
+    },
+    {
+      "id": "54744586620",
+      "properties": {
+        "amount": "75000",
+        "bdr": "75974046",
+        "closedate": "2026-12-30T19:35:26.841Z",
+        "createdate": "2026-01-28T13:21:39.690Z",
+        "dealname": "DRiV ",
+        "dealstage": "1006756883",
+        "hs_deal_stage_probability": "0.2",
+        "hs_lastmodifieddate": "2026-04-14T14:34:22.759Z",
+        "hs_object_id": "54744586620",
+        "hubspot_owner_id": "75974046",
+        "pipeline": "678921051"
+      }
+    },
+    {
+      "id": "57093321043",
+      "properties": {
+        "amount": "75000",
+        "bdr": "75974046",
+        "closedate": "2026-08-14T17:57:18.091Z",
+        "createdate": "2026-02-26T18:06:08.788Z",
+        "dealname": "Standard Process (inbound)",
+        "dealstage": "1006756883",
+        "hs_deal_stage_probability": "0.2",
+        "hs_lastmodifieddate": "2026-04-14T14:32:28.959Z",
+        "hs_object_id": "57093321043",
+        "hubspot_owner_id": "83687269",
+        "pipeline": "678921051"
+      }
+    },
+    {
+      "id": "52003309744",
+      "properties": {
+        "amount": "50000",
+        "bdr": "75974046",
+        "closedate": "2026-07-02T14:52:50.621Z",
+        "createdate": "2025-12-17T15:51:25.882Z",
+        "dealname": "Sanlam Private Wealth",
+        "dealstage": "1006756883",
+        "hs_deal_stage_probability": "0.1",
+        "hs_lastmodifieddate": "2026-04-14T14:32:00.661Z",
+        "hs_object_id": "52003309744",
+        "hubspot_owner_id": "83687269",
+        "pipeline": "678921051"
+      }
+    },
+    {
+      "id": "49777356100",
+      "properties": {
+        "amount": "50000",
+        "bdr": "75974046",
+        "closedate": "2026-06-19T18:00:02.654Z",
+        "createdate": "2025-11-21T16:59:52.273Z",
+        "dealname": "Summit Financial - Pitcher Pathways",
+        "dealstage": "1006756883",
+        "hs_deal_stage_probability": "0.3",
+        "hs_lastmodifieddate": "2026-04-14T14:31:43.233Z",
+        "hs_object_id": "49777356100",
+        "hubspot_owner_id": "83687269",
+        "pipeline": "678921051"
+      }
+    },
+    {
+      "id": "54606259879",
+      "properties": {
+        "amount": "21666.66",
+        "bdr": null,
+        "closedate": "2027-01-26T14:35:16.949Z",
+        "createdate": "2026-01-26T14:35:17.561Z",
+        "dealname": "Renewal - ",
+        "dealstage": "1022425437",
+        "hs_deal_stage_probability": "0.5",
+        "hs_lastmodifieddate": "2026-04-14T14:31:07.973Z",
+        "hs_object_id": "54606259879",
+        "hubspot_owner_id": "79422455",
+        "pipeline": "699588012"
+      }
+    },
+    {
+      "id": "54431672761",
+      "properties": {
+        "amount": "1540",
+        "bdr": null,
+        "closedate": "2027-01-23T18:48:50.632Z",
+        "createdate": "2026-01-23T18:48:51.373Z",
+        "dealname": "Renewal - Danone Nutrition",
+        "dealstage": "1022425437",
+        "hs_deal_stage_probability": "0.5",
+        "hs_lastmodifieddate": "2026-04-14T14:31:06.239Z",
+        "hs_object_id": "54431672761",
+        "hubspot_owner_id": "79422455",
+        "pipeline": "699588012"
+      }
+    },
+    {
+      "id": "58827750548",
+      "properties": {
+        "amount": "85000",
+        "bdr": "75974046",
+        "closedate": "2026-06-30T18:16:47.810Z",
+        "createdate": "2026-04-06T14:51:06.988Z",
+        "dealname": "Braeburn (pharma inbound)",
+        "dealstage": "1006756883",
+        "hs_deal_stage_probability": "0.25",
+        "hs_lastmodifieddate": "2026-04-14T14:31:04.420Z",
+        "hs_object_id": "58827750548",
+        "hubspot_owner_id": "75974046",
+        "pipeline": "678921051"
+      }
+    },
+    {
+      "id": "58474846498",
+      "properties": {
+        "amount": "75000",
+        "bdr": null,
+        "closedate": "2026-08-28T17:58:15.424Z",
+        "createdate": "2026-03-27T17:50:47.781Z",
+        "dealname": "L'Oréal - New Deal",
+        "dealstage": "995739703",
+        "hs_deal_stage_probability": "0.200000000000000011102230246251565404236316680908203125",
+        "hs_lastmodifieddate": "2026-04-14T14:31:01.502Z",
+        "hs_object_id": "58474846498",
+        "hubspot_owner_id": "83687269",
+        "pipeline": "678921051"
+      }
+    },
+    {
+      "id": "58295367009",
+      "properties": {
+        "amount": "25000",
+        "bdr": "75974046",
+        "closedate": "2026-06-30T16:10:13.025Z",
+        "createdate": "2026-03-25T16:17:02.065Z",
+        "dealname": "IDM+ ",
+        "dealstage": "995739703",
+        "hs_deal_stage_probability": "0.200000000000000011102230246251565404236316680908203125",
+        "hs_lastmodifieddate": "2026-04-14T14:31:01.497Z",
+        "hs_object_id": "58295367009",
+        "hubspot_owner_id": "83340100",
+        "pipeline": "678921051"
+      }
+    },
+    {
+      "id": "58567567997",
+      "properties": {
+        "amount": "90000",
+        "bdr": "89313200",
+        "closedate": "2026-08-24T18:34:59.450Z",
+        "createdate": "2026-03-31T10:51:07.024Z",
+        "dealname": "Organon - Outbound - Ismail - 31Mar26",
+        "dealstage": "1006756883",
+        "hs_deal_stage_probability": "0.2",
+        "hs_lastmodifieddate": "2026-04-14T14:30:46.942Z",
+        "hs_object_id": "58567567997",
+        "hubspot_owner_id": "75974046",
+        "pipeline": "678921051"
+      }
+    },
+    {
+      "id": "55978767020",
+      "properties": {
+        "amount": "50000",
+        "bdr": "",
+        "closedate": "2026-08-28T17:58:06.274Z",
+        "createdate": "2026-02-11T18:59:16.849Z",
+        "dealname": "Vontobel H1-26 Expansion ",
+        "dealstage": "1006756883",
+        "hs_deal_stage_probability": "0.05000000000000000277555756156289135105907917022705078125",
+        "hs_lastmodifieddate": "2026-04-14T14:30:42.810Z",
+        "hs_object_id": "55978767020",
+        "hubspot_owner_id": "83687269",
+        "pipeline": "678921051"
+      }
+    },
+    {
+      "id": "57939045138",
+      "properties": {
+        "amount": "75000",
+        "bdr": "75974046",
+        "closedate": "2026-10-23T17:13:02.301Z",
+        "createdate": "2026-03-12T12:46:48.486Z",
+        "dealname": "SAMI Pharma - New Deal",
+        "dealstage": "1006756883",
+        "hs_deal_stage_probability": "0.2",
+        "hs_lastmodifieddate": "2026-04-14T14:30:41.598Z",
+        "hs_object_id": "57939045138",
+        "hubspot_owner_id": "75974046",
+        "pipeline": "678921051"
+      }
+    },
+    {
+      "id": "48123088232",
+      "properties": {
+        "amount": "50000",
+        "bdr": "",
+        "closedate": "2026-06-30T15:46:41.481Z",
+        "createdate": "2025-11-03T13:54:12.826Z",
+        "dealname": "Spandex Asia Pacific",
+        "dealstage": "995739703",
+        "hs_deal_stage_probability": "0.2",
+        "hs_lastmodifieddate": "2026-04-14T14:30:37.823Z",
+        "hs_object_id": "48123088232",
+        "hubspot_owner_id": "83340100",
+        "pipeline": "678921051"
+      }
+    },
+    {
+      "id": "54955567437",
+      "properties": {
+        "amount": "15000",
+        "bdr": "75974046",
+        "closedate": "2026-06-05T17:59:48.563Z",
+        "createdate": "2026-01-28T17:10:08.982Z",
+        "dealname": "Tremco",
+        "dealstage": "1006756883",
+        "hs_deal_stage_probability": "0.4",
+        "hs_lastmodifieddate": "2026-04-14T14:30:29.403Z",
+        "hs_object_id": "54955567437",
+        "hubspot_owner_id": "83687269",
+        "pipeline": "678921051"
+      }
+    },
+    {
+      "id": "16851871875",
+      "properties": {
+        "amount": "353160",
+        "bdr": null,
+        "closedate": "2026-09-25T17:59:21.655Z",
+        "createdate": "2024-01-08T14:38:16.791Z",
+        "dealname": "Trumpf",
+        "dealstage": "995739703",
+        "hs_deal_stage_probability": "0.1",
+        "hs_lastmodifieddate": "2026-04-14T06:30:04.262Z",
+        "hs_object_id": "16851871875",
+        "hubspot_owner_id": "83687269",
+        "pipeline": "678921051"
+      }
+    },
+    {
+      "id": "58630660273",
+      "properties": {
+        "amount": "100097.4",
+        "bdr": null,
+        "closedate": "2026-04-24T15:13:38.775Z",
+        "createdate": "2026-04-01T15:13:47.391Z",
+        "dealname": "Professional Services - Azurity Pharmaceuticals - Q2 2026",
+        "dealstage": "1142314257",
+        "hs_deal_stage_probability": "0.90000000000000002220446049250313080847263336181640625",
+        "hs_lastmodifieddate": "2026-04-13T22:05:10.894Z",
+        "hs_object_id": "58630660273",
+        "hubspot_owner_id": "79422455",
+        "pipeline": "781732165"
+      }
+    },
+    {
+      "id": "57018959398",
+      "properties": {
+        "amount": "100000",
+        "bdr": "75974046",
+        "closedate": "2026-08-24T18:35:14.358Z",
+        "createdate": "2026-02-25T15:45:58.061Z",
+        "dealname": "Soltis Investment Advisors",
+        "dealstage": "1006756883",
+        "hs_deal_stage_probability": "0.05000000000000000277555756156289135105907917022705078125",
+        "hs_lastmodifieddate": "2026-04-13T19:18:39.819Z",
+        "hs_object_id": "57018959398",
+        "hubspot_owner_id": "75974046",
+        "pipeline": "678921051"
+      }
+    },
+    {
+      "id": "58686013088",
+      "properties": {
+        "amount": "200000",
+        "bdr": "89058004",
+        "closedate": "2026-11-23T19:17:07.690Z",
+        "createdate": "2026-04-02T16:18:03.782Z",
+        "dealname": "Philips Healthcare - April 26 - New Deal",
+        "dealstage": "1006756883",
+        "hs_deal_stage_probability": "0.1",
+        "hs_lastmodifieddate": "2026-04-13T19:18:08.224Z",
+        "hs_object_id": "58686013088",
+        "hubspot_owner_id": "75974046",
+        "pipeline": "678921051"
+      }
+    },
+    {
+      "id": "57856057187",
+      "properties": {
+        "amount": "35000",
+        "bdr": null,
+        "closedate": "2026-05-29T17:51:40.449Z",
+        "createdate": "2026-03-11T15:42:35.367Z",
+        "dealname": "Cushon - (Willis Towers Watson Company)",
+        "dealstage": "1006756883",
+        "hs_deal_stage_probability": "0.2",
+        "hs_lastmodifieddate": "2026-04-13T19:04:51.374Z",
+        "hs_object_id": "57856057187",
+        "hubspot_owner_id": "83687269",
+        "pipeline": "678921051"
+      }
+    },
+    {
+      "id": "37358957933",
+      "properties": {
+        "amount": "100000",
+        "bdr": "75974046",
+        "closedate": "2026-07-24T17:59:31.081Z",
+        "createdate": "2025-05-16T16:00:45.887Z",
+        "dealname": "DWS Asset Management (US)",
+        "dealstage": "995739704",
+        "hs_deal_stage_probability": "0.2",
+        "hs_lastmodifieddate": "2026-04-13T19:00:32.596Z",
+        "hs_object_id": "37358957933",
+        "hubspot_owner_id": "83687269",
+        "pipeline": "678921051"
+      }
+    },
+    {
+      "id": "56545038680",
+      "properties": {
+        "amount": "90000",
+        "bdr": "75974046",
+        "closedate": "2026-08-25T18:18:10.036Z",
+        "createdate": "2026-02-17T17:32:21.342Z",
+        "dealname": "Lantheus",
+        "dealstage": "1006756883",
+        "hs_deal_stage_probability": "0.05",
+        "hs_lastmodifieddate": "2026-04-13T18:21:27.659Z",
+        "hs_object_id": "56545038680",
+        "hubspot_owner_id": "75974046",
+        "pipeline": "678921051"
+      }
+    },
+    {
+      "id": "51075810697",
+      "properties": {
+        "amount": "900000",
+        "bdr": "75974046",
+        "closedate": "2026-07-24T17:58:52.473Z",
+        "createdate": "2025-12-03T21:31:40.382Z",
+        "dealname": "Lincoln Financial - RFI",
+        "dealstage": "995739703",
+        "hs_deal_stage_probability": "0.55",
+        "hs_lastmodifieddate": "2026-04-13T18:12:19.063Z",
+        "hs_object_id": "51075810697",
+        "hubspot_owner_id": "83687269",
+        "pipeline": "678921051"
+      }
+    },
+    {
+      "id": "39349115939",
+      "properties": {
+        "amount": "195000",
+        "bdr": null,
+        "closedate": "2026-09-30T18:55:11.063Z",
+        "createdate": "2025-06-26T16:58:29.259Z",
+        "dealname": "Mondelēz International - Pilot+ Expansion ",
+        "dealstage": "995739704",
+        "hs_deal_stage_probability": "0.59999999999999997779553950749686919152736663818359375",
+        "hs_lastmodifieddate": "2026-04-13T18:06:55.788Z",
+        "hs_object_id": "39349115939",
+        "hubspot_owner_id": "83687269",
+        "pipeline": "678921051"
+      }
+    },
+    {
+      "id": "57669122707",
+      "properties": {
+        "amount": "75000",
+        "bdr": "75974046",
+        "closedate": "2026-10-16T15:30:21.452Z",
+        "createdate": "2026-03-06T18:55:25.667Z",
+        "dealname": "Broadridge",
+        "dealstage": "1006756883",
+        "hs_deal_stage_probability": "0.05000000000000000277555756156289135105907917022705078125",
+        "hs_lastmodifieddate": "2026-04-13T18:05:29.493Z",
+        "hs_object_id": "57669122707",
+        "hubspot_owner_id": "83687269",
+        "pipeline": "678921051"
+      }
+    },
+    {
+      "id": "53818854975",
+      "properties": {
+        "amount": "30000",
+        "bdr": null,
+        "closedate": "2026-06-30T14:44:40.194Z",
+        "createdate": "2026-01-14T16:30:40.667Z",
+        "dealname": "Air France KLM",
+        "dealstage": "1006756883",
+        "hs_deal_stage_probability": "0.05000000000000000277555756156289135105907917022705078125",
+        "hs_lastmodifieddate": "2026-04-13T14:44:40.432Z",
+        "hs_object_id": "53818854975",
+        "hubspot_owner_id": "83340100",
+        "pipeline": "678921051"
+      }
+    },
+    {
+      "id": "57352420965",
+      "properties": {
+        "amount": "55000",
+        "bdr": null,
+        "closedate": "2027-03-02T15:54:51.546Z",
+        "createdate": "2026-03-02T15:54:52.466Z",
+        "dealname": "Renewal - Britive",
+        "dealstage": "1022425437",
+        "hs_deal_stage_probability": "0.5",
+        "hs_lastmodifieddate": "2026-04-08T20:34:37.716Z",
+        "hs_object_id": "57352420965",
+        "hubspot_owner_id": "79422455",
+        "pipeline": "699588012"
+      }
+    },
+    {
+      "id": "58798208396",
+      "properties": {
+        "amount": null,
+        "bdr": "89058004",
+        "closedate": null,
+        "createdate": "2026-04-06T11:00:13.234Z",
+        "dealname": "Diageo - July 26 - New Deal",
+        "dealstage": "1006756883",
+        "hs_deal_stage_probability": "0.05000000000000000277555756156289135105907917022705078125",
+        "hs_lastmodifieddate": "2026-04-07T16:59:21.606Z",
+        "hs_object_id": "58798208396",
+        "hubspot_owner_id": "89058004",
+        "pipeline": "678921051"
+      }
+    },
+    {
+      "id": "58555216703",
+      "properties": {
+        "amount": "30000.42",
+        "bdr": null,
+        "closedate": "2027-03-30T13:08:41.325Z",
+        "createdate": "2026-03-30T13:08:48.342Z",
+        "dealname": "Renewal - Danone Nutrition",
+        "dealstage": "1022425437",
+        "hs_deal_stage_probability": "0.5",
+        "hs_lastmodifieddate": "2026-04-07T16:46:28.088Z",
+        "hs_object_id": "58555216703",
+        "hubspot_owner_id": "79422455",
+        "pipeline": "699588012"
+      }
+    },
+    {
+      "id": "12950216614",
+      "properties": {
+        "amount": "127000",
+        "bdr": null,
+        "closedate": "2027-04-01T04:31:23.144Z",
+        "createdate": "2023-04-12T14:01:23.215Z",
+        "dealname": "Danone Nutrition South East Asia - 2026 - Core Global Product Rollout (Services)",
+        "dealstage": "995739703",
+        "hs_deal_stage_probability": "0.200000000000000011102230246251565404236316680908203125",
+        "hs_lastmodifieddate": "2026-04-07T15:45:18.749Z",
+        "hs_object_id": "12950216614",
+        "hubspot_owner_id": "79422455",
+        "pipeline": "678921051"
+      }
+    },
+    {
+      "id": "34322598716",
+      "properties": {
+        "amount": "135150",
+        "bdr": null,
+        "closedate": "2027-04-01T04:32:08.489Z",
+        "createdate": "2025-03-06T13:58:04.981Z",
+        "dealname": "Danone Nutrition - UK&I",
+        "dealstage": "995739704",
+        "hs_deal_stage_probability": "0.59999999999999997779553950749686919152736663818359375",
+        "hs_lastmodifieddate": "2026-04-07T15:45:18.738Z",
+        "hs_object_id": "34322598716",
+        "hubspot_owner_id": "79422455",
+        "pipeline": "678921051"
+      }
+    },
+    {
+      "id": "36026575476",
+      "properties": {
+        "amount": "50000",
+        "bdr": "79422455",
+        "closedate": "2026-06-30T15:13:52.778Z",
+        "createdate": "2025-04-21T15:14:57.506Z",
+        "dealname": "Johnson & Johnson - Services (MS Dynamics Migration)",
+        "dealstage": "1142314253",
+        "hs_deal_stage_probability": "0.200000000000000011102230246251565404236316680908203125",
+        "hs_lastmodifieddate": "2026-04-07T14:32:09.018Z",
+        "hs_object_id": "36026575476",
+        "hubspot_owner_id": "79422455",
+        "pipeline": "781732165"
+      }
+    },
+    {
+      "id": "44810846317",
+      "properties": {
+        "amount": null,
+        "bdr": "89058004",
+        "closedate": null,
+        "createdate": "2025-09-29T13:05:23.538Z",
+        "dealname": "Amplifon",
+        "dealstage": "1006756883",
+        "hs_deal_stage_probability": "0.05000000000000000277555756156289135105907917022705078125",
+        "hs_lastmodifieddate": "2026-04-07T13:30:47.952Z",
+        "hs_object_id": "44810846317",
+        "hubspot_owner_id": "89058004",
+        "pipeline": "678921051"
+      }
+    },
+    {
+      "id": "36973631816",
+      "properties": {
+        "amount": "158333",
+        "bdr": "77771305",
+        "closedate": "2027-09-30T05:29:14.073Z",
+        "createdate": "2025-05-09T04:34:39.978Z",
+        "dealname": "Bank Vontobel AG - Renewal 2027",
+        "dealstage": "1022425437",
+        "hs_deal_stage_probability": "0.5",
+        "hs_lastmodifieddate": "2026-04-05T00:26:23.125Z",
+        "hs_object_id": "36973631816",
+        "hubspot_owner_id": "86268003",
+        "pipeline": "699588012"
+      }
+    },
+    {
+      "id": "34866489728",
+      "properties": {
+        "amount": "75000",
+        "bdr": "1808107048",
+        "closedate": "2026-06-26T22:57:20.865Z",
+        "createdate": "2025-03-20T02:22:21.846Z",
+        "dealname": "Johnson & Johnson Medical EMEA",
+        "dealstage": "1006756883",
+        "hs_deal_stage_probability": "0.05000000000000000277555756156289135105907917022705078125",
+        "hs_lastmodifieddate": "2026-04-03T14:35:19.006Z",
+        "hs_object_id": "34866489728",
+        "hubspot_owner_id": "75974046",
+        "pipeline": "678921051"
+      }
+    },
+    {
+      "id": "53818916378",
+      "properties": {
+        "amount": "176000",
+        "bdr": null,
+        "closedate": "2026-05-20T15:23:28.949Z",
+        "createdate": "2026-01-14T16:20:39.072Z",
+        "dealname": "Stout",
+        "dealstage": "1006756883",
+        "hs_deal_stage_probability": "0.05000000000000000277555756156289135105907917022705078125",
+        "hs_lastmodifieddate": "2026-04-02T17:44:47.619Z",
+        "hs_object_id": "53818916378",
+        "hubspot_owner_id": "83687269",
+        "pipeline": "678921051"
+      }
+    },
+    {
+      "id": "56179587173",
+      "properties": {
+        "amount": "3250",
+        "bdr": null,
+        "closedate": "2026-02-28T09:58:14.159Z",
+        "createdate": "2026-02-13T09:58:06.811Z",
+        "dealname": "Ferrero  - Professional Services Hours",
+        "dealstage": "1142314257",
+        "hs_deal_stage_probability": "0.90000000000000002220446049250313080847263336181640625",
+        "hs_lastmodifieddate": "2026-03-29T23:21:54.015Z",
+        "hs_object_id": "56179587173",
+        "hubspot_owner_id": "86268003",
+        "pipeline": "781732165"
+      }
+    },
+    {
+      "id": "36030844179",
+      "properties": {
+        "amount": "20000",
+        "bdr": "79422455",
+        "closedate": "2026-06-30T13:50:55.456Z",
+        "createdate": "2025-04-21T14:54:12.328Z",
+        "dealname": "Abbvie Pharmaceutical OUS - Services Hours (Templates & Meta Accounts)",
+        "dealstage": "1142314253",
+        "hs_deal_stage_probability": "0.200000000000000011102230246251565404236316680908203125",
+        "hs_lastmodifieddate": "2026-03-28T20:57:57.008Z",
+        "hs_object_id": "36030844179",
+        "hubspot_owner_id": "79422455",
+        "pipeline": "781732165"
+      }
+    },
+    {
+      "id": "20608626791",
+      "properties": {
+        "amount": "11200",
+        "bdr": null,
+        "closedate": "2024-07-31T05:00:00Z",
+        "createdate": "2024-07-08T14:32:45.115Z",
+        "dealname": "Lifescan Global Corporation - Pitcher Consent Deployment - Austria, Belgium, France, Italy & Spain",
+        "dealstage": "1142314253",
+        "hs_deal_stage_probability": "0.200000000000000011102230246251565404236316680908203125",
+        "hs_lastmodifieddate": "2026-03-27T18:51:13.910Z",
+        "hs_object_id": "20608626791",
+        "hubspot_owner_id": null,
+        "pipeline": "781732165"
+      }
+    },
+    {
+      "id": "54351317831",
+      "properties": {
+        "amount": "39784",
+        "bdr": null,
+        "closedate": "2028-10-24T13:34:51.670Z",
+        "createdate": "2026-01-22T20:26:23.262Z",
+        "dealname": "Renewal - Rabobank",
+        "dealstage": "1022425437",
+        "hs_deal_stage_probability": "0.5",
+        "hs_lastmodifieddate": "2026-03-25T01:09:57.283Z",
+        "hs_object_id": "54351317831",
+        "hubspot_owner_id": "86268003",
+        "pipeline": "699588012"
+      }
+    },
+    {
+      "id": "43235327538",
+      "properties": {
+        "amount": "9000",
+        "bdr": null,
+        "closedate": "2025-09-01T12:37:15.342Z",
+        "createdate": "2025-09-01T12:37:01.782Z",
+        "dealname": "Abbott Rapid Diagnostics - Custom Development",
+        "dealstage": "1006756883",
+        "hs_deal_stage_probability": "0.05000000000000000277555756156289135105907917022705078125",
+        "hs_lastmodifieddate": "2026-03-15T06:15:42.778Z",
+        "hs_object_id": "43235327538",
+        "hubspot_owner_id": "77771305",
+        "pipeline": "678921051"
+      }
+    },
+    {
+      "id": "39081672794",
+      "properties": {
+        "amount": "44800",
+        "bdr": "89313200",
+        "closedate": "2026-01-08T16:27:24.235Z",
+        "createdate": "2025-06-20T10:17:30.186Z",
+        "dealname": "ITW Chemin - India",
+        "dealstage": "1009579862",
+        "hs_deal_stage_probability": "0",
+        "hs_lastmodifieddate": "2026-03-27T13:23:15.719Z",
+        "hs_object_id": "39081672794",
+        "hubspot_owner_id": "83340100",
+        "pipeline": "678921051"
+      }
+    }
+  ]
+}

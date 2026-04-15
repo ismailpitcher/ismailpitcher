@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pitcher BDR Sales Motion 2026</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; background:#f8fafc; color:#0f172a; min-height:100vh; }
+
+.page { max-width:1280px; margin:0 auto; padding:48px 32px 80px; }
+
+/* ── HEADER ── */
+.header { text-align:center; margin-bottom:40px; }
+.eyebrow { font-size:11px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:#6366f1; margin-bottom:12px; }
+.header h1 { font-size:36px; font-weight:800; background:linear-gradient(135deg,#1e1b4b 0%,#4338ca 50%,#7c3aed 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; line-height:1.2; margin-bottom:14px; }
+.header p { font-size:14px; color:#6b7280; max-width:600px; margin:0 auto; line-height:1.7; }
+
+/* ── KPI BAR ── */
+.kpi-bar { display:flex; gap:12px; flex-wrap:wrap; margin-bottom:36px; justify-content:center; }
+.kpi { background:#fff; border:1px solid #e5e7eb; border-radius:12px; padding:14px 22px; text-align:center; min-width:110px; }
+.kpi-val { font-size:26px; font-weight:800; background:linear-gradient(135deg,#4338ca,#9333ea); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+.kpi-label { font-size:10px; color:#6b7280; margin-top:3px; }
+
+/* ── LEGEND ── */
+.legend { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-bottom:44px; }
+.legend-item { display:flex; align-items:center; gap:6px; font-size:11px; font-weight:600; color:#6b7280; }
+.legend-dot { width:9px; height:9px; border-radius:50%; flex-shrink:0; }
+
+/* ── INPUTS ── */
+.inputs-label { text-align:center; font-size:10px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:#9ca3af; margin-bottom:16px; }
+.inputs-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:0; }
+.input-track { background:#fff; border:1px solid #e5e7eb; border-radius:14px; padding:20px; }
+.input-track.track-a { border-top:3px solid #8b5cf6; }
+.input-track.track-b { border-top:3px solid #6366f1; }
+.track-header { display:flex; align-items:center; gap:10px; margin-bottom:12px; }
+.track-icon { width:30px; height:30px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:15px; }
+.track-icon.purple { background:#ede9fe; }
+.track-icon.indigo { background:#e0e7ff; }
+.track-title { font-size:13px; font-weight:700; color:#0f172a; }
+.track-sub { font-size:11px; color:#64748b; margin-top:1px; }
+.actions-list { list-style:none; display:flex; flex-direction:column; gap:5px; }
+.actions-list li { display:flex; align-items:flex-start; gap:7px; font-size:11px; color:#6b7280; line-height:1.5; }
+.actions-list li::before { content:'→'; color:#4f46e5; font-weight:700; flex-shrink:0; }
+.output-row { display:flex; align-items:center; gap:7px; margin-top:12px; padding-top:12px; border-top:1px solid #e5e7eb; }
+.output-label { font-size:10px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:#6b7280; flex-shrink:0; }
+.output-val { font-size:11px; color:#4338ca; font-weight:500; }
+
+/* ── MERGE ── */
+.merge-wrapper { display:flex; flex-direction:column; align-items:center; padding:10px 0; }
+.merge-lines { display:flex; width:55%; justify-content:space-between; }
+.merge-line { width:2px; height:24px; background:linear-gradient(to bottom,rgba(139,92,246,0.5),rgba(99,102,241,0.5)); }
+.merge-arrow-line { width:2px; height:20px; background:linear-gradient(to bottom,#6366f1,#818cf8); }
+.merge-chip { background:#e0e7ff; border:1px solid #6366f1; border-radius:20px; padding:5px 16px; font-size:10px; font-weight:700; color:#4338ca; letter-spacing:1px; }
+
+/* ── CHIPS ── */
+.chip { display:inline-flex; align-items:center; gap:5px; padding:3px 9px; border-radius:20px; font-size:10px; font-weight:600; border:1px solid; white-space:nowrap; }
+.chip-nooks    { background:#fdf4ff; border-color:#d946ef; color:#a21caf; }
+.chip-intent   { background:#f5f3ff; border-color:#8b5cf6; color:#6d28d9; }
+.chip-data     { background:#eff6ff; border-color:#3b82f6; color:#1d4ed8; }
+.chip-crm      { background:#fff7ed; border-color:#ea580c; color:#c2410c; }
+.chip-linkedin { background:#e0f2fe; border-color:#0369a1; color:#0369a1; }
+.chip-pitcher  { background:#eef2ff; border-color:#6366f1; color:#4338ca; }
+.tools-chips { display:flex; flex-wrap:wrap; gap:5px; }
+
+/* ═══════════════════════════════════════════
+   HORIZONTAL TIMELINE
+═══════════════════════════════════════════ */
+.timeline-section { margin:0 0 0 0; }
+.timeline-title { text-align:center; font-size:10px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:#9ca3af; margin-bottom:20px; margin-top:16px; }
+
+.timeline-track {
+  position:relative;
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  padding:0 0 0 0;
+  margin-bottom:0;
+}
+
+/* Horizontal line behind nodes */
+.timeline-track::before {
+  content:'';
+  position:absolute;
+  top:22px;
+  left:calc(100% / 16);
+  right:calc(100% / 16);
+  height:2px;
+  background:linear-gradient(to right, #8b5cf6, #6366f1, #3b82f6, #14b8a6, #f97316, #d946ef, #a21caf, #10b981);
+  z-index:0;
+}
+
+.tl-step {
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  flex:1;
+  cursor:pointer;
+  position:relative;
+  z-index:1;
+  padding-bottom:12px;
+  transition:transform 0.15s;
+}
+.tl-step:hover { transform:translateY(-2px); }
+
+.tl-node {
+  width:44px;
+  height:44px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:13px;
+  font-weight:800;
+  border:3px solid #fff;
+  box-shadow:0 0 0 2px rgba(99,102,241,0.25), 0 2px 8px rgba(0,0,0,0.1);
+  transition:all 0.2s;
+  background:#fff;
+  margin-bottom:10px;
+}
+.tl-step.active .tl-node {
+  box-shadow:0 0 0 3px currentColor, 0 4px 16px rgba(0,0,0,0.15);
+  transform:scale(1.15);
+}
+.tl-label {
+  font-size:10px;
+  font-weight:700;
+  color:#64748b;
+  text-align:center;
+  line-height:1.35;
+  max-width:88px;
+  transition:color 0.2s;
+}
+.tl-step.active .tl-label { color:#0f172a; }
+.tl-sublabel {
+  font-size:9px;
+  color:#94a3b8;
+  text-align:center;
+  max-width:88px;
+  margin-top:2px;
+  line-height:1.3;
+}
+.tl-step.active .tl-sublabel { color:#6366f1; }
+
+/* Color per stage */
+.tl-s1 .tl-node { color:#6d28d9; background:#ede9fe; }
+.tl-s1.active .tl-node { background:#6d28d9; color:#fff; }
+.tl-s2 .tl-node { color:#1d4ed8; background:#dbeafe; }
+.tl-s2.active .tl-node { background:#1d4ed8; color:#fff; }
+.tl-s3 .tl-node { color:#0f766e; background:#ccfbf1; }
+.tl-s3.active .tl-node { background:#0f766e; color:#fff; }
+.tl-s4 .tl-node { color:#c2410c; background:#ffedd5; }
+.tl-s4.active .tl-node { background:#c2410c; color:#fff; }
+.tl-s5 .tl-node { color:#a21caf; background:#fae8ff; }
+.tl-s5.active .tl-node { background:#a21caf; color:#fff; }
+.tl-s6 .tl-node { color:#92400e; background:#fef9c3; }
+.tl-s6.active .tl-node { background:#b45309; color:#fff; }
+.tl-s7 .tl-node { color:#a21caf; background:#fce7f3; }
+.tl-s7.active .tl-node { background:#be185d; color:#fff; }
+.tl-s8 .tl-node { color:#047857; background:#d1fae5; }
+.tl-s8.active .tl-node { background:#047857; color:#fff; }
+
+/* ── DETAIL PANEL ── */
+.detail-panel {
+  display:none;
+  background:#fff;
+  border:1px solid #e5e7eb;
+  border-radius:16px;
+  overflow:hidden;
+  margin-top:16px;
+  animation:slideDown 0.2s ease;
+}
+.detail-panel.visible { display:block; }
+
+@keyframes slideDown {
+  from { opacity:0; transform:translateY(-8px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+
+.detail-inner { display:grid; grid-template-columns:1fr 360px; }
+.detail-left { padding:28px 32px; border-right:1px solid #e5e7eb; }
+.detail-right { padding:24px; background:#f8fafc; }
+
+.detail-head { display:flex; align-items:center; gap:12px; margin-bottom:14px; }
+.detail-num { width:32px; height:32px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:800; flex-shrink:0; }
+.detail-phase { font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; }
+.detail-title { font-size:20px; font-weight:700; color:#0f172a; margin-bottom:8px; }
+.detail-desc { font-size:13px; color:#4b5563; line-height:1.75; margin-bottom:16px; }
+
+.nooks-box { background:#fdf4ff; border:1px solid #e9d5ff; border-radius:10px; padding:14px; margin-top:14px; }
+.nooks-box-title { font-size:10px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:#a21caf; margin-bottom:8px; }
+.nooks-feature { font-size:11px; color:#6b7280; padding:4px 0; border-bottom:1px solid #f3e8ff; line-height:1.5; }
+.nooks-feature:last-child { border-bottom:none; }
+
+.tools-header-label { font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:#9ca3af; margin-bottom:8px; }
+
+/* ── MULTI-CHANNEL (Stage 6) ── */
+.multichannel-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; margin-bottom:16px; }
+.channel { background:#fff; border:1px solid #e5e7eb; border-radius:12px; padding:16px; }
+.channel-icon { font-size:20px; margin-bottom:6px; }
+.channel-title { font-size:12px; font-weight:700; margin-bottom:6px; }
+.channel-steps { list-style:none; display:flex; flex-direction:column; gap:4px; }
+.channel-steps li { font-size:11px; color:#6b7280; padding-left:12px; position:relative; line-height:1.4; }
+.channel-steps li::before { content:'·'; position:absolute; left:0; color:#6366f1; font-weight:900; }
+
+.cadence-section { background:#f8fafc; border:1px solid #e5e7eb; border-radius:12px; padding:16px; }
+.cadence-title { font-size:11px; font-weight:700; color:#0f172a; margin-bottom:10px; }
+.cadence-grid { display:grid; grid-template-columns:repeat(9,1fr); gap:4px; }
+.cadence-day { border-radius:8px; padding:7px 4px; text-align:center; }
+.cadence-day.email { background:#eef2ff; }
+.cadence-day.call  { background:#fdf4ff; }
+.cadence-day.li    { background:#e0f2fe; }
+.cadence-day.multi { background:#fef9c3; }
+.cadence-day-num   { font-size:10px; font-weight:700; color:#0f172a; }
+.cadence-day-action { font-size:9px; color:#64748b; line-height:1.3; margin-top:2px; }
+
+/* ── CALL OUTCOMES ── */
+.call-flow { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:12px; }
+.call-outcome { border:1px solid #e5e7eb; border-radius:10px; padding:12px; }
+.call-outcome-icon { font-size:16px; margin-bottom:4px; }
+.call-outcome-title { font-size:11px; font-weight:700; margin-bottom:4px; }
+.call-outcome-desc { font-size:10px; color:#6b7280; line-height:1.5; }
+
+/* ── DIVIDER ── */
+.divider { height:1px; background:linear-gradient(to right,transparent,rgba(99,102,241,0.3),transparent); margin:44px 0; }
+
+/* ── COACHING LOOP ── */
+.loop-header { text-align:center; margin-bottom:28px; }
+.loop-header .eyebrow { font-size:10px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:#a21caf; margin-bottom:8px; }
+.loop-header h2 { font-size:22px; font-weight:700; color:#0f172a; margin-bottom:8px; }
+.loop-header p { font-size:13px; color:#6b7280; max-width:560px; margin:0 auto; line-height:1.7; }
+.loop-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+.loop-card { background:#fff; border:1px solid #e5e7eb; border-radius:14px; padding:20px; }
+.loop-card-icon { font-size:24px; margin-bottom:8px; }
+.loop-card-title { font-size:14px; font-weight:700; color:#0f172a; margin-bottom:8px; }
+.loop-card-desc { font-size:12px; color:#6b7280; line-height:1.6; margin-bottom:12px; }
+
+/* ── INTENT OPTION CARDS ── */
+.intent-option {
+  border:1.5px solid #e5e7eb;
+  border-radius:10px;
+  padding:10px 10px;
+  cursor:pointer;
+  transition:all 0.15s;
+  background:#fff;
+}
+.intent-option:hover { border-color:#8b5cf6; background:#faf5ff; }
+.intent-option.active-opt { border-color:#8b5cf6; background:#f5f3ff; box-shadow:0 0 0 2px rgba(139,92,246,0.2); }
+.intent-opt-name { font-size:11px; font-weight:700; color:#0f172a; margin-bottom:3px; }
+.intent-opt-name::before { content:'○  '; color:#d1d5db; font-size:10px; }
+.intent-option.active-opt .intent-opt-name::before { content:'●  '; color:#8b5cf6; }
+.intent-opt-desc { font-size:10px; color:#94a3b8; line-height:1.4; }
+.intent-option.active-opt .intent-opt-desc { color:#6d28d9; }
+
+/* ── TOOL TABLE ── */
+.tool-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+.tool-card { border-radius:12px; padding:16px; }
+
+@media(max-width:900px) {
+  .inputs-grid { grid-template-columns:1fr; }
+  .timeline-track::before { display:none; }
+  .timeline-track { flex-wrap:wrap; gap:8px; }
+  .tl-step { flex:0 0 calc(25% - 8px); }
+  .detail-inner { grid-template-columns:1fr; }
+  .detail-right { border-top:1px solid #e5e7eb; }
+  .multichannel-grid { grid-template-columns:1fr; }
+  .loop-grid { grid-template-columns:1fr; }
+  .tool-grid { grid-template-columns:1fr; }
+  .cadence-grid { grid-template-columns:repeat(3,1fr); }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="eyebrow">Pitcher AG · BDR Playbook</div>
+    <h1>Outbound Sales Motion 2026</h1>
+    <p>A full-funnel, AI-powered outbound engine — from raw intent signal to booked meeting. Every tool mapped, every handoff defined.</p>
+  </div>
+
+  <!-- ═══════ INPUTS ═══════ -->
+  <div class="inputs-label">↓ &nbsp; two input tracks — always running in parallel &nbsp; ↓</div>
+  <div class="inputs-grid">
+    <div class="input-track track-a">
+      <div class="track-header">
+        <div class="track-icon purple">📡</div>
+        <div>
+          <div class="track-title">Track A — Intent Signals</div>
+          <div class="track-sub">In-market accounts showing buying behavior</div>
+        </div>
+      </div>
+
+      <!-- Always-on chips -->
+      <div class="tools-chips" style="margin-bottom:12px;">
+        <span class="chip chip-intent">G2 Intent</span>
+        <span class="chip chip-crm">HubSpot 1st Party</span>
+        <span class="chip chip-linkedin">LinkedIn Events</span>
+      </div>
+
+      <!-- 3rd-party option selector -->
+      <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#9ca3af;margin-bottom:8px;">Choose one intent tool →</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:12px;">
+        <div class="intent-option active-opt" id="opt-6sense" onclick="selectIntent('6sense')">
+          <div class="intent-opt-name">6Sense</div>
+          <div class="intent-opt-desc">Anonymous web intent → company-level identification</div>
+        </div>
+        <div class="intent-option" id="opt-rb2b" onclick="selectIntent('rb2b')">
+          <div class="intent-opt-name">RB2B</div>
+          <div class="intent-opt-desc">Named visitor identification on pitcher.com</div>
+        </div>
+        <div class="intent-option" id="opt-commonroom" onclick="selectIntent('commonroom')">
+          <div class="intent-opt-name">CommonRoom</div>
+          <div class="intent-opt-desc">LinkedIn engagement, job change signals, community activity</div>
+        </div>
+      </div>
+
+      <ul class="actions-list">
+        <li>G2: accounts researching Pitcher competitors (Seismic, Veeva, IQVIA)</li>
+        <li id="intent-detail">6Sense: anonymous web intent → company-level identification</li>
+        <li>HubSpot: email opens, pricing page visits, demo requests</li>
+      </ul>
+      <div class="output-row">
+        <span class="output-label">Signal Score →</span>
+        <span class="output-val">Account priority tier (Hot / Warm / Cold)</span>
+      </div>
+    </div>
+    <div class="input-track track-b">
+      <div class="track-header">
+        <div class="track-icon indigo">🎯</div>
+        <div>
+          <div class="track-title">Track B — Strategic Target Accounts</div>
+          <div class="track-sub">CMO / Management defined TAL</div>
+        </div>
+      </div>
+      <div class="tools-chips" style="margin-bottom:10px;">
+        <span class="chip chip-pitcher">ICP Framework</span>
+        <span class="chip chip-linkedin">LinkedIn Sales Nav</span>
+        <span class="chip chip-crm">HubSpot TAL</span>
+      </div>
+      <ul class="actions-list">
+        <li>ICP: Pharma, MedTech, Manufacturing, FinServ — 200–5,000 employees</li>
+        <li>Geographies: North America, South America, Europe, EMEA, APAC, ANZ</li>
+        <li>Tech signals: Seismic customer, Veeva Vault CRM migration, IQVIA OCE user</li>
+        <li>Company triggers: funding, headcount growth, new VP Sales/RevOps hire</li>
+        <li>Competitor displacement: Seismic + Highspot merger chaos (18-month window)</li>
+      </ul>
+      <div class="output-row">
+        <span class="output-label">TAL →</span>
+        <span class="output-val">Tiered account list synced to HubSpot</span>
+      </div>
+    </div>
+  </div>
+  <div class="merge-wrapper">
+    <div class="merge-lines"><div class="merge-line"></div><div class="merge-line"></div></div>
+    <div style="display:flex;flex-direction:column;align-items:center;">
+      <div class="merge-arrow-line"></div>
+      <div class="merge-chip">UNIFIED PRIORITY ACCOUNT LIST</div>
+      <div class="merge-arrow-line"></div>
+    </div>
+  </div>
+
+  <!-- ═══════ HORIZONTAL TIMELINE ═══════ -->
+  <div class="timeline-section">
+    <div class="timeline-title">↓ &nbsp; 8-stage sales motion — click any stage to explore &nbsp; ↓</div>
+
+    <div class="timeline-track">
+      <div class="tl-step tl-s1 active" onclick="selectStage(1)">
+        <div class="tl-node">01</div>
+        <div class="tl-label">Account Scoring</div>
+        <div class="tl-sublabel">Score & prioritize accounts</div>
+      </div>
+      <div class="tl-step tl-s2" onclick="selectStage(2)">
+        <div class="tl-node">02</div>
+        <div class="tl-label">Prospect ID</div>
+        <div class="tl-sublabel">Find the right people</div>
+      </div>
+      <div class="tl-step tl-s3" onclick="selectStage(3)">
+        <div class="tl-node">03</div>
+        <div class="tl-label">Enrichment</div>
+        <div class="tl-sublabel">Mobile, email, context</div>
+      </div>
+      <div class="tl-step tl-s4" onclick="selectStage(4)">
+        <div class="tl-node">04</div>
+        <div class="tl-label">CRM Import</div>
+        <div class="tl-sublabel">Clean, tag, assign</div>
+      </div>
+      <div class="tl-step tl-s5" onclick="selectStage(5)">
+        <div class="tl-node">05</div>
+        <div class="tl-label">Content Creation</div>
+        <div class="tl-sublabel">Build the message</div>
+      </div>
+      <div class="tl-step tl-s6" onclick="selectStage(6)">
+        <div class="tl-node">06</div>
+        <div class="tl-label">Sequence</div>
+        <div class="tl-sublabel">Multi-channel execution</div>
+      </div>
+      <div class="tl-step tl-s7" onclick="selectStage(7)">
+        <div class="tl-node">07</div>
+        <div class="tl-label">Live Call</div>
+        <div class="tl-sublabel">The moment that matters</div>
+      </div>
+      <div class="tl-step tl-s8" onclick="selectStage(8)">
+        <div class="tl-node">08</div>
+        <div class="tl-label">AE Handoff</div>
+        <div class="tl-sublabel">Convert to opportunity</div>
+      </div>
+    </div>
+
+    <!-- ─── STAGE 1 PANEL ─── -->
+    <div class="detail-panel visible" id="panel-1">
+      <div class="detail-inner">
+        <div class="detail-left">
+          <div class="detail-head">
+            <div class="detail-num" style="background:#ede9fe;color:#6d28d9;">01</div>
+            <span class="detail-phase" style="color:#6d28d9;">ACCOUNT SCORING & PRIORITIZATION</span>
+          </div>
+          <div class="detail-title">Score, Rank & Decide Where to Focus</div>
+          <div class="detail-desc">Combine intent signals, ICP fit, first-party behavioral data, and call history to produce a single account priority score. This prevents BDRs from wasting time on wrong accounts and ensures the highest-probability accounts get attention first.</div>
+          <ul class="actions-list">
+            <li>Nooks Prospect ingests signal data + CRM data → ML-driven account score</li>
+            <li>Accounts ranked into tiers: Tier 1 (immediate outreach), Tier 2 (this month), Tier 3 (nurture)</li>
+            <li>Explainable AI shows which specific signals drove the score</li>
+            <li>Scores refresh dynamically as new signals arrive — priority shifts in real time</li>
+            <li>Manager reviews Tier 1 weekly; BDR works Tier 1 daily</li>
+          </ul>
+          <div class="output-row">
+            <span class="output-label">Output →</span>
+            <span class="output-val">Ranked account list with signal breakdown, ready for prospecting</span>
+          </div>
+        </div>
+        <div class="detail-right">
+          <div class="tools-header-label">Tools Used</div>
+          <div class="tools-chips" style="margin-bottom:16px;">
+            <span class="chip chip-nooks">Nooks Prospect</span>
+            <span class="chip chip-intent">G2</span>
+            <span class="chip chip-crm">HubSpot</span>
+          </div>
+
+          <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#9ca3af;margin-bottom:8px;">+ choose one intent tool</div>
+          <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:18px;">
+            <div style="display:flex;align-items:flex-start;gap:8px;padding:9px 11px;border:1.5px solid #e5e7eb;border-radius:9px;background:#fff;">
+              <span style="font-size:10px;color:#8b5cf6;margin-top:1px;">○</span>
+              <div><div style="font-size:11px;font-weight:700;color:#0f172a;">6Sense</div><div style="font-size:10px;color:#94a3b8;line-height:1.4;">Anonymous web intent → company-level identification</div></div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:8px;padding:9px 11px;border:1.5px solid #e5e7eb;border-radius:9px;background:#fff;">
+              <span style="font-size:10px;color:#8b5cf6;margin-top:1px;">○</span>
+              <div><div style="font-size:11px;font-weight:700;color:#0f172a;">RB2B</div><div style="font-size:10px;color:#94a3b8;line-height:1.4;">Named visitor identification on pitcher.com</div></div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:8px;padding:9px 11px;border:1.5px solid #e5e7eb;border-radius:9px;background:#fff;">
+              <span style="font-size:10px;color:#8b5cf6;margin-top:1px;">○</span>
+              <div><div style="font-size:11px;font-weight:700;color:#0f172a;">CommonRoom</div><div style="font-size:10px;color:#94a3b8;line-height:1.4;">LinkedIn engagement, job change signals, community activity</div></div>
+            </div>
+          </div>
+
+          <div style="background:#f0fdf4;border:1px solid #86efac;border-radius:10px;padding:13px;">
+            <div style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#15803d;margin-bottom:8px;">✓ Actions in this step</div>
+            <div style="font-size:11px;color:#374151;line-height:1.7;">
+              1. Open Nooks Prospect → Account Scoring view<br>
+              2. Filter for Tier 1 accounts (score ≥ 80)<br>
+              3. Cross-check with G2 intent + HubSpot engagement<br>
+              4. Tag accounts: <em>hot / warm / cold</em> in HubSpot<br>
+              5. Assign Tier 1 accounts to BDR owner for same-day outreach
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── STAGE 2 PANEL ─── -->
+    <div class="detail-panel" id="panel-2">
+      <div class="detail-inner">
+        <div class="detail-left">
+          <div class="detail-head">
+            <div class="detail-num" style="background:#dbeafe;color:#1d4ed8;">02</div>
+            <span class="detail-phase" style="color:#1d4ed8;">PROSPECT IDENTIFICATION</span>
+          </div>
+          <div class="detail-title">Find the Right People at the Right Accounts</div>
+          <div class="detail-desc">At each prioritized account, identify 10–20 specific personas to target. Multi-threaded outreach dramatically increases conversion rates — don't go single-threaded. Target a mix of Economic Buyer, Champion, and Blocker personas simultaneously.</div>
+          <ul class="actions-list">
+            <li><strong>Economic Buyers:</strong> VP/Head of Sales, CRO, Chief Commercial Officer</li>
+            <li><strong>Champions:</strong> Sales Enablement Manager, RevOps Director, Head of Field Sales</li>
+            <li><strong>Technical:</strong> VP Product / IT (for Catalyst module conversations)</li>
+            <li><strong>Pharma-specific:</strong> Head of Commercial Excellence, Field Force Manager, Medical Affairs VP</li>
+            <li>Filter by: seniority, tenure (avoid recent hires &lt;3mo), location — and keyword titles below</li>
+            <li>Validate: recent job changes, LinkedIn activity, content engagement</li>
+          </ul>
+          <div style="margin-top:12px;padding:12px 14px;background:#f5f3ff;border:1px solid #c4b5fd;border-radius:10px;">
+            <div style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#6d28d9;margin-bottom:8px;">Prospecting Keywords — LinkedIn Title Filter</div>
+            <div style="display:flex;flex-wrap:wrap;gap:5px;">
+              <span class="chip chip-intent">Enterprise Enablement</span><span class="chip chip-intent">Sales Enablement</span><span class="chip chip-intent">Digital Enablement</span><span class="chip chip-intent">Sales Excellence</span><span class="chip chip-intent">Sales Effectiveness</span><span class="chip chip-intent">Sales Operations</span><span class="chip chip-intent">Sales Productivity</span><span class="chip chip-intent">Sales Training</span><span class="chip chip-intent">Sales Readiness</span><span class="chip chip-intent">Sales Force</span><span class="chip chip-intent">SFE</span><span class="chip chip-intent">Customer Development</span><span class="chip chip-intent">Rep Productivity</span><span class="chip chip-intent">Field Productivity</span><span class="chip chip-intent">Commercial Operations</span><span class="chip chip-intent">Commercial Excellence</span><span class="chip chip-intent">Commercial Marketing</span><span class="chip chip-intent">Commercial Training</span><span class="chip chip-intent">Marketing Enablement</span><span class="chip chip-intent">Field Marketing</span><span class="chip chip-intent">CRM</span><span class="chip chip-intent">Field Data</span><span class="chip chip-intent">Territory Insights</span><span class="chip chip-intent">Salesforce</span><span class="chip chip-intent">Field Sales</span>
+            </div>
+          </div>
+          <div class="output-row">
+            <span class="output-label">Output →</span>
+            <span class="output-val">10–20 named prospects per account with LinkedIn profiles + initial context</span>
+          </div>
+        </div>
+        <div class="detail-right">
+          <div class="tools-header-label">Tools Used</div>
+          <div class="tools-chips" style="margin-bottom:16px;">
+            <span class="chip chip-linkedin">LinkedIn Sales Nav</span>
+            <span class="chip chip-nooks">Nooks Prospect</span>
+          </div>
+          <div style="background:#f0fdf4;border:1px solid #86efac;border-radius:10px;padding:13px;">
+            <div style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#15803d;margin-bottom:8px;">✓ Actions in this step</div>
+            <div style="font-size:11px;color:#374151;line-height:1.7;">
+              1. Open LinkedIn Sales Nav → search target account<br>
+              2. Filter by keyword titles (use list on left)<br>
+              3. Filter: seniority Senior+, tenure &gt;3mo, relevant geo<br>
+              4. Save 10–20 leads per account to Nooks Prospect list<br>
+              5. Validate: check LinkedIn activity + recent job changes<br>
+              6. Assign persona type (Buyer / Champion / Technical)
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── STAGE 3 PANEL ─── -->
+    <div class="detail-panel" id="panel-3">
+      <div class="detail-inner">
+        <div class="detail-left">
+          <div class="detail-head">
+            <div class="detail-num" style="background:#ccfbf1;color:#0f766e;">03</div>
+            <span class="detail-phase" style="color:#0f766e;">CONTACT ENRICHMENT</span>
+          </div>
+          <div class="detail-title">Get Verified Data — Mobile, Email, Context</div>
+          <div class="detail-desc">Contact data decays at ~30% per year. Before any outreach, enrich every prospect with verified mobile numbers, direct dials, and work emails. Nooks Numbers runs waterfall enrichment across multiple providers automatically — only charges credits when a valid number is found.</div>
+          <ul class="actions-list">
+            <li>Waterfall enrichment: query Cognism → Datagma → LeadIQ → ZoomInfo sequentially</li>
+            <li>Stop at first valid mobile number — cost-efficient, maximum coverage</li>
+            <li>Invalid/DNC numbers automatically flagged and removed from future campaigns</li>
+            <li>Enrich company data: firmographics, tech stack, recent news, competitor tech used</li>
+            <li>Job change signals: promoted or moved in last 90 days = high-priority trigger</li>
+            <li>Funding round alerts: Series B+ = expansion budget available</li>
+          </ul>
+          <div class="output-row">
+            <span class="output-label">Output →</span>
+            <span class="output-val">Verified mobile + email + enriched profile ready for CRM import</span>
+          </div>
+        </div>
+        <div class="detail-right">
+          <div class="tools-header-label">Tools Used</div>
+          <div class="tools-chips" style="margin-bottom:14px;">
+            <span class="chip chip-nooks">Nooks Numbers</span>
+            <span class="chip chip-data">Cognism</span>
+            <span class="chip chip-data">Datagma</span>
+            <span class="chip chip-data">LeadIQ</span>
+            <span class="chip chip-data">ZoomInfo</span>
+            <span class="chip chip-data">Lusha</span>
+          </div>
+          <div style="background:#f0fdf4;border:1px solid #86efac;border-radius:10px;padding:13px;">
+            <div style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#15803d;margin-bottom:8px;">✓ Actions in this step</div>
+            <div style="font-size:11px;color:#374151;line-height:1.7;">
+              1. Select all saved prospects from Stage 02 list<br>
+              2. Run Nooks Numbers → waterfall enrichment in bulk<br>
+              3. Review results: confirm mobile + work email found<br>
+              4. Flag DNC / unverified → remove from campaign<br>
+              5. Enrich company record: tech stack, recent news, competitor used<br>
+              6. Mark enrichment complete → ready for CRM import
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── STAGE 4 PANEL ─── -->
+    <div class="detail-panel" id="panel-4">
+      <div class="detail-inner">
+        <div class="detail-left">
+          <div class="detail-head">
+            <div class="detail-num" style="background:#ffedd5;color:#c2410c;">04</div>
+            <span class="detail-phase" style="color:#c2410c;">CRM IMPORT & HYGIENE</span>
+          </div>
+          <div class="detail-title">Load into HubSpot — Clean, Tagged, Assigned</div>
+          <div class="detail-desc">Clean CRM data is the foundation of everything. Contacts enter HubSpot in a structured, deduplicated way with all relevant context tagged — signal source, account tier, persona type, and enrichment timestamp. A dirty CRM means wasted outreach and invisible pipeline.</div>
+          <ul class="actions-list">
+            <li>One-click import from Nooks Prospect directly into HubSpot (deduplication built-in)</li>
+            <li>Auto-tag: signal source (G2/6Sense/TAL), account tier (1/2/3), persona type</li>
+            <li>Set lifecycle stage = Prospect; assign to BDR owner</li>
+            <li>Custom properties: account_temperature, competitor_used, enrichment_date, intent_signal</li>
+            <li>Company record: link contact → company, set deal association if relevant</li>
+            <li>Trigger HubSpot automation: new Tier 1 contact → notify BDR via Slack immediately</li>
+          </ul>
+          <div class="output-row">
+            <span class="output-label">Output →</span>
+            <span class="output-val">HubSpot contact + company record, tagged, assigned, sequence-ready</span>
+          </div>
+        </div>
+        <div class="detail-right">
+          <div class="tools-header-label">Tools Used</div>
+          <div class="tools-chips" style="margin-bottom:14px;">
+            <span class="chip chip-nooks">Nooks → HubSpot</span>
+            <span class="chip chip-crm">HubSpot CRM</span>
+          </div>
+          <div style="background:#f0fdf4;border:1px solid #86efac;border-radius:10px;padding:13px;">
+            <div style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#15803d;margin-bottom:8px;">✓ Actions in this step</div>
+            <div style="font-size:11px;color:#374151;line-height:1.7;">
+              1. Export enriched list from Nooks → one-click import to HubSpot<br>
+              2. Confirm deduplication: no duplicate contacts or companies<br>
+              3. Auto-tag: signal source, account tier, persona type<br>
+              4. Set lifecycle stage = Prospect; assign to BDR owner<br>
+              5. Verify HubSpot automation fired: Tier 1 → Slack alert sent<br>
+              6. Contact is now sequence-ready
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── STAGE 5 PANEL ─── -->
+    <div class="detail-panel" id="panel-5">
+      <div class="detail-inner">
+        <div class="detail-left">
+          <div class="detail-head">
+            <div class="detail-num" style="background:#fae8ff;color:#a21caf;">05</div>
+            <span class="detail-phase" style="color:#a21caf;">CONTENT CREATION & PERSONALIZATION</span>
+          </div>
+          <div class="detail-title">Build the Message — Per Persona, Per Signal</div>
+          <div class="detail-desc">Generic outreach dies in spam. Every message must be grounded in a specific signal, reference the prospect's reality, and make a relevant Pitcher angle land. AI accelerates content creation — but the BDR reviews and approves every message before it sends.</div>
+          <ul class="actions-list">
+            <li>Nooks Prospect generates AI email draft using: intent signals + call history + buyer context</li>
+            <li>Pitcher Intel (Claude AI) supplements with: account research, competitive angle, industry pain</li>
+            <li>Per prospect: 3–5 email variations + LinkedIn message + cold call script</li>
+            <li>Personalization anchors: competitor they use (Seismic/Veeva/IQVIA), trigger event, role-specific pain</li>
+            <li>Pitcher angles: Catalyst AI App Builder, Virtual Coach roleplay, Seismic merger disruption</li>
+            <li>Message reviewed by BDR before sequence launch — AI assists, human approves</li>
+          </ul>
+          <div class="output-row">
+            <span class="output-label">Output →</span>
+            <span class="output-val">Full message set per prospect: email thread, LinkedIn copy, call script</span>
+          </div>
+        </div>
+        <div class="detail-right">
+          <div class="tools-header-label">Tools Used</div>
+          <div class="tools-chips" style="margin-bottom:14px;">
+            <span class="chip chip-nooks">Nooks Prospect</span>
+            <span class="chip chip-nooks">Nooks Sequence</span>
+            <span class="chip chip-pitcher">Pitcher Intel (Claude)</span>
+            <span class="chip chip-crm">HubSpot Templates</span>
+          </div>
+          <div style="background:#f0fdf4;border:1px solid #86efac;border-radius:10px;padding:13px;">
+            <div style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#15803d;margin-bottom:8px;">✓ Actions in this step</div>
+            <div style="font-size:11px;color:#374151;line-height:1.7;">
+              1. Open Pitcher Intel → run account research brief per target<br>
+              2. Identify the key signal: competitor used, job change, intent spike<br>
+              3. Use Nooks AI draft → customize with signal + Pitcher angle<br>
+              4. Write LinkedIn message + cold call opener per persona<br>
+              5. BDR reviews and approves all messages before launch<br>
+              6. Save approved templates to Nooks Sequence library
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── STAGE 6 PANEL ─── -->
+    <div class="detail-panel" id="panel-6">
+      <div style="padding:24px 28px 20px;">
+        <div class="detail-head" style="margin-bottom:8px;">
+          <div class="detail-num" style="background:#fef9c3;color:#92400e;">06</div>
+          <span class="detail-phase" style="color:#92400e;">MULTI-CHANNEL SEQUENCE EXECUTION</span>
+        </div>
+        <div class="detail-title">Execute Across All Channels — Simultaneously</div>
+        <div class="detail-desc">Three channels run in parallel. Email warms the prospect, LinkedIn builds familiarity, cold call delivers the live conversation. Together they create surround-sound presence that cuts through noise.</div>
+        <div class="tools-chips" style="margin-bottom:20px;">
+          <span class="chip chip-nooks">Nooks Sequence</span>
+          <span class="chip chip-nooks">Nooks Dial</span>
+          <span class="chip chip-nooks">Nooks Numbers</span>
+          <span class="chip chip-linkedin">LinkedIn Sales Nav</span>
+          <span class="chip chip-crm">HubSpot</span>
+        </div>
+
+        <div class="multichannel-grid">
+          <div class="channel">
+            <div class="channel-icon">📧</div>
+            <div class="channel-title" style="color:#4338ca;">Email Channel</div>
+            <div style="margin-bottom:8px;"><span class="chip chip-nooks">Nooks Sequence</span></div>
+            <ul class="channel-steps">
+              <li>AI-personalized subject lines with signal reference</li>
+              <li>Nooks tracks opens, clicks, and replies in real-time</li>
+              <li>Automatic deliverability monitoring + inbox health scoring</li>
+              <li>Reply triggers: auto-remove from sequence, notify BDR</li>
+              <li>Scheduled sending during optimal windows (Tue–Thu, 8–10am)</li>
+              <li>Bounce management: bad emails auto-flagged</li>
+            </ul>
+          </div>
+          <div class="channel">
+            <div class="channel-icon">💼</div>
+            <div class="channel-title" style="color:#0369a1;">LinkedIn Channel</div>
+            <div style="margin-bottom:8px;"><span class="chip chip-linkedin">Sales Navigator</span></div>
+            <ul class="channel-steps">
+              <li>Day 1: Connection request with personalized note</li>
+              <li>Day 5: Follow-up message if connected (value-forward)</li>
+              <li>Day 11: InMail if not connected (reference email sent)</li>
+              <li>Engage with prospect's content before outreaching</li>
+              <li>Sales Nav alerts: job change, company news = instant trigger</li>
+              <li>Track connection status in HubSpot custom property</li>
+            </ul>
+          </div>
+          <div class="channel">
+            <div class="channel-icon">📞</div>
+            <div class="channel-title" style="color:#a21caf;">Phone Channel</div>
+            <div style="margin-bottom:8px;"><span class="chip chip-nooks">Nooks Dial</span></div>
+            <ul class="channel-steps">
+              <li>Power/Parallel dialing: connects to live human only</li>
+              <li>Spam protection: automatic number rotation</li>
+              <li>AI voicemail detection: skip VMs instantly, drop pre-recorded</li>
+              <li>Real-time transcription + AI prompts during live call</li>
+              <li>Call outcome auto-logged to HubSpot</li>
+              <li>Virtual Salesfloor: blitz rooms with team</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="cadence-section" style="margin-top:16px;">
+          <div class="cadence-title">21-Day Cadence Map — 11 Touchpoints</div>
+          <div class="cadence-grid">
+            <div class="cadence-day multi"><div class="cadence-day-num">Day 1</div><div class="cadence-day-action">Email 1 + LI connect</div></div>
+            <div class="cadence-day call"><div class="cadence-day-num">Day 3</div><div class="cadence-day-action">Call #1 + VM drop</div></div>
+            <div class="cadence-day li"><div class="cadence-day-num">Day 5</div><div class="cadence-day-action">LI follow-up msg</div></div>
+            <div class="cadence-day email"><div class="cadence-day-num">Day 7</div><div class="cadence-day-action">Email 2 (angle 2)</div></div>
+            <div class="cadence-day call"><div class="cadence-day-num">Day 9</div><div class="cadence-day-action">Call #2</div></div>
+            <div class="cadence-day li"><div class="cadence-day-num">Day 11</div><div class="cadence-day-action">LI InMail</div></div>
+            <div class="cadence-day email"><div class="cadence-day-num">Day 14</div><div class="cadence-day-action">Email 3 (insight)</div></div>
+            <div class="cadence-day call"><div class="cadence-day-num">Day 17</div><div class="cadence-day-action">Call #3</div></div>
+            <div class="cadence-day email"><div class="cadence-day-num">Day 21</div><div class="cadence-day-action">Break-up email</div></div>
+          </div>
+          <div style="margin-top:8px;display:flex;gap:12px;flex-wrap:wrap;">
+            <span style="font-size:10px;color:#64748b;"><span style="color:#4338ca;">■</span> Email</span>
+            <span style="font-size:10px;color:#64748b;"><span style="color:#a21caf;">■</span> Call (Nooks)</span>
+            <span style="font-size:10px;color:#64748b;"><span style="color:#0369a1;">■</span> LinkedIn</span>
+            <span style="font-size:10px;color:#64748b;"><span style="color:#92400e;">■</span> Multi-channel same day</span>
+          </div>
+        </div>
+        <div class="output-row" style="margin-top:16px;padding-top:14px;border-top:1px solid #e5e7eb;">
+          <span class="output-label">Output →</span>
+          <span class="output-val">Coordinated 11-touch, 21-day sequence running across all three channels</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── STAGE 7 PANEL ─── -->
+    <div class="detail-panel" id="panel-7">
+      <div class="detail-inner">
+        <div class="detail-left">
+          <div class="detail-head">
+            <div class="detail-num" style="background:#fce7f3;color:#be185d;">07</div>
+            <span class="detail-phase" style="color:#be185d;">LIVE CONVERSATION — THE COLD CALL</span>
+          </div>
+          <div class="detail-title">The Moment That Matters Most</div>
+          <div class="detail-desc">Nooks Dial handles the infrastructure — spam protection, parallel dialing, voicemail skip. The BDR focuses on the conversation. Real-time AI surfaces objection responses, competitor battlecards, and relevant context during the call — without the rep leaving the screen.</div>
+          <ul class="actions-list">
+            <li><strong>Before:</strong> Nooks surfaces account context, recent signals, call script, and prior call history</li>
+            <li><strong>During:</strong> real-time transcription, AI prompts for objections, competitor responses surface automatically</li>
+            <li><strong>Parallel dialing:</strong> dial multiple numbers, connect only when a live human picks up — 3× more conversations per hour</li>
+            <li><strong>Spam protection:</strong> Nooks Numbers rotates caller IDs, manages carrier reputation</li>
+            <li><strong>Virtual Salesfloor:</strong> manager can listen live, whisper coach, or run blitz rooms</li>
+            <li><strong>Post-call:</strong> outcome, notes, and next action auto-logged to HubSpot — zero manual CRM work</li>
+          </ul>
+          <div class="call-flow">
+            <div class="call-outcome" style="border-color:#10b981;">
+              <div class="call-outcome-icon">✅</div>
+              <div class="call-outcome-title" style="color:#047857;">Meeting Booked</div>
+              <div class="call-outcome-desc">Sequence paused. HubSpot deal created. Calendar invite sent. AE handoff briefing auto-generated.</div>
+            </div>
+            <div class="call-outcome" style="border-color:#f59e0b;">
+              <div class="call-outcome-icon">📅</div>
+              <div class="call-outcome-title" style="color:#92400e;">Callback Requested</div>
+              <div class="call-outcome-desc">HubSpot task created with callback time. Nooks reminder fires 5 min before. Sequence paused.</div>
+            </div>
+            <div class="call-outcome" style="border-color:#6366f1;">
+              <div class="call-outcome-icon">📬</div>
+              <div class="call-outcome-title" style="color:#4338ca;">Voicemail Left</div>
+              <div class="call-outcome-desc">Nooks drops pre-recorded VM instantly. Sequence continues. Email 2 fires within 4 hours.</div>
+            </div>
+            <div class="call-outcome" style="border-color:#ef4444;">
+              <div class="call-outcome-icon">🚫</div>
+              <div class="call-outcome-title" style="color:#b91c1c;">Not Interested</div>
+              <div class="call-outcome-desc">Call notes logged. Sequence paused 90 days. Signal score penalized. Manager notified.</div>
+            </div>
+          </div>
+          <div class="output-row" style="margin-top:14px;">
+            <span class="output-label">Output →</span>
+            <span class="output-val">Live conversation → meeting booked, callback, or informed next touch</span>
+          </div>
+        </div>
+        <div class="detail-right">
+          <div class="tools-header-label">Tools Used</div>
+          <div class="tools-chips" style="margin-bottom:14px;">
+            <span class="chip chip-nooks">Nooks Dial</span>
+            <span class="chip chip-nooks">Nooks Numbers</span>
+            <span class="chip chip-nooks">Nooks Coach</span>
+            <span class="chip chip-crm">HubSpot (auto-log)</span>
+          </div>
+          <div style="background:#f0fdf4;border:1px solid #86efac;border-radius:10px;padding:13px;">
+            <div style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#15803d;margin-bottom:8px;">✓ Actions in this step</div>
+            <div style="font-size:11px;color:#374151;line-height:1.7;">
+              1. Open Nooks Dial → load Tier 1 call queue<br>
+              2. Review account context + call script before dialing<br>
+              3. Launch parallel dial session — connect on live pickup only<br>
+              4. During call: follow script, handle objections with AI prompts<br>
+              5. Log outcome immediately: booked / callback / VM / not interested<br>
+              6. HubSpot auto-updated — no manual entry needed
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── STAGE 8 PANEL ─── -->
+    <div class="detail-panel" id="panel-8">
+      <div class="detail-inner">
+        <div class="detail-left">
+          <div class="detail-head">
+            <div class="detail-num" style="background:#d1fae5;color:#047857;">08</div>
+            <span class="detail-phase" style="color:#047857;">MEETING BOOKED → AE HANDOFF</span>
+          </div>
+          <div class="detail-title">Convert the Meeting into a Qualified Opportunity</div>
+          <div class="detail-desc">A booked meeting is not won pipeline. The BDR-to-AE handoff must be airtight — full context transfer, confirmed attendees, pre-call research, and a clear hypothesis for why Pitcher wins this account. A weak handoff loses meetings that were hard to book.</div>
+          <ul class="actions-list">
+            <li>HubSpot deal created at Stage 0 (S0) immediately on meeting confirmation</li>
+            <li>AE receives: account intelligence summary, signal history, call notes, LinkedIn profile, competitor context</li>
+            <li>Pitcher Intel (Claude AI) generates account research brief: company pain, org structure, competitive landscape</li>
+            <li>Pre-meeting prep: AE reviews Virtual Coach roleplay scenarios for this specific persona/industry</li>
+            <li>BDR joins first 5 minutes of discovery call for warm introduction — reduces no-show rate</li>
+            <li>Post-meeting: AE updates deal stage, notes, next steps in HubSpot within 24h</li>
+          </ul>
+          <div class="output-row">
+            <span class="output-label">Output →</span>
+            <span class="output-val">S0 deal in HubSpot, AE briefed, discovery call scheduled, Pitcher winning hypothesis defined</span>
+          </div>
+        </div>
+        <div class="detail-right">
+          <div class="tools-header-label">Tools Used</div>
+          <div class="tools-chips" style="margin-bottom:14px;">
+            <span class="chip chip-crm">HubSpot (Deal S0)</span>
+            <span class="chip chip-pitcher">Pitcher Intel</span>
+            <span class="chip chip-pitcher">Virtual Coach</span>
+            <span class="chip chip-pitcher">Pitcher Platform</span>
+          </div>
+          <div style="background:#f0fdf4;border:1px solid #86efac;border-radius:10px;padding:13px;">
+            <div style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#15803d;margin-bottom:8px;">✓ Actions in this step</div>
+            <div style="font-size:11px;color:#374151;line-height:1.7;">
+              1. Meeting confirmed → HubSpot deal created at S0<br>
+              2. Run Pitcher Intel brief: company pain, org chart, competitive landscape<br>
+              3. Send AE handoff package: signal history, call notes, LinkedIn, competitor context<br>
+              4. AE reviews Nooks call transcripts from all prior BDR touches<br>
+              5. AE completes Virtual Coach roleplay for this persona/industry<br>
+              6. BDR joins first 5min of discovery call for warm intro
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /timeline-section -->
+
+
+</div><!-- /page -->
+
+<script>
+const intentDetails = {
+  '6sense':     '6Sense: anonymous web intent → company-level identification',
+  'rb2b':       'RB2B: named visitor identification on pitcher.com',
+  'commonroom': 'CommonRoom: LinkedIn engagement, job change signals, community activity'
+};
+
+function selectIntent(key) {
+  document.querySelectorAll('.intent-option').forEach(el => el.classList.remove('active-opt'));
+  document.getElementById('opt-' + key).classList.add('active-opt');
+  document.getElementById('intent-detail').textContent = intentDetails[key];
+}
+
+function selectStage(n) {
+  // Hide all panels
+  document.querySelectorAll('.detail-panel').forEach(p => p.classList.remove('visible'));
+  // Deactivate all steps
+  document.querySelectorAll('.tl-step').forEach(s => s.classList.remove('active'));
+  // Show selected
+  document.getElementById('panel-' + n).classList.add('visible');
+  document.querySelector('.tl-s' + n).classList.add('active');
+  // Scroll to panel smoothly
+  document.getElementById('panel-' + n).scrollIntoView({ behavior:'smooth', block:'nearest' });
+}
+</script>
+</body>
+</html>

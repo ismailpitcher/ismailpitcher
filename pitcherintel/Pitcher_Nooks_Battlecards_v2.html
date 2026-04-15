@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pitcher — Nooks Battlecards v2</title>
+<style>
+  :root {
+    --blue: #1a73e8;
+    --dark: #1e1e2e;
+    --border: #e2e8f0;
+    --pain: #dc2626;
+    --proof: #16a34a;
+    --objection: #d97706;
+    --talk: #1d4ed8;
+    --opener: #7c3aed;
+    --trigger: #0f766e;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f0f2f8; color: #1e1e2e; }
+
+  /* ── HEADER ── */
+  .page-header {
+    background: linear-gradient(135deg, #0f4c81 0%, #1a73e8 100%);
+    color: white; padding: 32px 48px;
+    display: flex; align-items: center; gap: 20px;
+  }
+  .logo-box { width: 48px; height: 48px; background: rgba(255,255,255,0.15); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0; }
+  .page-header h1 { font-size: 24px; font-weight: 700; }
+  .page-header p { font-size: 13px; opacity: 0.85; margin-top: 4px; }
+
+  /* ── HOW-TO BANNER ── */
+  .howto-banner {
+    background: #1e293b; color: #e2e8f0;
+    padding: 18px 48px; display: flex; gap: 40px; align-items: center;
+    border-bottom: 2px solid #334155; font-size: 13px;
+  }
+  .howto-step { display: flex; align-items: center; gap: 10px; }
+  .howto-step .num { width: 26px; height: 26px; border-radius: 50%; background: #1a73e8; color: white; font-weight: 700; font-size: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .howto-step .txt { line-height: 1.4; }
+  .howto-step .txt strong { display: block; color: #fff; }
+  .howto-step .txt span { color: #94a3b8; }
+  .howto-arrow { color: #334155; font-size: 20px; }
+
+  /* ── NAV ── */
+  .nav-tabs {
+    background: #fff; border-bottom: 2px solid var(--border);
+    padding: 0 48px; display: flex; gap: 0;
+  }
+  .nav-tab {
+    padding: 14px 28px; font-size: 14px; font-weight: 500; cursor: pointer;
+    border-bottom: 3px solid transparent; margin-bottom: -2px; color: #64748b;
+    transition: all 0.15s; border-top: none; border-left: none; border-right: none;
+    background: none; white-space: nowrap;
+  }
+  .nav-tab:hover { color: var(--blue); }
+  .nav-tab.active { color: var(--blue); border-bottom-color: var(--blue); font-weight: 700; }
+
+  /* ── SECTIONS ── */
+  .section { padding: 28px 48px; display: none; }
+  .section.active { display: block; }
+  .section-header { margin-bottom: 20px; }
+  .section-header h2 { font-size: 18px; font-weight: 700; color: #0f172a; }
+  .section-header p { font-size: 13px; color: #64748b; margin-top: 4px; }
+
+  /* ── GRID ── */
+  .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); gap: 20px; }
+
+  /* ── CARD ── */
+  .card { background: #fff; border-radius: 14px; border: 1px solid var(--border); overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,.06); }
+
+  .card-header { padding: 16px 20px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid var(--border); }
+  .card-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+  .card-icon.industry { background: #dbeafe; }
+  .card-icon.role     { background: #ede9fe; }
+  .card-title-block { flex: 1; min-width: 0; }
+  .card-title { font-size: 15px; font-weight: 700; color: #0f172a; }
+  .card-subtitle { font-size: 11px; color: #94a3b8; margin-top: 2px; }
+  .card-tag { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; padding: 3px 8px; border-radius: 6px; white-space: nowrap; flex-shrink: 0; }
+  .tag-industry { background: #dbeafe; color: #1e40af; }
+  .tag-role     { background: #ede9fe; color: #6b21a8; }
+
+  .card-body { padding: 14px 20px; display: flex; flex-direction: column; gap: 12px; }
+
+  /* ── BLOCKS ── */
+  .block { display: flex; flex-direction: column; gap: 6px; }
+  .block-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; }
+  .block-label.pain      { color: var(--pain); }
+  .block-label.talk      { color: var(--talk); }
+  .block-label.proof     { color: var(--proof); }
+  .block-label.objection { color: var(--objection); }
+  .block-label.opener    { color: var(--opener); }
+  .block-label.trigger   { color: var(--trigger); }
+
+  ul { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+  li { font-size: 12.5px; line-height: 1.5; padding-left: 14px; position: relative; }
+  li::before { content: '•'; position: absolute; left: 0; }
+  li.pain::before      { color: var(--pain); }
+  li.talk::before      { color: var(--talk); }
+  li.opener::before    { color: var(--opener); }
+
+  /* ── TRIGGER BOX ── */
+  .trigger-box {
+    background: #f0fdfa; border: 1px solid #99f6e4; border-left: 3px solid #0d9488;
+    border-radius: 8px; padding: 10px 12px; font-size: 12px; line-height: 1.5;
+  }
+  .trigger-box strong { color: #0f766e; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 4px; }
+  .trigger-keywords { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
+  .kw { background: #ccfbf1; color: #0f766e; border-radius: 4px; padding: 2px 7px; font-size: 11px; font-weight: 600; }
+
+  /* ── PROOF BOX ── */
+  .proof-box { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 10px 14px; }
+  .stat-row { display: flex; gap: 16px; flex-wrap: wrap; }
+  .proof-stat { text-align: center; }
+  .proof-stat .number { font-size: 20px; font-weight: 800; color: #15803d; line-height: 1.1; }
+  .proof-stat .label  { font-size: 10px; color: #64748b; margin-top: 2px; line-height: 1.3; max-width: 90px; }
+
+  /* ── OBJECTION ITEMS ── */
+  .objection-item { background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 10px 12px; display: flex; flex-direction: column; gap: 4px; }
+  .objection-q { font-size: 12px; font-weight: 700; color: #92400e; }
+  .objection-a { font-size: 12px; color: #374151; line-height: 1.5; }
+
+  /* ── SENIORITY MODIFIER ── */
+  .seniority-block {
+    background: #faf5ff; border: 1px solid #e9d5ff; border-left: 3px solid #7c3aed;
+    border-radius: 8px; padding: 10px 12px;
+  }
+  .seniority-block .sen-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #7c3aed; margin-bottom: 8px; }
+  .sen-row { display: flex; gap: 6px; margin-bottom: 6px; align-items: flex-start; }
+  .sen-row:last-child { margin-bottom: 0; }
+  .sen-tag { font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 4px; white-space: nowrap; flex-shrink: 0; margin-top: 1px; }
+  .sen-tag.csuite  { background: #1e3a5f; color: #93c5fd; }
+  .sen-tag.director{ background: #3b0764; color: #d8b4fe; }
+  .sen-tag.manager { background: #052e16; color: #86efac; }
+  .sen-text { font-size: 12px; color: #374151; line-height: 1.5; }
+
+  /* ── CUSTOMER STORY ── */
+  .customer-story {
+    background: linear-gradient(135deg, #f0f9ff 0%, #e7f5fd 100%);
+    border: 1px solid #bae6fd; border-left: 4px solid #0284c7;
+    border-radius: 8px; padding: 10px 14px;
+  }
+  .story-label   { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #0284c7; margin-bottom: 4px; }
+  .story-company { font-weight: 700; color: #0c4a6e; font-size: 13px; }
+  .story-text    { font-size: 12px; color: #374151; line-height: 1.5; margin-top: 3px; }
+  .story-result  { font-weight: 600; color: #0369a1; margin-top: 5px; font-size: 12px; }
+
+  /* ── HOWTO TAB ── */
+  .howto-card { background: #fff; border-radius: 12px; border: 1px solid var(--border); padding: 24px; margin-bottom: 16px; max-width: 720px; }
+  .howto-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 14px; color: #0f172a; }
+  .howto-card ol { padding-left: 20px; display: flex; flex-direction: column; gap: 8px; }
+  .howto-card li { font-size: 13px; line-height: 1.6; color: #374151; }
+  .howto-card li::before { display: none; }
+  code { background: #f1f5f9; padding: 2px 6px; border-radius: 4px; font-family: monospace; font-size: 12px; color: #0f172a; }
+
+  @media (max-width: 900px) {
+    .cards-grid { grid-template-columns: 1fr; }
+    .page-header, .section, .nav-tabs { padding-left: 20px; padding-right: 20px; }
+    .howto-banner { flex-direction: column; gap: 12px; padding: 16px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ HEADER ══ -->
+<div class="page-header">
+  <div class="logo-box">🏏</div>
+  <div>
+    <h1>Pitcher — Nooks Battlecards v2</h1>
+    <p>9 cards · 5 Industry + 4 Role Archetype · Max 2 cards open per call · Optimized for cold calling</p>
+  </div>
+</div>
+
+<!-- ══ HOW-TO BANNER ══ -->
+<div class="howto-banner">
+  <div class="howto-step">
+    <div class="num">1</div>
+    <div class="txt">
+      <strong>Open Industry card</strong>
+      <span>Manual — before the call starts<br>Pharma / MedTech / Manufacturing / FinServ / CPG</span>
+    </div>
+  </div>
+  <div class="howto-arrow">→</div>
+  <div class="howto-step">
+    <div class="num">2</div>
+    <div class="txt">
+      <strong>Role card auto-triggers</strong>
+      <span>Nooks detects title keywords<br>Enablement / Revenue / Ops+Tech / Executive</span>
+    </div>
+  </div>
+  <div class="howto-arrow">→</div>
+  <div class="howto-step">
+    <div class="num">3</div>
+    <div class="txt">
+      <strong>Check Seniority Modifier</strong>
+      <span>Inside every Role card<br>C-Suite / Director / Manager — adjust your tone</span>
+    </div>
+  </div>
+  <div class="howto-arrow">→</div>
+  <div class="howto-step">
+    <div class="num">✓</div>
+    <div class="txt">
+      <strong>2 cards max, always sharp</strong>
+      <span>No juggling. No tab-switching.<br>Open with Conversation Starters. Close with Proof.</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══ NAV ══ -->
+<div class="nav-tabs">
+  <button class="nav-tab active" onclick="showTab('industry', this)">💊 Industry (5)</button>
+  <button class="nav-tab" onclick="showTab('role', this)">🎯 Role Archetype (4)</button>
+  <button class="nav-tab" onclick="showTab('setup', this)">⚙️ Nooks Setup</button>
+</div>
+
+<!-- ════════════════════════════════════════════
+     INDUSTRY TAB
+════════════════════════════════════════════ -->
+<div id="tab-industry" class="section active">
+  <div class="section-header">
+    <h2>Industry Battlecards</h2>
+    <p>Set up as <strong>General</strong> type in Nooks. Open manually before each call based on company vertical. Use with one Role Archetype card.</p>
+  </div>
+  <div class="cards-grid">
+
+    <!-- ─── PHARMA ─── -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon industry">💊</div>
+        <div class="card-title-block">
+          <div class="card-title">Pharma / Life Sciences</div>
+          <div class="card-subtitle">Novartis · Pfizer · Sanofi · AstraZeneca · Biogen · Daiichi Sankyo</div>
+        </div>
+        <span class="card-tag tag-industry">Industry</span>
+      </div>
+      <div class="card-body">
+        <div class="block">
+          <div class="block-label opener">⚡ Open With</div>
+          <ul>
+            <li class="opener">When an HCP gives your rep 7 minutes — what does that rep walk in with today?</li>
+            <li class="opener">How long does it take a new MSL or field rep to reach full productivity?</li>
+            <li class="opener">How are you ensuring reps only share compliant content across different markets?</li>
+          </ul>
+        </div>
+        <div class="block">
+          <div class="block-label pain">⚠ Pain Points</div>
+          <ul>
+            <li class="pain">Veeva ending Salesforce partnership → forced migration to Vault CRM creates costly disruption</li>
+            <li class="pain">Compliant content scattered across multiple systems — reps improvise, risking regulatory violations</li>
+            <li class="pain">Field reps spend 20–30 min per visit on admin; post-call reports filed late or inaccurately</li>
+            <li class="pain">New market approvals or label updates take weeks to reach the field consistently</li>
+          </ul>
+        </div>
+        <div class="block">
+          <div class="block-label talk">→ Key Talking Points</div>
+          <ul>
+            <li class="talk"><strong>Veeva angle:</strong> "Pitcher lets you keep Salesforce and replace Veeva CLM entirely — no forced migration, no rebuild." <em style="color:#dc2626">(⚠ Never say we 'integrate with' Veeva CLM/PromoMats — we replace them)</em></li>
+            <li class="talk">HCP-specific decks assembled automatically from compliant content library + CRM data — reps arrive prepared in under a minute</li>
+            <li class="talk">Full offline capability — hospitals, clinics, remote visits, no signal needed</li>
+            <li class="talk">Medical/Legal guardrails baked in — every market, every product. Full audit trail.</li>
+            <li class="talk">Visit reports auto-generated and synced to CRM — admin drops to near zero</li>
+          </ul>
+        </div>
+        <div class="block">
+          <div class="block-label proof">✓ Proof Points</div>
+          <div class="proof-box">
+            <div class="stat-row">
+              <div class="proof-stat"><div class="number">95%</div><div class="label">Visit accuracy (Bianco Pharma)</div></div>
+              <div class="proof-stat"><div class="number">+15%</div><div class="label">Annual sales in 6 months</div></div>
+              <div class="proof-stat"><div class="number">6 wks</div><div class="label">Deployment time</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="block">
+          <div class="block-label objection">⚡ Objections</div>
+          <div class="objection-item">
+            <div class="objection-q">"We already use Veeva."</div>
+            <div class="objection-a"><strong>First, clarify which Veeva:</strong><br>🔴 <strong>Veeva CRM (Salesforce)?</strong> → "Veeva is ending their Salesforce partnership — everyone faces a forced migration. Pitcher keeps your Salesforce, replaces CLM. No rebuild."<br>🟡 <strong>Veeva Vault?</strong> → Vault is compliance storage. Pitcher is the rep-facing execution layer on top — different problem, different layer.<br>🔵 <strong>Already on Vault CRM?</strong> → Deep lock-in. Note it, deprioritize.</div>
+          </div>
+          <div class="objection-item">
+            <div class="objection-q">"We're worried about compliance violations."</div>
+            <div class="objection-a">Compliance team builds guardrails once. Every market, every product. Reps can only share approved content. Full audit trail — same standard as your current MLR process.</div>
+          </div>
+          <div class="objection-item">
+            <div class="objection-q">"Field teams are slow to adopt new software."</div>
+            <div class="objection-a">Mobile-first, works offline, value is visible to reps from Day 1. 94% adoption even when not mandated — because reps arrive more prepared, not more burdened.</div>
+          </div>
+        </div>
+        <div class="block">
+          <div class="block-label" style="color:#0284c7">📣 Customer Story</div>
+          <div class="customer-story">
+            <div class="story-label">Reference</div>
+            <div class="story-company">Bianco Pharmaceuticals (EMEA)</div>
+            <div class="story-text">Replaced manual rep workflows with Pitcher. Reps get HCP-specific decks auto-assembled from CRM + compliant content. Visit planning, compliance tracking, and CRM sync all live in one offline-capable app. Live in 6 weeks.</div>
+            <div class="story-result">→ 95% visit accuracy · 90% on-message delivery · ~15% annual sales growth · real-time management reporting</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── MEDTECH ─── -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon industry">🔬</div>
+        <div class="card-title-block">
+          <div class="card-title">MedTech / Medical Devices</div>
+          <div class="card-subtitle">Philips · Stryker · Zimmer Biomet · Demant · Siemens Healthineers</div>
+        </div>
+        <span class="card-tag tag-industry">Industry</span>
+      </div>
+      <div class="card-body">
+        <div class="block">
+          <div class="block-label opener">⚡ Open With</div>
+          <ul>
+            <li class="opener">Are you evaluating Salesforce's new Life Sciences Cloud as a Veeva alternative?</li>
+            <li class="opener">How do reps prepare for a meeting with a hospital procurement team today?</li>
+            <li class="opener">What happens when marketing releases a new clinical data package — how fast does it reach the field?</li>
+          </ul>
+        </div>
+        <div class="block">
+          <div class="block-label pain">⚠ Pain Points</div>
+          <ul>
+            <li class="pain">Salesforce pitching Life Sciences Cloud as a Veeva alternative — but it's desktop-first, no offline, no native UX</li>
+            <li class="pain">Showpad/BigTinCan merger (April 2025) → customers face pricing changes, roadmap uncertainty, re-negotiation window</li>
+            <li class="pain">Reps can't memorize specs across 20–50+ device SKUs — manual deck builds before every hospital call</li>
+            <li class="pain">High-dollar, complex sales need compelling follow-ups; standard tools can't produce clinical evidence packages</li>
+          </ul>
+        </div>
+        <div class="block">
+          <div class="block-label talk">→ Key Talking Points</div>
+          <ul>
+            <li class="talk"><strong>SFDC LSC angle:</strong> "SFDC LSC is still rep-facing desktop — no offline, no device-native UX. Pitcher is built for the field, not the office."</li>
+            <li class="talk"><strong>Merger window:</strong> "If you're on Showpad or BigTinCan, now is the time to evaluate — pricing and roadmap are in flux."</li>
+            <li class="talk">Complex clinical products: auto-assembles clinical evidence, ROI models, and competitive positioning per account</li>
+            <li class="talk">Fully offline — hospitals, clinics, and OR suites with no wifi; zero data loss</li>
+            <li class="talk">Open API: connects to Salesforce, SAP, Veeva, and legacy MedTech stacks</li>
+          </ul>
+        </div>
+        <div class="block">
+          <div class="block-label proof">✓ Proof Points</div>
+          <div class="proof-box">
+            <div class="stat-row">
+              <div class="proof-stat"><div class="number">94%</div><div class="label">Daily adoption (non-mandatory)</div></div>
+              <div class="proof-stat"><div class="number">25%</div><div class="label">More revenue/rep</div></div>
+              <div class="proof-stat"><div class="number">33%</div><div class="label">Faster onboarding</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="block">
+          <div class="block-label objection">⚡ Objections</div>
+          <div class="objection-item">
+            <div class="objection-q">"We use Showpad / BigTinCan."</div>
+            <div class="objection-a">The merger (Vector Capital, April 2025) means your roadmap and pricing are being renegotiated right now. When is your renewal? This is the ideal window to evaluate — you have leverage.</div>
+          </div>
+          <div class="objection-item">
+            <div class="objection-q">"Our portfolio is small but high-dollar — do we really need this?"</div>
+            <div class="objection-a">Especially for complex, high-value products — reps need to sift through clinical content and build relevant presentations per account. Pitcher automates all of that. Per account, per call.</div>
+          </div>
+          <div class="objection-item">
+            <div class="objection-q">"How does it handle legacy system integrations?"</div>
+            <div class="objection-a">Open API — certified connectors for Salesforce, Veeva, SAP, MS Dynamics, and more. Hundreds of enterprise deployments. IT team reviews and approves; our team owns the complexity.</div>
+          </div>
+        </div>
+        <div class="block">
+          <div class="block-label" style="color:#0284c7">📣 Customer Story</div>
+          <div class="customer-story">
+            <div class="story-label">Reference — Won vs. Showpad</div>
+            <div class="story-company">Demant / Oticon (Global Hearing Healthcare)</div>
+            <div class="story-text">Runs entire field sales workflow across EMEA and North America — pre-visit prep, fully offline detailing in hospitals and clinics, and post-call Salesforce sync. 20+ Oticon product lines. Won head-to-head against Showpad.</div>
+            <div class="story-result">→ Dual-region Salesforce · 100% offline-capable · 94% daily adoption · complex compliance met</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── MANUFACTURING ─── -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon industry">⚙️</div>
+        <div class="card-title-block">
+          <div class="card-title">Manufacturing / Industrial</div>
+          <div class="card-subtitle">Siemens · Honeywell · ABB · Bosch · SIKA · Michelin · Weir Group</div>
+        </div>
+        <span class="card-tag tag-industry">Industry</span>
+      </div>
+      <div class="card-body">
+        <div class="block">
+          <div class="block-label opener">⚡ Open With</div>
+          <ul>
+            <li class="opener">When you launch a new product line, how long before every field rep and distributor partner is presenting it correctly?</li>
+            <li class="opener">How do your distributor reps access up-to-date product specs and pricing right now?</li>
+            <li class="opener">How do you track whether channel partners are actually using your content?</li>
+          </ul>
+        </div>
+        <div class="block">
+          <div class="block-label pain">⚠ Pain Points</div>
+          <ul>
+            <li class="pain">Showpad + BigTinCan merged April 2025 (Vector Capital) — pricing renegotiations, roadmap instability, 6–12 month disruption window</li>
+            <li class="pain">Selling direct AND through distributors — content, messaging, and training completely inconsistent</li>
+            <li class="pain">Product specs and pricing update constantly — field reps show up with outdated materials</li>
+            <li class="pain">Marketing, Sales, and Field Service operate in silos — customers get confused, deals slow down</li>
+          </ul>
+        </div>
+        <div class="block">
+          <div class="block-label talk">→ Key Talking Points</div>
+          <ul>
+            <li class="talk"><strong>Merger window:</strong> "Showpad + BigTinCan = merger disruption. 6–12 months of pricing instability. Customers like Fujirebio and J&J already moved to Pitcher."</li>
+            <li class="talk">One source of truth — direct reps, distributors, and field techs each see what's relevant to them, same platform</li>
+            <li class="talk">AR-enhanced product visualization: show specs, maintenance workflows, and installation in 3D during the meeting</li>
+            <li class="talk">Automated content retirement: outdated specs gone instantly, new content pushed to every field rep immediately</li>
+            <li class="talk">Multi-tier enablement: you control brand + messaging while empowering every channel partner</li>
+          </ul>
+        </div>
+        <div class="block">
+          <div class="block-label proof">✓ Proof Points</div>
+          <div class="proof-box">
+            <div class="stat-row">
+              <div class="proof-stat"><div class="number">2,300</div><div class="label">Reps · 40 countries (Michelin)</div></div>
+              <div class="proof-stat"><div class="number">25%</div><div class="label">More revenue/rep</div></div>
+              <div class="proof-stat"><div class="number">23%</div><div class="label">More pipeline → SQL</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="block">
+          <div class="block-label objection">⚡ Objections</div>
+          <div class="objection-item">
+            <div class="objection-q">"We already use Showpad / BigTinCan."</div>
+            <div class="objection-a">Vector Capital acquired BigTinCan and merged it with Showpad in April 2025. Pricing and product roadmap are now in flux. When is your contract renewal? This is exactly the window to evaluate alternatives — you have leverage.</div>
+          </div>
+          <div class="objection-item">
+            <div class="objection-q">"We sell through distributors — can they use Pitcher?"</div>
+            <div class="objection-a">Yes — Pitcher supports multi-tier enablement. You control the brand and messaging; each distributor gets a tailored view. One platform, infinite channels.</div>
+          </div>
+          <div class="objection-item">
+            <div class="objection-q">"We already have a CMS/PIM."</div>
+            <div class="objection-a">Pitcher integrates with your CMS and PIM and adds what they lack: rep-facing enablement, coaching, AR product visualization, and mobile usability. Net result: stack simplification.</div>
+          </div>
+        </div>
+        <div class="block">
+          <div class="block-label" style="color:#0284c7">📣 Customer Story</div>
+          <div class="customer-story">
+            <div class="story-label">Reference — Global Scale</div>
+            <div class="story-company">Michelin (Manufacturing — Global)</div>
+            <div class="story-text">2,300 reps across 40 countries. Full offline access, automated customer-specific TCO calculations via Salesforce + TIM integration, and auto-generated visit reports. A 20-minute post-call routine became under 2 minutes.</div>
+            <div class="story-result">→ 2,300 reps · 40 countries · visit reporting automated · CRM adoption increased globally</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── FINSERV ─── -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon industry">🏦</div>
+        <div class="card-title-block">
+          <div class="card-title">Financial Services</div>
+          <div class="card-subtitle">Wealth mgmt · Insurance · Asset mgmt · Private banking · Vontobel · UBS</div>
+        </div>
+        <span class="card-tag tag-industry">Industry</span>
+      </div>
+      <div class="card-body">
+        <div class="block">
+          <div class="block-label opener">⚡ Open With</div>
+          <ul>
+            <li class="opener">How long does it take a relationship manager to prepare a personalized client portfolio review today?</li>
+            <li class="opener">When a senior advisor retires, what's the plan to transfer their client knowledge to the next person?</li>
+            <li class="opener">How are you ensuring compliance across all client communications right now?</li>
+          </ul>
+        </div>
+        <div class="block">
+          <div class="block-label pain">⚠ Pain Points</div>
+          <ul>
+            <li class="pain">Advisors spend hours manually assembling compliant, branded portfolio reviews for each client meeting</li>
+            <li class="pain">HNW clients expect personalized, polished presentations — generic decks damage trust and lose accounts</li>
+            <li class="pain">Senior advisors aging out — junior reps lack deep product knowledge and relationship context</li>
+            <li class="pain">All client content must pass compliance review — slowing advisor responsiveness to market events</li>
+          </ul>
+        </div>
+        <div class="block">
+          <div class="block-label talk">→ Key Talking Points</div>
+          <ul>
+            <li class="talk">Auto-generates compliant, branded, personalized portfolio presentations per client — in minutes, not hours</li>
+            <li class="talk">Language auto-sets from CRM (DE/EN/FR/IT/ES) — mandatory compliance slides locked by admin, externally sharing disabled</li>
+            <li class="talk">Guided selling: cross-sell and upsell opportunities surface automatically based on client CRM data</li>
+            <li class="talk">Present any content — video, PDFs, live Bloomberg/Reuters feeds — from any device, fully offline</li>
+            <li class="talk">Digital Sales Rooms: custom microsites per client with recordings, materials, secure chat — created in seconds</li>
+          </ul>
+        </div>
+        <div class="block">
+          <div class="block-label proof">✓ Proof Points</div>
+          <div class="proof-box">
+            <div class="stat-row">
+              <div class="proof-stat"><div class="number">25%</div><div class="label">More revenue per advisor</div></div>
+              <div class="proof-stat"><div class="number">33%</div><div class="label">Onboarding reduction</div></div>
+              <div class="proof-stat"><div class="number">94%</div><div class="label">Adoption rate</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="block">
+          <div class="block-label objection">⚡ Objections</div>
+          <div class="objection-item">
+            <div class="objection-q">"We use Seismic."</div>
+            <div class="objection-a">Seismic is strong in FinServ content management. Pitcher adds what Seismic can't: full offline capability, native CRM activation (Salesforce-native launch), and the full advisor workflow — prep, present, follow up — in one platform.</div>
+          </div>
+          <div class="objection-item">
+            <div class="objection-q">"Does it integrate with our compliance and portfolio systems?"</div>
+            <div class="objection-a">Open API — connects to Salesforce, Bloomberg, Reuters, and any compliance stack. Pitcher adds the enablement layer on top of what you already have. No infrastructure changes needed.</div>
+          </div>
+        </div>
+        <div class="block">
+          <div class="block-label" style="color:#0284c7">📣 Customer Story</div>
+          <div class="customer-story">
+            <div class="story-label">Reference — Live Feb 2026</div>
+            <div class="story-company">Vontobel (Swiss Private Wealth Management)</div>
+            <div class="story-text">RMs build personalized, compliance-approved client decks in minutes — launched directly from a Salesforce Account record. Language auto-sets from CRM. Mandatory compliance slides are admin-locked. External sharing disabled.</div>
+            <div class="story-result">→ Salesforce-native workflow · multilingual · full audit trail · Azure AD SSO · launched February 2026</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── CPG + HIGH TECH ─── -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon industry">🛒</div>
+        <div class="card-title-block">
+          <div class="card-title">CPG / FMCG &amp; High Tech</div>
+          <div class="card-subtitle">Mondelez · Heineken · PepsiCo · Nestlé · SaaS / Enterprise Software</div>
+        </div>
+        <span class="card-tag tag-industry">Industry</span>
+      </div>
+      <div class="card-body">
+        <div class="block">
+          <div class="block-label opener">⚡ Open With</div>
+          <ul>
+            <li class="opener">How does a rep prep for a store visit when they have 30 accounts on their list?</li>
+            <li class="opener">How quickly does a seasonal campaign reach your field reps after marketing launches it?</li>
+            <li class="opener">When a store manager asks for ROI data on a display — can your rep pull that up in the meeting?</li>
+          </ul>
+        </div>
+        <div class="block">
+          <div class="block-label pain">⚠ Pain Points</div>
+          <ul>
+            <li class="pain">Reps cover 20–30 accounts per territory — impossible to personalize each pitch without automation</li>
+            <li class="pain">Multiple brands, 100s of SKUs, seasonal campaigns — reps use outdated materials or build from scratch</li>
+            <li class="pain">Marketing launches new campaigns monthly — field teams find out weeks late</li>
+            <li class="pain">For High Tech: messaging inconsistencies across geos; long ramp time for new reps; content siloed in SharePoint</li>
+          </ul>
+        </div>
+        <div class="block">
+          <div class="block-label talk">→ Key Talking Points</div>
+          <ul>
+            <li class="talk">AI-driven presentations pull real-time store/account data — historical sales, seasonal campaigns — auto-generated per account, one click</li>
+            <li class="talk">AR-enabled display selling: reps visualize in-store layouts and show projected shelf ROI on-site</li>
+            <li class="talk">In-deck purchasing: buyers order directly during the presentation — zero follow-up lag</li>
+            <li class="talk">CRM auto-capture: reps focus on selling, not admin. Leadership gets clean data without chasing reps.</li>
+            <li class="talk">For High Tech: GenAI pitch decks from CRM + intent data in one click. AI coaching on call performance. Full pipeline analytics.</li>
+          </ul>
+        </div>
+        <div class="block">
+          <div class="block-label proof">✓ Proof Points</div>
+          <div class="proof-box">
+            <div class="stat-row">
+              <div class="proof-stat"><div class="number">10min→30s</div><div class="label">Meeting prep (Mondelez)</div></div>
+              <div class="proof-stat"><div class="number">94%</div><div class="label">Adoption rate</div></div>
+              <div class="proof-stat"><div class="number">33%</div><div class="label">Faster onboarding</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="block">
+          <div class="block-label objection">⚡ Objections</div>
+          <div class="objection-item">
+            <div class="objection-q">"We already use Seismic/Highspot for content."</div>
+            <div class="objection-a">Those are content repositories. Pitcher is a field selling engine — content, CRM activation, AR display selling, in-deck ordering, and analytics in one. Seismic shows content; Pitcher closes deals.</div>
+          </div>
+          <div class="objection-item">
+            <div class="objection-q">"Reps won't want another tool to learn."</div>
+            <div class="objection-a">Pitcher replaces the 4–5 tools reps currently juggle. Mobile-first, field-ready, effective from Day 1 without formal training. Mondelez went from 10 minutes to 30 seconds for meeting prep.</div>
+          </div>
+        </div>
+        <div class="block">
+          <div class="block-label" style="color:#0284c7">📣 Customer Story</div>
+          <div class="customer-story">
+            <div class="story-label">Reference</div>
+            <div class="story-company">Mondelez International (CPG)</div>
+            <div class="story-text">Field reps used to spend 10+ minutes manually assembling meeting prep. With Pitcher's AI-powered prep agent, every rep walks in with a context-ready presentation assembled from CRM data and content library automatically.</div>
+            <div class="story-result">→ 10 min → 30 sec meeting prep · AI-assembled per account · 94% adoption · one-tap Salesforce sync</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /cards-grid -->
+</div>
+
+<!-- ════════════════════════════════════════════
+     ROLE ARCHETYPE TAB
+════════════════════════════════════════════ -->
+<div id="tab-role" class="section">
+  <div class="section-header">
+    <h2>Role Archetype Battlecards</h2>
+    <p>Set up as <strong>Persona</strong> type in Nooks. Auto-trigger from job title keywords. Always use alongside an Industry card. Each card includes a <strong>Seniority Modifier</strong> — adjust tone based on title level.</p>
+  </div>
+  <div class="cards-grid">
+
+    <!-- ─── ENABLEMENT CHAMPION ─── -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon role">🎯</div>
+        <div class="card-title-block">
+          <div class="card-title">Enablement Champion</div>
+          <div class="card-subtitle">Sales Enablement · Training · Content Ops · Product Marketing · GTM</div>
+        </div>
+        <span class="card-tag tag-role">Role</span>
+      </div>
+      <div class="card-body">
+        <div class="block">
+          <div class="trigger-box">
+            <strong>🔁 Nooks Auto-Trigger Keywords</strong>
+            <div class="trigger-keywords">
+              <span class="kw">Enablement</span><span class="kw">Sales Enablement</span><span class="kw">Training</span>
+              <span class="kw">Readiness</span><span class="kw">Content Ops</span><span class="kw">Product Marketing</span>
+              <span class="kw">Field Marketing</span><span class="kw">Marketing Operations</span><span class="kw">GTM</span><span class="kw">LMS</span>
+            </div>
+          </div>
+        </div>
+        <div class="block">
+          <div class="block-label opener">⚡ Open With</div>
+          <ul>
+            <li class="opener">What's your current rep ramp time — and what's your target for this year?</li>
+            <li class="opener">How do your sellers access and personalize content for a specific account today?</li>
+            <li class="opener">What metrics tell you that your enablement programs are actually working?</li>
+          </ul>
+        </div>
+        <div class="block">
+          <div class="block-label pain">⚠ Pain Points</div>
+          <ul>
+            <li class="pain">Reps can't find or personalize content — build decks from scratch, use outdated versions</li>
+            <li class="pain">60–70% of marketing content is never used by sales — invisible ROI on every asset built</li>
+            <li class="pain">Tools are disconnected from CRM/LMS — reps work around them instead of in them</li>
+            <li class="pain">Can't prove ROI of enablement programs to CRO/CCO</li>
+            <li class="pain">Brand and compliance break down when reps modify materials outside approved guardrails</li>
+          </ul>
+        </div>
+        <div class="block">
+          <div class="block-label talk">→ Lead With This</div>
+          <ul>
+            <li class="talk">Content in the flow of work — reps prep, present, and follow up from one platform; zero tool-switching</li>
+            <li class="talk">Governance built in — reps personalize within guardrails; brand and compliance always protected</li>
+            <li class="talk">Closed-loop analytics: see which content gets used, when, by which reps, in which deals</li>
+            <li class="talk">Launch messaging today — track field adoption by tomorrow, not next quarter</li>
+            <li class="talk">CRM + LMS + content integrations — sits inside the tools reps already use</li>
+          </ul>
+        </div>
+        <div class="block">
+          <div class="block-label proof">✓ Proof Points</div>
+          <div class="proof-box">
+            <div class="stat-row">
+              <div class="proof-stat"><div class="number">94%</div><div class="label">Daily adoption (non-mandatory)</div></div>
+              <div class="proof-stat"><div class="number">33%</div><div class="label">Faster ramp time</div></div>
+              <div class="proof-stat"><div class="number">23%</div><div class="label">More pipeline → SQL</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="block">
+          <div class="block-label objection">⚡ Objections</div>
+          <div class="objection-item">
+            <div class="objection-q">"We already use SharePoint/Seismic/Highspot."</div>
+            <div class="objection-a">Those are content repositories. Pitcher activates content inside the selling workflow — CRM data, personalization, analytics, training all connected. Reps never leave the platform to prep or present.</div>
+          </div>
+          <div class="objection-item">
+            <div class="objection-q">"We just rolled out a new LMS — bad timing."</div>
+            <div class="objection-a">Pitcher integrates with your LMS — it's the rep-facing execution layer on top of your learning infrastructure. The two are complementary, not competing.</div>
+          </div>
+          <div class="objection-item">
+            <div class="objection-q">"I can't make this decision alone — needs VP sign-off."</div>
+            <div class="objection-a">Totally fair. What does your VP care most about — ramp time, adoption rates, or revenue attribution? I can help you tailor the numbers for that conversation.</div>
+          </div>
+        </div>
+        <div class="block">
+          <div class="seniority-block">
+            <div class="sen-label">🎚 Seniority Modifier — Adjust Your Angle</div>
+            <div class="sen-row">
+              <div class="sen-tag csuite">VP / Head</div>
+              <div class="sen-text">Lead with strategy + ROI proof. <em>"Your content investment has been invisible — Pitcher closes the loop from content → pipeline → revenue. 23% more SQL. Here's the attribution story you've been missing."</em></div>
+            </div>
+            <div class="sen-row">
+              <div class="sen-tag director">Director</div>
+              <div class="sen-text">Lead with adoption + making them the champion. <em>"94% adoption without mandating it — your team will actually use this. And I can help you build the business case for your CCO."</em></div>
+            </div>
+            <div class="sen-row">
+              <div class="sen-tag manager">Manager / IC</div>
+              <div class="sen-text">Lead with day-in-the-life empathy. <em>"How long does it take to find the right content for a specific deal stage right now? Pitcher brings that to under a minute."</em></div>
+            </div>
+          </div>
+        </div>
+        <div class="block">
+          <div class="block-label" style="color:#0284c7">📣 Customer Story</div>
+          <div class="customer-story">
+            <div class="story-label">Reference</div>
+            <div class="story-company">Mondelez + Global Animal Health Leader</div>
+            <div class="story-text">Mondelez: 10 min → 30 sec meeting prep. Adoption came organically — reps chose to use it. // Animal Health: Enablement director standardized field enablement globally across 52 countries, replacing 38 fragmented CRM platforms.</div>
+            <div class="story-result">→ 94% adoption · 33% faster onboarding · 3,100 reps in 18 months · consistent messaging globally</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── REVENUE LEADER ─── -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon role">🗺️</div>
+        <div class="card-title-block">
+          <div class="card-title">Revenue Leader</div>
+          <div class="card-subtitle">VP/Head of Field Sales · Commercial Excellence · RevOps · Trade Marketing</div>
+        </div>
+        <span class="card-tag tag-role">Role</span>
+      </div>
+      <div class="card-body">
+        <div class="block">
+          <div class="trigger-box">
+            <strong>🔁 Nooks Auto-Trigger Keywords</strong>
+            <div class="trigger-keywords">
+              <span class="kw">Field Sales</span><span class="kw">VP Sales</span><span class="kw">Head of Sales</span>
+              <span class="kw">Commercial Excellence</span><span class="kw">Commercial Operations</span>
+              <span class="kw">Revenue Operations</span><span class="kw">RevOps</span><span class="kw">National Sales</span>
+              <span class="kw">Trade Marketing</span><span class="kw">Category Director</span><span class="kw">Sales Operations</span>
+            </div>
+          </div>
+        </div>
+        <div class="block">
+          <div class="block-label opener">⚡ Open With</div>
+          <ul>
+            <li class="opener">What's the biggest gap between what you ask reps to do and what actually happens in the field?</li>
+            <li class="opener">When you push out a new campaign, how do you know reps are actually using it?</li>
+            <li class="opener">Where is manual re-entry most painful in your current rep workflow?</li>
+          </ul>
+        </div>
+        <div class="block">
+          <div class="block-label pain">⚠ Pain Points</div>
+          <ul>
+            <li class="pain">Inconsistent field execution — can't see what reps are actually doing in the field</li>
+            <li class="pain">No visibility from content → pipeline → revenue: can't connect the dots</li>
+            <li class="pain">New campaigns and compliance updates take weeks to reach the field — reps miss the window</li>
+            <li class="pain">Reps spend too much time on admin and meeting prep instead of selling</li>
+            <li class="pain">Siloed data across CRM, LMS, and content tools — manual re-entry, leadership data unreliable</li>
+          </ul>
+        </div>
+        <div class="block">
+          <div class="block-label talk">→ Lead With This</div>
+          <ul>
+            <li class="talk">Mobile-first, fully offline — hospitals, warehouses, stores, rural areas — zero signal needed</li>
+            <li class="talk">Real-time content push: new campaign or compliance update goes live — every rep has it immediately, usage tracked</li>
+            <li class="talk">Analytics connecting enablement activity to revenue: content → pipeline → closed deal, one view</li>
+            <li class="talk">GenAI meeting prep + auto-CRM capture — reps get hours back per week, admin drops to near zero</li>
+            <li class="talk">One platform aligning strategy, content, coaching, and execution — strategy finally reaches the field</li>
+          </ul>
+        </div>
+        <div class="block">
+          <div class="block-label proof">✓ Proof Points</div>
+          <div class="proof-box">
+            <div class="stat-row">
+              <div class="proof-stat"><div class="number">25%</div><div class="label">More revenue per rep</div></div>
+              <div class="proof-stat"><div class="number">94%</div><div class="label">Daily adoption</div></div>
+              <div class="proof-stat"><div class="number">10min→30s</div><div class="label">Meeting prep (Mondelez)</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="block">
+          <div class="block-label objection">⚡ Objections</div>
+          <div class="objection-item">
+            <div class="objection-q">"Reps won't use another tool in the field."</div>
+            <div class="objection-a">Pitcher replaces the 3–4 things they're already juggling. Mobile-first, works offline, effective from Day 1. 94% adoption even when not mandated — because reps arrive more prepared, not more burdened.</div>
+          </div>
+          <div class="objection-item">
+            <div class="objection-q">"I need to see this work before I commit."</div>
+            <div class="objection-a">Let's pilot with one region or team. We'll track content adoption, call quality, and deal velocity. Most customers see measurable impact inside 60 days.</div>
+          </div>
+          <div class="objection-item">
+            <div class="objection-q">"We already have BI dashboards / too many tools."</div>
+            <div class="objection-a">BI shows what happened. Pitcher shows why — and lets you act on it in the same platform. Net result: stack simplification. Content, CRM, training, and analytics in one.</div>
+          </div>
+        </div>
+        <div class="block">
+          <div class="seniority-block">
+            <div class="sen-label">🎚 Seniority Modifier — Adjust Your Angle</div>
+            <div class="sen-row">
+              <div class="sen-tag csuite">VP / Head</div>
+              <div class="sen-text">Lead with P&L impact. <em>"Companies using Pitcher see 25% more revenue per rep. That's $250K extra on a $1M quota — with the same headcount."</em></div>
+            </div>
+            <div class="sen-row">
+              <div class="sen-tag director">Director</div>
+              <div class="sen-text">Lead with execution gap. <em>"What's the biggest gap between what leadership plans and what actually happens in the field? Let's talk about closing that."</em></div>
+            </div>
+            <div class="sen-row">
+              <div class="sen-tag manager">Manager / IC</div>
+              <div class="sen-text">Lead with daily friction. <em>"How long does it take your team to prep for a customer meeting right now — from opening their laptop to walking in the door?"</em></div>
+            </div>
+          </div>
+        </div>
+        <div class="block">
+          <div class="block-label" style="color:#0284c7">📣 Customer Story</div>
+          <div class="customer-story">
+            <div class="story-label">Reference</div>
+            <div class="story-company">Michelin · Bianco Pharmaceuticals</div>
+            <div class="story-text">Michelin: field sales leadership deployed Pitcher to 2,300 reps in 40 countries — reps arrive with customer-specific data-driven decks, reports are automated, full CRM adoption. // Bianco: 95% visit accuracy, 90% on-message rate, real-time management reporting.</div>
+            <div class="story-result">→ 2,300 reps · 40 countries · 95% visit accuracy · 25% more revenue/rep · admin to near zero</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── OPS & TECH BUYER ─── -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon role">🔄</div>
+        <div class="card-title-block">
+          <div class="card-title">Ops &amp; Tech Buyer</div>
+          <div class="card-subtitle">IT · Digital Transformation · Commercial Systems · Head of Digital · CIO-adjacent</div>
+        </div>
+        <span class="card-tag tag-role">Role</span>
+      </div>
+      <div class="card-body">
+        <div class="block">
+          <div class="trigger-box">
+            <strong>🔁 Nooks Auto-Trigger Keywords</strong>
+            <div class="trigger-keywords">
+              <span class="kw">IT Director</span><span class="kw">Digital Transformation</span><span class="kw">Commercial IT</span>
+              <span class="kw">Head of Digital</span><span class="kw">Commercial Systems</span><span class="kw">Technology</span>
+              <span class="kw">CIO</span><span class="kw">Systems</span><span class="kw">Infrastructure</span><span class="kw">Platform</span>
+            </div>
+          </div>
+        </div>
+        <div class="block">
+          <div class="block-label opener">⚡ Open With</div>
+          <ul>
+            <li class="opener">Which seller or client journeys are the top commercial technology priority for your team this year?</li>
+            <li class="opener">Where do handoffs break down between Sales, Marketing, and Service in your current tech stack?</li>
+            <li class="opener">How will you measure success for a commercial enablement deployment in the first 90 days?</li>
+          </ul>
+        </div>
+        <div class="block">
+          <div class="block-label pain">⚠ Pain Points</div>
+          <ul>
+            <li class="pain">Fragmented systems and duplicate processes — legacy stacks won't retire themselves</li>
+            <li class="pain">Commercial priorities and IT roadmaps never align — every project becomes a 12-month negotiation</li>
+            <li class="pain">Rollout fatigue — teams resist every new system, adoption is unpredictable</li>
+            <li class="pain">Integration risk: security, compliance, and data governance slow everything down</li>
+          </ul>
+        </div>
+        <div class="block">
+          <div class="block-label talk">→ Lead With This</div>
+          <ul>
+            <li class="talk">Open API — certified connectors for Salesforce, SAP, MS Dynamics, Veeva, Azure AD; no rip-and-replace</li>
+            <li class="talk">SOC 2 certified, GDPR-compliant, EU/region-specific data residency options</li>
+            <li class="talk">94% adoption without mandating it — organic change management, zero rollout fatigue</li>
+            <li class="talk">Deploys in weeks, not months — IT team reviews and approves; Pitcher owns the integration complexity</li>
+            <li class="talk">Future-proof: open architecture adapts to evolving systems, regulations, and field workflows</li>
+          </ul>
+        </div>
+        <div class="block">
+          <div class="block-label proof">✓ Proof Points</div>
+          <div class="proof-box">
+            <div class="stat-row">
+              <div class="proof-stat"><div class="number">Weeks</div><div class="label">Deployment time (not months)</div></div>
+              <div class="proof-stat"><div class="number">SOC 2</div><div class="label">+ GDPR + EU data residency</div></div>
+              <div class="proof-stat"><div class="number">94%</div><div class="label">Organic adoption</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="block">
+          <div class="block-label objection">⚡ Objections</div>
+          <div class="objection-item">
+            <div class="objection-q">"Legacy integration will be risky."</div>
+            <div class="objection-a">Certified connectors for every major enterprise stack, hundreds of successful enterprise deployments. Our team owns the integration complexity — your team reviews and approves. Zero infra changes to Salesforce required.</div>
+          </div>
+          <div class="objection-item">
+            <div class="objection-q">"Transformation projects take too long."</div>
+            <div class="objection-a">Pitcher deploys in weeks. Business value is visible before the quarter ends — not at the 12-month mark of a traditional implementation.</div>
+          </div>
+          <div class="objection-item">
+            <div class="objection-q">"Data residency and compliance are blockers."</div>
+            <div class="objection-a">Pitcher offers EU data residency, SOC 2, GDPR compliance, and admin-governed content controls. This is especially relevant for European HLS and FinServ deployments — we've solved this for Vontobel in Switzerland.</div>
+          </div>
+        </div>
+        <div class="block">
+          <div class="seniority-block">
+            <div class="sen-label">🎚 Seniority Modifier — Adjust Your Angle</div>
+            <div class="sen-row">
+              <div class="sen-tag csuite">CIO / Head of Digital</div>
+              <div class="sen-text">Lead with strategic alignment. <em>"Pitcher enables your commercial IT roadmap without displacing existing investments. Open API + open architecture = future-proof, not locked in."</em></div>
+            </div>
+            <div class="sen-row">
+              <div class="sen-tag director">Director / Manager</div>
+              <div class="sen-text">Lead with practical deployment. <em>"Deploys in weeks. Your team remains in control of integrations. We own the complexity. First value before the quarter closes."</em></div>
+            </div>
+          </div>
+        </div>
+        <div class="block">
+          <div class="block-label" style="color:#0284c7">📣 Customer Story</div>
+          <div class="customer-story">
+            <div class="story-label">Reference — IT Integration</div>
+            <div class="story-company">Vontobel — IT &amp; Commercial Systems</div>
+            <div class="story-text">Integrated Pitcher directly into Salesforce via Azure AD SSO. IT team configured compliance governance in the admin panel — mandatory slides, language logic, external sharing restrictions. Zero Salesforce infrastructure changes.</div>
+            <div class="story-result">→ Salesforce-native · Azure AD SSO · admin-governed compliance · no Salesforce rebuild · live in weeks</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── EXECUTIVE SPONSOR ─── -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon role">👑</div>
+        <div class="card-title-block">
+          <div class="card-title">Executive Sponsor</div>
+          <div class="card-subtitle">CEO · CCO · CRO · CSO · President · Managing Director · EVP</div>
+        </div>
+        <span class="card-tag tag-role">Role</span>
+      </div>
+      <div class="card-body">
+        <div class="block">
+          <div class="trigger-box">
+            <strong>🔁 Nooks Auto-Trigger Keywords</strong>
+            <div class="trigger-keywords">
+              <span class="kw">CEO</span><span class="kw">Chief Executive</span><span class="kw">CCO</span><span class="kw">CRO</span>
+              <span class="kw">Chief Revenue</span><span class="kw">Chief Commercial</span><span class="kw">CSO</span>
+              <span class="kw">President</span><span class="kw">Managing Director</span><span class="kw">EVP</span>
+            </div>
+          </div>
+        </div>
+        <div class="block">
+          <div class="block-label opener">⚡ Open With</div>
+          <ul>
+            <li class="opener">What's the single biggest execution gap between your GTM strategy and what actually happens in the field?</li>
+            <li class="opener">If your reps could generate 25% more pipeline with the same headcount — what would that be worth?</li>
+            <li class="opener">How are you accelerating ramp time as you scale the team this year?</li>
+          </ul>
+        </div>
+        <div class="block">
+          <div class="block-label pain">⚠ What They Care About</div>
+          <ul>
+            <li class="pain">Revenue growth, win rates, and competitive edge — not tool features</li>
+            <li class="pain">Strategy reaching the field consistently at scale across regions</li>
+            <li class="pain">Rollout risk: failed adoption, disruption to in-quarter results</li>
+            <li class="pain">Speed to value — board wants results, not an 18-month implementation timeline</li>
+          </ul>
+        </div>
+        <div class="block">
+          <div class="block-label talk">→ How to Frame This Conversation</div>
+          <ul>
+            <li class="talk"><strong>Outcomes only — no features:</strong> "Companies using Pitcher see 25% more revenue per rep and 33% faster onboarding."</li>
+            <li class="talk"><strong>Strategic framing:</strong> "This is about turning your GTM strategy into field execution — consistently, at global scale."</li>
+            <li class="talk"><strong>Zero adoption risk:</strong> "94% adoption even when not mandated. No rollout risk. No change management program needed."</li>
+            <li class="talk"><strong>Speed:</strong> "Deployed in weeks. ROI visible within the first quarter."</li>
+            <li class="talk"><strong>Get sponsorship:</strong> They're the economic buyer — their sign-off unlocks the project. Ask for it directly.</li>
+          </ul>
+        </div>
+        <div class="block">
+          <div class="block-label proof">✓ The Numbers to Lead With</div>
+          <div class="proof-box">
+            <div class="stat-row">
+              <div class="proof-stat"><div class="number">$250K</div><div class="label">More/rep on $1M quota</div></div>
+              <div class="proof-stat"><div class="number">23%</div><div class="label">Pipeline → SQL lift</div></div>
+              <div class="proof-stat"><div class="number">33%</div><div class="label">Onboarding reduction</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="block">
+          <div class="block-label objection">⚡ Executive Objections</div>
+          <div class="objection-item">
+            <div class="objection-q">"We've already invested in Salesforce / other platforms."</div>
+            <div class="objection-a">Pitcher doesn't replace your CRM or LMS — it activates them. The value is connecting what you already have into a single rep-facing platform. No rip-and-replace.</div>
+          </div>
+          <div class="objection-item">
+            <div class="objection-q">"I need to see ROI before committing."</div>
+            <div class="objection-a">Start with a pilot on one team or region. We'll track ramp time, content adoption, and deal velocity. Most customers see measurable impact within 90 days — before the quarter closes.</div>
+          </div>
+          <div class="objection-item">
+            <div class="objection-q">"My team owns this decision — not me."</div>
+            <div class="objection-a">Happy to work with your team. When is the best time to bring your Head of Enablement or Commercial Excellence lead into the conversation? I can prepare the right materials for that discussion.</div>
+          </div>
+        </div>
+        <div class="block">
+          <div class="seniority-block">
+            <div class="sen-label">🎚 Note: This card IS the C-Suite card. For the stakeholder below them, switch to Enablement Champion or Revenue Leader.</div>
+            <div class="sen-row">
+              <div class="sen-tag csuite">Always</div>
+              <div class="sen-text">Keep it to 2–3 stats. No feature talk. Ask the big question first. Listen for their strategic priority — then anchor every message to that specific gap.</div>
+            </div>
+          </div>
+        </div>
+        <div class="block">
+          <div class="block-label" style="color:#0284c7">📣 Customer Story</div>
+          <div class="customer-story">
+            <div class="story-label">Reference — Board-Level Proof</div>
+            <div class="story-company">Michelin — C-Suite Proof Point</div>
+            <div class="story-text">Michelin's executive team commissioned Pitcher to unify field execution across 40 countries. 2,300 reps operate from a single compliant content and CRM execution platform — with full management visibility on which content drives pipeline and revenue.</div>
+            <div class="story-result">→ 25% more revenue per rep · 33% faster ramp · 40-country rollout · content usage tracked to deal level</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /cards-grid -->
+</div>
+
+<!-- ════════════════════════════════════════════
+     SETUP TAB
+════════════════════════════════════════════ -->
+<div id="tab-setup" class="section">
+  <div class="section-header">
+    <h2>Nooks Setup Guide</h2>
+    <p>How to set up all 9 cards in Nooks — exact steps, card types, and trigger keywords.</p>
+  </div>
+  <div class="howto-card">
+    <h3>📋 What to Create in Nooks (9 cards total)</h3>
+    <ol>
+      <li><strong>5 Industry Battlecards (General type):</strong> Pharma / Life Sciences · MedTech / Medical Devices · Manufacturing / Industrial · Financial Services · CPG &amp; High Tech</li>
+      <li><strong>4 Role Archetype Battlecards (Persona type):</strong> Enablement Champion · Revenue Leader · Ops &amp; Tech Buyer · Executive Sponsor</li>
+    </ol>
+  </div>
+  <div class="howto-card">
+    <h3>🔵 Industry Cards — Setup (General Type)</h3>
+    <ol>
+      <li>Nooks → <code>Battlecards</code> → <code>New Battlecard</code> → Type: <strong>General</strong></li>
+      <li>Title: Copy exactly (e.g. <code>Pharma / Life Sciences</code>)</li>
+      <li>Paste content sections: Open With → Pain Points → Talking Points → Proof → Objections → Customer Story</li>
+      <li>These are <strong>manually opened</strong> before each call. Know the company vertical before you dial.</li>
+      <li>Tip: Keep the Industry card open throughout the call as the foundation. Let the Role card auto-surface on top.</li>
+    </ol>
+  </div>
+  <div class="howto-card">
+    <h3>🟣 Role Archetype Cards — Setup (Persona Type)</h3>
+    <ol>
+      <li>Nooks → <code>Battlecards</code> → <code>New Battlecard</code> → Type: <strong>Persona</strong></li>
+      <li>Title: e.g. <code>Enablement Champion</code></li>
+      <li>Persona Trigger keywords: Copy the keywords from the green trigger box on each card</li>
+      <li>Paste content: Open With → Pain → Lead With This → Proof → Objections → Seniority Modifier → Story</li>
+      <li>These <strong>auto-surface</strong> when Nooks detects matching title keywords from the contact record</li>
+    </ol>
+  </div>
+  <div class="howto-card">
+    <h3>🎚 The Seniority Modifier (inside every Role card)</h3>
+    <ol>
+      <li>You no longer need separate Seniority battlecards — it's built into the Role card</li>
+      <li>The Seniority Modifier section at the bottom of each Role card tells you exactly how to adjust your angle</li>
+      <li>C-Suite → outcomes and ROI · Director → champion + adoption · Manager → day-in-the-life + empathy</li>
+      <li>This keeps the Seniority context in view at all times without an extra card cluttering the screen</li>
+    </ol>
+  </div>
+  <div class="howto-card">
+    <h3>💡 Cold Call Flow (how to use both cards together)</h3>
+    <ol>
+      <li><strong>Before the call:</strong> Open the relevant Industry card (Pharma / MedTech / etc.)</li>
+      <li><strong>Call starts:</strong> Nooks auto-surfaces Role card based on contact's title</li>
+      <li><strong>First 10 seconds:</strong> Use an "Open With" question from the Role card — these are discovery openers, not pitches</li>
+      <li><strong>Discovery:</strong> Reference Pain Points from the Industry card to validate their specific context</li>
+      <li><strong>Value:</strong> Use Talking Points from the Role card (they care about this functionally) + Industry proof (same vertical proof = credibility)</li>
+      <li><strong>Objection:</strong> Navigate to objections section of whichever card is relevant</li>
+      <li><strong>Credibility close:</strong> Drop the Customer Story — match the industry story to their vertical for maximum relevance</li>
+    </ol>
+  </div>
+</div>
+
+<script>
+function showTab(tabId, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + tabId).classList.add('active');
+  btn.classList.add('active');
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,999 @@
+{
+  "metadata": {
+    "fetchedAt": "2026-04-15T21:05:57.087Z",
+    "status": "ok",
+    "counts": {
+      "tasks": 50,
+      "deals": 6,
+      "activities": 10,
+      "topAccounts": 10,
+      "topProspects": 10,
+      "upcomingMeetings": 4,
+      "closingDeals": 0,
+      "s0MeetingsThisMonth": 6,
+      "closedWon": 0,
+      "closedLost": 0
+    }
+  },
+  "tasks": [
+    {
+      "id": "107572460473",
+      "subject": "Follow up with Barbara Ortega",
+      "status": "NOT_STARTED",
+      "type": "TODO",
+      "priority": "NONE",
+      "dueDate": null,
+      "body": "Regarding email: Reckitt + Pitcher - picking up where we left off, sent on Tuesday, April 7, 2026 1:48 AM",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/task/107572460473"
+    },
+    {
+      "id": "107829323416",
+      "subject": "Cold Call",
+      "status": "NOT_STARTED",
+      "type": "CALL",
+      "priority": "HIGH",
+      "dueDate": null,
+      "body": "",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/task/107829323416"
+    },
+    {
+      "id": "107831779856",
+      "subject": "Cold Call",
+      "status": "NOT_STARTED",
+      "type": "CALL",
+      "priority": "HIGH",
+      "dueDate": null,
+      "body": "",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/task/107831779856"
+    },
+    {
+      "id": "107834717467",
+      "subject": "Cold Call",
+      "status": "NOT_STARTED",
+      "type": "CALL",
+      "priority": "HIGH",
+      "dueDate": null,
+      "body": "",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/task/107834717467"
+    },
+    {
+      "id": "107870650903",
+      "subject": "Follow up with Ralf Gehrke",
+      "status": "NOT_STARTED",
+      "type": "TODO",
+      "priority": "NONE",
+      "dueDate": null,
+      "body": "Regarding email: Re: Akamai + Pitcher - picking up where we left off, sent on Tuesday, April 7, 2026 6:22 PM",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/task/107870650903"
+    },
+    {
+      "id": "107870677770",
+      "subject": "Follow up with Aybars Zenger",
+      "status": "NOT_STARTED",
+      "type": "TODO",
+      "priority": "NONE",
+      "dueDate": null,
+      "body": "Regarding email: Ismail from Pitcher, sent on Tuesday, April 7, 2026 12:54 PM",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/task/107870677770"
+    },
+    {
+      "id": "107870843201",
+      "subject": "Follow up with Mert Sarıgöz",
+      "status": "NOT_STARTED",
+      "type": "TODO",
+      "priority": "NONE",
+      "dueDate": null,
+      "body": "Regarding email: Pitcher - Sales Enablement 2.0, sent on Thursday, April 9, 2026 3:11 PM",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/task/107870843201"
+    },
+    {
+      "id": "107904885894",
+      "subject": "Cold Call",
+      "status": "NOT_STARTED",
+      "type": "CALL",
+      "priority": "HIGH",
+      "dueDate": null,
+      "body": "",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/task/107904885894"
+    },
+    {
+      "id": "107905580711",
+      "subject": "Cold Call",
+      "status": "NOT_STARTED",
+      "type": "CALL",
+      "priority": "HIGH",
+      "dueDate": null,
+      "body": "",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/task/107905580711"
+    },
+    {
+      "id": "107909316400",
+      "subject": "Cold Call",
+      "status": "NOT_STARTED",
+      "type": "CALL",
+      "priority": "HIGH",
+      "dueDate": null,
+      "body": "",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/task/107909316400"
+    },
+    {
+      "id": "107909480205",
+      "subject": "Cold Call",
+      "status": "NOT_STARTED",
+      "type": "CALL",
+      "priority": "HIGH",
+      "dueDate": null,
+      "body": "",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/task/107909480205"
+    },
+    {
+      "id": "107909480345",
+      "subject": "Cold Call",
+      "status": "NOT_STARTED",
+      "type": "CALL",
+      "priority": "HIGH",
+      "dueDate": null,
+      "body": "",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/task/107909480345"
+    },
+    {
+      "id": "107910421809",
+      "subject": "Cold Call",
+      "status": "NOT_STARTED",
+      "type": "CALL",
+      "priority": "HIGH",
+      "dueDate": null,
+      "body": "",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/task/107910421809"
+    },
+    {
+      "id": "107910843231",
+      "subject": "Cold Call",
+      "status": "NOT_STARTED",
+      "type": "CALL",
+      "priority": "HIGH",
+      "dueDate": null,
+      "body": "",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/task/107910843231"
+    },
+    {
+      "id": "107911002443",
+      "subject": "Cold Call",
+      "status": "NOT_STARTED",
+      "type": "CALL",
+      "priority": "HIGH",
+      "dueDate": null,
+      "body": "",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/task/107911002443"
+    },
+    {
+      "id": "107911211940",
+      "subject": "Cold Call #2",
+      "status": "NOT_STARTED",
+      "type": "CALL",
+      "priority": "MEDIUM",
+      "dueDate": null,
+      "body": "",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/task/107911211940"
+    },
+    {
+      "id": "107911261959",
+      "subject": "Cold Call #2",
+      "status": "NOT_STARTED",
+      "type": "CALL",
+      "priority": "MEDIUM",
+      "dueDate": null,
+      "body": "",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/task/107911261959"
+    },
+    {
+      "id": "107911267669",
+      "subject": "Cold Call #2",
+      "status": "NOT_STARTED",
+      "type": "CALL",
+      "priority": "MEDIUM",
+      "dueDate": null,
+      "body": "",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/task/107911267669"
+    },
+    {
+      "id": "107911302814",
+      "subject": "Cold Call #5",
+      "status": "NOT_STARTED",
+      "type": "CALL",
+      "priority": "MEDIUM",
+      "dueDate": null,
+      "body": "",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/task/107911302814"
+    },
+    {
+      "id": "107911321243",
+      "subject": "Cold Call",
+      "status": "NOT_STARTED",
+      "type": "CALL",
+      "priority": "HIGH",
+      "dueDate": null,
+      "body": "",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/task/107911321243"
+    },
+    {
+      "id": "107911744858",
+      "subject": "Cold Call #2",
+      "status": "NOT_STARTED",
+      "type": "CALL",
+      "priority": "MEDIUM",
+      "dueDate": null,
+      "body": "",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/task/107911744858"
+    },
+    {
+      "id": "107911772305",
+      "subject": "Cold Call",
+      "status": "NOT_STARTED",
+      "type": "CALL",
+      "priority": "HIGH",
+      "dueDate": null,
+      "body": "",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/task/107911772305"
+    },
+    {
+      "id": "107911794825",
+      "subject": "Cold Call #5",
+      "status": "NOT_STARTED",
+      "type": "CALL",
+      "priority": "MEDIUM",
+      "dueDate": null,
+      "body": "",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/task/107911794825"
+    },
+    {
+      "id": "107911808649",
+      "subject": "Cold Call #2",
+      "status": "NOT_STARTED",
+      "type": "CALL",
+      "priority": "MEDIUM",
+      "dueDate": null,
+      "body": "",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/task/107911808649"
+    },
+    {
+      "id": "107911817290",
+      "subject": "Cold Call #2",
+      "status": "NOT_STARTED",
+      "type": "CALL",
+      "priority": "MEDIUM",
+      "dueDate": null,
+      "body": "",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/task/107911817290"
+    },
+    {
+      "id": "107911817329",
+      "subject": "Cold Call #5",
+      "status": "NOT_STARTED",
+      "type": "CALL",
+      "priority": "MEDIUM",
+      "dueDate": null,
+      "body": "",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/task/107911817329"
+    },
+    {
+      "id": "107911828115",
+      "subject": "Cold Call",
+      "status": "NOT_STARTED",
+      "type": "CALL",
+      "priority": "HIGH",
+      "dueDate": null,
+      "body": "",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/task/107911828115"
+    },
+    {
+      "id": "107911838873",
+      "subject": "Cold Call",
+      "status": "NOT_STARTED",
+      "type": "CALL",
+      "priority": "HIGH",
+      "dueDate": null,
+      "body": "",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/task/107911838873"
+    },
+    {
+      "id": "107911840790",
+      "subject": "Cold Call",
+      "status": "NOT_STARTED",
+      "type": "CALL",
+      "priority": "HIGH",
+      "dueDate": null,
+      "body": "",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/task/107911840790"
+    },
+    {
+      "id": "107911844923",
+      "subject": "Cold Call #2",
+      "status": "NOT_STARTED",
+      "type": "CALL",
+      "priority": "MEDIUM",
+      "dueDate": null,
+      "body": "",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/task/107911844923"
+    },
+    {
+      "id": "107911852675",
+      "subject": "Cold Call",
+      "status": "NOT_STARTED",
+      "type": "CALL",
+      "priority": "HIGH",
+      "dueDate": null,
+      "body": "",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/task/107911852675"
+    },
+    {
+      "id": "107911852678",
+      "subject": "Cold Call #2",
+      "status": "NOT_STARTED",
+      "type": "CALL",
+      "priority": "MEDIUM",
+      "dueDate": null,
+      "body": "",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/task/107911852678"
+    },
+    {
+      "id": "107911853365",
+      "subject": "Cold Call",
+      "status": "NOT_STARTED",
+      "type": "CALL",
+      "priority": "HIGH",
+      "dueDate": null,
+      "body": "",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/task/107911853365"
+    },
+    {
+      "id": "107911887250",
+      "subject": "Cold Call #4",
+      "status": "NOT_STARTED",
+      "type": "CALL",
+      "priority": "MEDIUM",
+      "dueDate": null,
+      "body": "",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/task/107911887250"
+    },
+    {
+      "id": "107911890034",
+      "subject": "Cold Call #2",
+      "status": "NOT_STARTED",
+      "type": "CALL",
+      "priority": "MEDIUM",
+      "dueDate": null,
+      "body": "",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/task/107911890034"
+    },
+    {
+      "id": "107911894088",
+      "subject": "Cold Call",
+      "status": "NOT_STARTED",
+      "type": "CALL",
+      "priority": "HIGH",
+      "dueDate": null,
+      "body": "",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/task/107911894088"
+    },
+    {
+      "id": "107911894150",
+      "subject": "Cold Call #3",
+      "status": "NOT_STARTED",
+      "type": "CALL",
+      "priority": "MEDIUM",
+      "dueDate": null,
+      "body": "",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/task/107911894150"
+    },
+    {
+      "id": "107911904437",
+      "subject": "Cold Call #2",
+      "status": "NOT_STARTED",
+      "type": "CALL",
+      "priority": "MEDIUM",
+      "dueDate": null,
+      "body": "",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/task/107911904437"
+    },
+    {
+      "id": "107911904909",
+      "subject": "Cold Call #2",
+      "status": "NOT_STARTED",
+      "type": "CALL",
+      "priority": "MEDIUM",
+      "dueDate": null,
+      "body": "",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/task/107911904909"
+    },
+    {
+      "id": "107911914399",
+      "subject": "Cold Call",
+      "status": "NOT_STARTED",
+      "type": "CALL",
+      "priority": "HIGH",
+      "dueDate": null,
+      "body": "",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/task/107911914399"
+    },
+    {
+      "id": "107911921173",
+      "subject": "Cold Call #2",
+      "status": "NOT_STARTED",
+      "type": "CALL",
+      "priority": "MEDIUM",
+      "dueDate": null,
+      "body": "",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/task/107911921173"
+    },
+    {
+      "id": "107911923747",
+      "subject": "Cold Call #4",
+      "status": "NOT_STARTED",
+      "type": "CALL",
+      "priority": "MEDIUM",
+      "dueDate": null,
+      "body": "",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/task/107911923747"
+    },
+    {
+      "id": "107911925541",
+      "subject": "Cold Call",
+      "status": "NOT_STARTED",
+      "type": "CALL",
+      "priority": "HIGH",
+      "dueDate": null,
+      "body": "",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/task/107911925541"
+    },
+    {
+      "id": "107911936562",
+      "subject": "Cold Call",
+      "status": "NOT_STARTED",
+      "type": "CALL",
+      "priority": "HIGH",
+      "dueDate": null,
+      "body": "",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/task/107911936562"
+    },
+    {
+      "id": "107911937681",
+      "subject": "Cold Call #2",
+      "status": "NOT_STARTED",
+      "type": "CALL",
+      "priority": "MEDIUM",
+      "dueDate": null,
+      "body": "",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/task/107911937681"
+    },
+    {
+      "id": "107911937708",
+      "subject": "Cold Call",
+      "status": "NOT_STARTED",
+      "type": "CALL",
+      "priority": "HIGH",
+      "dueDate": null,
+      "body": "",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/task/107911937708"
+    },
+    {
+      "id": "107911942514",
+      "subject": "Cold Call",
+      "status": "NOT_STARTED",
+      "type": "CALL",
+      "priority": "HIGH",
+      "dueDate": null,
+      "body": "",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/task/107911942514"
+    },
+    {
+      "id": "107911948837",
+      "subject": "Cold Call #2",
+      "status": "NOT_STARTED",
+      "type": "CALL",
+      "priority": "MEDIUM",
+      "dueDate": null,
+      "body": "",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/task/107911948837"
+    },
+    {
+      "id": "107911951955",
+      "subject": "Cold Call #5",
+      "status": "NOT_STARTED",
+      "type": "CALL",
+      "priority": "MEDIUM",
+      "dueDate": null,
+      "body": "",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/task/107911951955"
+    },
+    {
+      "id": "107911960432",
+      "subject": "Cold Call #2",
+      "status": "NOT_STARTED",
+      "type": "CALL",
+      "priority": "MEDIUM",
+      "dueDate": null,
+      "body": "",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/task/107911960432"
+    }
+  ],
+  "deals": [
+    {
+      "id": "58208415488",
+      "name": "Novartis - Outbound - Ismail - 23Mar26",
+      "stage": "Stage 0",
+      "stageId": "1006756883",
+      "amount": 75000,
+      "closeDate": "2026-10-16T15:30:15.738Z",
+      "createDate": "2026-03-23T15:26:35.417Z",
+      "nextStep": "\nDL 3/24 Disco and booked for tomorrow at 8a  \nDemo booked for 4/7",
+      "probability": "0.25",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/deal/58208415488"
+    },
+    {
+      "id": "58332108811",
+      "name": "Imagicle - Inbound - Ismail - 25Mar26",
+      "stage": "Stage 0",
+      "stageId": "1006756883",
+      "amount": 50000,
+      "closeDate": "2026-06-30T14:48:13.212Z",
+      "createDate": "2026-03-26T09:07:18.478Z",
+      "nextStep": "Demo scheduled 04/01/26 to look at AI Virtual Coach but canceled and said we will have to reschedule after April 20th. Will reach back out on the 20th ",
+      "probability": "0.1",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/deal/58332108811"
+    },
+    {
+      "id": "58567509311",
+      "name": "Danone - Outbound - Ismail - 31Mar26",
+      "stage": "Stage 0",
+      "stageId": "1006756883",
+      "amount": 10000,
+      "closeDate": null,
+      "createDate": "2026-03-31T12:46:53.632Z",
+      "nextStep": "Discovery on 17th of April",
+      "probability": "0.1",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/deal/58567509311"
+    },
+    {
+      "id": "58567567997",
+      "name": "Organon - Outbound - Ismail - 31Mar26",
+      "stage": "Stage 0",
+      "stageId": "1006756883",
+      "amount": 90000,
+      "closeDate": "2026-08-24T18:34:59.450Z",
+      "createDate": "2026-03-31T10:51:07.024Z",
+      "nextStep": "Working on scheduling the next demo (week of 4/20/2026)",
+      "probability": "0.2",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/deal/58567567997"
+    },
+    {
+      "id": "58798181200",
+      "name": "Viatris (MENA)",
+      "stage": "Stage 0",
+      "stageId": "1006756883",
+      "amount": 200000,
+      "closeDate": "2026-11-10T19:23:17.364Z",
+      "createDate": "2026-04-07T11:22:47.603Z",
+      "nextStep": "Disco on 4/14",
+      "probability": "0.18",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/deal/58798181200"
+    },
+    {
+      "id": "58902455829",
+      "name": "Deva - Outbound - Ismail - 7Apr26",
+      "stage": "Stage 0",
+      "stageId": "1006756883",
+      "amount": 10000,
+      "closeDate": null,
+      "createDate": "2026-04-08T05:45:00.413Z",
+      "nextStep": "Disco on 16th of April",
+      "probability": "0.05000000000000000277555756156289135105907917022705078125",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/deal/58902455829"
+    }
+  ],
+  "activities": [
+    {
+      "type": "MEETING",
+      "id": "107223303011",
+      "title": "Danone <> Pitcher - Introduction Call",
+      "time": "2026-04-17T13:00:00Z",
+      "detail": ""
+    },
+    {
+      "type": "MEETING",
+      "id": "107969720840",
+      "title": "Pharmevo <> Pitcher - Introduction Call",
+      "time": "2026-04-16T12:00:00Z",
+      "detail": ""
+    },
+    {
+      "type": "MEETING",
+      "id": "107585875968",
+      "title": "Viatris <> Pitcher - Introduction Call",
+      "time": "2026-04-16T11:30:00Z",
+      "detail": ""
+    },
+    {
+      "type": "MEETING",
+      "id": "107593454217",
+      "title": "Deva <> Pitcher - Introduction Call",
+      "time": "2026-04-16T11:00:00Z",
+      "detail": ""
+    },
+    {
+      "type": "EMAIL",
+      "id": "108087629880",
+      "title": "The 40% problem",
+      "time": "2026-04-15T20:43:02.286Z",
+      "detail": "EMAIL"
+    },
+    {
+      "type": "EMAIL",
+      "id": "108086868817",
+      "title": "The 40% problem",
+      "time": "2026-04-15T19:58:03.488Z",
+      "detail": "EMAIL"
+    },
+    {
+      "type": "EMAIL",
+      "id": "108073422503",
+      "title": "The 40% problem",
+      "time": "2026-04-15T18:40:02.825Z",
+      "detail": "EMAIL"
+    },
+    {
+      "type": "EMAIL",
+      "id": "108082112516",
+      "title": "Category reviews aren't won in the meeting",
+      "time": "2026-04-15T18:12:59.517Z",
+      "detail": "EMAIL"
+    },
+    {
+      "type": "EMAIL",
+      "id": "108066472080",
+      "title": "J&J <> Pitcher",
+      "time": "2026-04-15T17:43:02.198Z",
+      "detail": "EMAIL"
+    },
+    {
+      "type": "EMAIL",
+      "id": "108078038923",
+      "title": "The 40% problem",
+      "time": "2026-04-15T17:38:07.197Z",
+      "detail": "EMAIL"
+    }
+  ],
+  "topAccounts": [
+    {
+      "id": "44962050957",
+      "name": "Account",
+      "domain": "cba.com.au",
+      "website": "cba.com.au",
+      "temperature": "Hot",
+      "lifecyclestage": "lead",
+      "lastActivity": "2026-04-15T20:00:00Z",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/company/44962050957"
+    },
+    {
+      "id": "239423627",
+      "name": "Zoetis US",
+      "domain": "",
+      "website": "",
+      "temperature": "Hot",
+      "lifecyclestage": "customer",
+      "lastActivity": "2026-04-15T13:00:00Z",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/company/239423627"
+    },
+    {
+      "id": "33361117839",
+      "name": "Zoetis",
+      "domain": "zoetis.com",
+      "website": "www.zoetis.com",
+      "temperature": "Hot",
+      "lifecyclestage": "customer",
+      "lastActivity": "2026-04-15T13:00:00Z",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/company/33361117839"
+    },
+    {
+      "id": "48630078879",
+      "name": "Armis",
+      "domain": "armis.com",
+      "website": "https://www.armis.com",
+      "temperature": "Cold",
+      "lifecyclestage": "lead",
+      "lastActivity": "2026-04-15T19:58:03.488Z",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/company/48630078879"
+    },
+    {
+      "id": "32161471794",
+      "name": "Johnson & Johnson Medtech",
+      "domain": "its.jnj.com",
+      "website": "jnj.com",
+      "temperature": "Cold",
+      "lifecyclestage": "1015833991",
+      "lastActivity": "2026-04-15T19:14:00.440Z",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/company/32161471794"
+    },
+    {
+      "id": "7577791556",
+      "name": "LivaNova",
+      "domain": "livanova.com",
+      "website": "livanova.com",
+      "temperature": "Cold",
+      "lifecyclestage": "",
+      "lastActivity": "2026-04-15T18:57:59.841Z",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/company/7577791556"
+    },
+    {
+      "id": "35878181651",
+      "name": "Danone Nutrition",
+      "domain": "danone.com",
+      "website": "https://www.danone.com",
+      "temperature": "Cold",
+      "lifecyclestage": "customer",
+      "lastActivity": "2026-04-15T18:12:59.517Z",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/company/35878181651"
+    },
+    {
+      "id": "29992898594",
+      "name": "Olympus",
+      "domain": "olympus.com",
+      "website": "olympus.com",
+      "temperature": "Cold",
+      "lifecyclestage": "lead",
+      "lastActivity": "2026-04-15T18:12:19.415Z",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/company/29992898594"
+    },
+    {
+      "id": "51025256485",
+      "name": "Virbac",
+      "domain": "virbacus.com",
+      "website": "virbacus.com",
+      "temperature": "Cold",
+      "lifecyclestage": "1015833991",
+      "lastActivity": "2026-04-15T18:00:00Z",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/company/51025256485"
+    },
+    {
+      "id": "53176646046",
+      "name": "Johnson & Johnson",
+      "domain": "jnj.com",
+      "website": "www.jnj.com",
+      "temperature": "Cold",
+      "lifecyclestage": "1015833991",
+      "lastActivity": "2026-04-15T17:43:02.198Z",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/company/53176646046"
+    }
+  ],
+  "topProspects": [
+    {
+      "id": "210177832260",
+      "name": "Matthew Garvic",
+      "email": "matthew.garvic@astrazeneca.com",
+      "company": "Astrazeneca",
+      "title": "Head of Learning & Capability Development, Oncology",
+      "lifecyclestage": "lead",
+      "lastActivity": "2026-04-15T21:00:00Z",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/contact/210177832260"
+    },
+    {
+      "id": "212581807707",
+      "name": "Francisco Vizuet",
+      "email": "francisco.vizuet@ferring.com",
+      "company": "Ferring Pharmaceuticals",
+      "title": "Director of Commercial Operations",
+      "lifecyclestage": "lead",
+      "lastActivity": "2026-04-15T21:00:00Z",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/contact/212581807707"
+    },
+    {
+      "id": "212588006261",
+      "name": "Shannon Austin",
+      "email": "shannon.austin@ferring.com",
+      "company": "Ferring Pharmaceuticals",
+      "title": "Associate Director, Commercial Training and Development, Specialty Care",
+      "lifecyclestage": "lead",
+      "lastActivity": "2026-04-15T21:00:00Z",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/contact/212588006261"
+    },
+    {
+      "id": "212606875968",
+      "name": "Gina Labib",
+      "email": "gina.labib@ferring.com",
+      "company": "Ferring Pharmaceuticals",
+      "title": "Associate Vice President, Commercial Operations",
+      "lifecyclestage": "lead",
+      "lastActivity": "2026-04-15T21:00:00Z",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/contact/212606875968"
+    },
+    {
+      "id": "212895682591",
+      "name": "Victoria Tavares",
+      "email": "victoria.tavares@merck.com",
+      "company": "MSD",
+      "title": "Associate Director, Oncology Commercial Strategy & Operations",
+      "lifecyclestage": "lead",
+      "lastActivity": "2026-04-15T21:00:00Z",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/contact/212895682591"
+    },
+    {
+      "id": "213384177284",
+      "name": "Claudio Silveira",
+      "email": "csilveira@expedia.com",
+      "company": "Expedia Group",
+      "title": "Senior Regional Manager, Business Development, LATAM & Caribbean",
+      "lifecyclestage": "lead",
+      "lastActivity": "2026-04-15T20:43:02.286Z",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/contact/213384177284"
+    },
+    {
+      "id": "213999458410",
+      "name": "Nikki Mallon",
+      "email": "nicole.mallon@armis.com",
+      "company": "Armis",
+      "title": "Global Sales Enablement Specialist",
+      "lifecyclestage": "lead",
+      "lastActivity": "2026-04-15T19:58:03.488Z",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/contact/213999458410"
+    },
+    {
+      "id": "213383644231",
+      "name": "Timothy McManus",
+      "email": "tmcmanus@optimumlightpath.com",
+      "company": "Lightpath",
+      "title": "Enterprise Account Executive",
+      "lifecyclestage": "lead",
+      "lastActivity": "2026-04-15T18:40:02.825Z",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/contact/213383644231"
+    },
+    {
+      "id": "213363481882",
+      "name": "Lisa Mormile",
+      "email": "lmormile@pyramidglobal.com",
+      "company": "Pyramid Global Hospitality",
+      "title": "Regional Director, Revenue Management",
+      "lifecyclestage": "lead",
+      "lastActivity": "2026-04-15T17:38:07.197Z",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/contact/213363481882"
+    },
+    {
+      "id": "212959442197",
+      "name": "Ciprian Cordun",
+      "email": "ciprian.cordun@danone.com",
+      "company": "Danone - France",
+      "title": "Head of Commercial Technology & Digital | Sales & Marketing | Digital Transformation | B2B & B2C",
+      "lifecyclestage": "lead",
+      "lastActivity": "2026-04-15T16:24:04.230Z",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/contact/212959442197"
+    }
+  ],
+  "upcomingMeetings": [
+    {
+      "id": "107593454217",
+      "title": "Deva <> Pitcher - Introduction Call",
+      "startTime": "2026-04-16T11:00:00Z",
+      "endTime": "2026-04-16T11:30:00Z",
+      "outcome": "",
+      "isExternal": true,
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/record/0-47/107593454217"
+    },
+    {
+      "id": "107585875968",
+      "title": "Viatris <> Pitcher - Introduction Call",
+      "startTime": "2026-04-16T11:30:00Z",
+      "endTime": "2026-04-16T12:00:00Z",
+      "outcome": "",
+      "isExternal": true,
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/record/0-47/107585875968"
+    },
+    {
+      "id": "107969720840",
+      "title": "Pharmevo <> Pitcher - Introduction Call",
+      "startTime": "2026-04-16T12:00:00Z",
+      "endTime": "2026-04-16T12:30:00Z",
+      "outcome": "",
+      "isExternal": true,
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/record/0-47/107969720840"
+    },
+    {
+      "id": "107223303011",
+      "title": "Danone <> Pitcher - Introduction Call",
+      "startTime": "2026-04-17T13:00:00Z",
+      "endTime": "2026-04-17T13:30:00Z",
+      "outcome": "",
+      "isExternal": true,
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/record/0-47/107223303011"
+    }
+  ],
+  "closingDeals": [],
+  "incomingEmails": [
+    {
+      "id": "107925781584",
+      "subject": "Automatic reply: What happens 15 minutes before an HCP visit",
+      "from": "ashraf.al-ouf@bayer.com",
+      "fromName": "Ashraf Al-Ouf",
+      "timestamp": "2026-04-13T13:09:29Z",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/record/0-49/107925781584"
+    },
+    {
+      "id": "107924003692",
+      "subject": "Automatic reply: What happens 15 minutes before an HCP visit",
+      "from": "john.tawfik@merckgroup.com",
+      "fromName": "John Tawfik",
+      "timestamp": "2026-04-13T12:53:19Z",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/record/0-49/107924003692"
+    },
+    {
+      "id": "107924637835",
+      "subject": "Automatic reply: What happens 15 minutes before an HCP visit",
+      "from": "tarek.mattar@sandoz.com",
+      "fromName": "Tarek Mattar",
+      "timestamp": "2026-04-13T12:52:29Z",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/record/0-49/107924637835"
+    },
+    {
+      "id": "107923153993",
+      "subject": "Automatic reply: [External] What happens 15 minutes before an HCP visit",
+      "from": "Adrien.Peraldo@ucb.com",
+      "fromName": "Adrien Peraldo",
+      "timestamp": "2026-04-13T12:30:20Z",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/record/0-49/107923153993"
+    },
+    {
+      "id": "107923562394",
+      "subject": "Automatic reply: [External] What happens 15 minutes before an HCP visit",
+      "from": "Satvinderjit.Sukham@ucb.com",
+      "fromName": "Satvinderjit Sukham",
+      "timestamp": "2026-04-13T12:29:11Z",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/record/0-49/107923562394"
+    },
+    {
+      "id": "107923589481",
+      "subject": "Automatische Antwort: What happens 15 minutes before an HCP visit",
+      "from": "Sebnem.Murat@woerwagpharma.com",
+      "fromName": "Sebnem Murat",
+      "timestamp": "2026-04-13T12:22:16Z",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/record/0-49/107923589481"
+    },
+    {
+      "id": "107921875372",
+      "subject": "Automatic reply: [EXTERNAL] What happens 15 minutes before an HCP visit",
+      "from": "maram.hameed@zentiva.com",
+      "fromName": "Maram Hameed",
+      "timestamp": "2026-04-13T11:12:40Z",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/record/0-49/107921875372"
+    },
+    {
+      "id": "107922426980",
+      "subject": "Automatic reply: [EXTERNAL] What happens 15 minutes before an HCP visit",
+      "from": "alexandru.tofan@zentiva.com",
+      "fromName": "Alexandru Tofan",
+      "timestamp": "2026-04-13T11:11:35Z",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/record/0-49/107922426980"
+    },
+    {
+      "id": "107852906011",
+      "subject": "Re: [EXTERNAL] Following up",
+      "from": "Barbara.Ortega@reckitt.com",
+      "fromName": "Barbara Ortega",
+      "timestamp": "2026-04-10T16:09:34Z",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/record/0-49/107852906011"
+    },
+    {
+      "id": "107840569426",
+      "subject": "Automatic reply: What happens 15 minutes before an HCP visit",
+      "from": "david.dellamonica@astrazeneca.com",
+      "fromName": "David Dellamonica",
+      "timestamp": "2026-04-10T14:27:05Z",
+      "hubspotUrl": "https://app.hubspot.com/contacts/2288821/record/0-49/107840569426"
+    }
+  ],
+  "s0MeetingsThisMonth": 6,
+  "s0MeetingsPast": 6,
+  "closedDealsThisMonth": {
+    "won": 0,
+    "wonValue": 0,
+    "lost": 0,
+    "lostValue": 0
+  }
+}
