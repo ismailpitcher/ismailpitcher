@@ -219,14 +219,17 @@ select.hd-sel:focus{border-color:var(--blue);color:var(--text)}
     <div class="key-st no" id="key-banner">✗ No API key set</div>
     <label>Anthropic API Key</label>
     <input type="password" id="key-inp" placeholder="sk-ant-api03-…" autocomplete="off">
+    <label>Proxy URL <span style="color:var(--td);font-weight:400;text-transform:none;letter-spacing:0">(CORS fix — see README)</span></label>
+    <input type="text" id="proxy-inp" placeholder="https://your-worker.workers.dev" autocomplete="off">
     <label>Default Model</label>
     <select id="mdl-sel-mo">
       <option value="claude-opus-4-5-20251001">Claude Opus 4 — Most capable</option>
       <option value="claude-sonnet-4-5-20251001" selected>Claude Sonnet 4 — Balanced (recommended)</option>
       <option value="claude-haiku-4-5-20251001">Claude Haiku 4 — Fastest</option>
     </select>
-    <div class="mo-info">🔒 Your API key is stored locally in your browser only — never sent anywhere except Anthropic's API.<br>
-    Get your key at <a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a></div>
+    <div class="mo-info">🔒 Your API key is stored locally in your browser — never shared with anyone.<br>
+    Get your key: <a href="https://console.anthropic.com/settings/keys" target="_blank">console.anthropic.com</a><br>
+    Proxy needed? Deploy <strong>proxy/worker.js</strong> to <a href="https://workers.cloudflare.com" target="_blank">Cloudflare Workers</a> (free) and paste the URL above.</div>
     <div class="mo-acts">
       <button class="btn-ca" onclick="closeSettings()">Cancel</button>
       <button class="btn-pr" onclick="saveSettings()">Save</button>
@@ -889,13 +892,16 @@ async function run() {
   runBtn.textContent = '⏳ Analyzing…';
 
   try {
-    const resp = await fetch('https://api.anthropic.com/v1/messages', {
+    const proxyUrl = localStorage.getItem('p_proxy');
+    const endpoint = proxyUrl ? proxyUrl.replace(/\/$/, '') : 'https://api.anthropic.com/v1/messages';
+
+    const resp = await fetch(endpoint, {
       method: 'POST',
       headers: {
         'x-api-key': apiKey,
         'anthropic-version': '2023-06-01',
         'content-type': 'application/json',
-        'anthropic-dangerous-allow-browser': 'true'
+        ...(!proxyUrl && {'anthropic-dangerous-allow-browser': 'true'})
       },
       body: JSON.stringify({
         model,
@@ -1055,6 +1061,7 @@ function openSettings() {
   inp.value = key ? '●'.repeat(24)+key.slice(-4) : '';
   inp.dataset.orig = key;
   inp.addEventListener('focus', function h(){ if(this.value.includes('●')) this.value=''; inp.removeEventListener('focus',h); }, {once:true});
+  document.getElementById('proxy-inp').value = localStorage.getItem('p_proxy')||'';
   document.getElementById('set-mo').classList.add('open');
   updateAPIStatus();
 }
@@ -1064,10 +1071,12 @@ function closeSettings() { document.getElementById('set-mo').classList.remove('o
 function saveSettings() {
   const raw = document.getElementById('key-inp').value.trim();
   const key = raw.includes('●') ? (document.getElementById('key-inp').dataset.orig||'') : raw;
+  const proxy = document.getElementById('proxy-inp').value.trim();
   const mdl = document.getElementById('mdl-sel-mo').value;
   document.getElementById('mdl-sel').value = mdl;
-  if(key) { localStorage.setItem('p_key',key); toast('Settings saved ✓','ok'); }
-  else { localStorage.removeItem('p_key'); toast('API key cleared','ok'); }
+  if(key) localStorage.setItem('p_key', key); else localStorage.removeItem('p_key');
+  if(proxy) localStorage.setItem('p_proxy', proxy); else localStorage.removeItem('p_proxy');
+  toast('Settings saved ✓', 'ok');
   closeSettings();
   updateAPIStatus();
 }
