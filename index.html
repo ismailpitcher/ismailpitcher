@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pitcher AI Sales Team</title>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#09102a;--bg2:#0f1a35;--bg3:#162040;--bg4:#1e2d56;
+  --border:#243058;--blue:#3b82f6;--purple:#8b5cf6;--green:#22c55e;
+  --red:#ef4444;--text:#e2e8f0;--tm:#94a3b8;--td:#64748b;
+  --font:'Inter','Segoe UI',system-ui,sans-serif;
+  --mono:'SF Mono','Fira Code',Consolas,monospace;
+}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--font);font-size:14px;line-height:1.6;overflow:hidden}
+
+/* LAYOUT */
+#app{display:grid;grid-template-rows:54px 1fr;grid-template-columns:296px 1fr;grid-template-areas:"hd hd""sb mn";height:100vh}
+
+/* HEADER */
+#hd{grid-area:hd;background:var(--bg2);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 18px;gap:14px;z-index:100}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-ic{width:32px;height:32px;background:linear-gradient(135deg,var(--blue),var(--purple));border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.logo-t{font-size:15px;font-weight:700;background:linear-gradient(90deg,#60a5fa,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.logo-s{font-size:11px;color:var(--td);display:block}
+.hd-sp{flex:1}
+.hd-badge{background:var(--bg3);border:1px solid var(--border);border-radius:20px;padding:4px 12px;font-size:11px;color:var(--tm)}
+.hd-badge .dot{color:var(--td)}
+select.hd-sel{background:var(--bg3);border:1px solid var(--border);border-radius:6px;color:var(--tm);font-size:12px;padding:5px 8px;cursor:pointer;outline:none;font-family:var(--font)}
+select.hd-sel:focus{border-color:var(--blue);color:var(--text)}
+.btn-ic{background:var(--bg3);border:1px solid var(--border);border-radius:6px;color:var(--tm);font-size:15px;width:34px;height:34px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;flex-shrink:0}
+.btn-ic:hover{background:var(--bg4);color:var(--text);border-color:var(--blue)}
+
+/* SIDEBAR */
+#sb{grid-area:sb;background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;overflow:hidden}
+.sb-sec{padding:14px;border-bottom:1px solid var(--border)}
+.sb-lbl{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--td);margin-bottom:8px}
+#ti{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:6px;color:var(--text);font-size:13px;padding:9px 12px;outline:none;font-family:var(--font);transition:border-color .15s}
+#ti:focus{border-color:var(--blue)}
+#ti::placeholder{color:var(--td)}
+#ctx{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:6px;color:var(--text);font-size:12px;padding:8px 10px;outline:none;font-family:var(--font);resize:none;margin-top:8px;transition:border-color .15s;min-height:60px}
+#ctx:focus{border-color:var(--blue)}
+#ctx::placeholder{color:var(--td)}
+#run-btn{width:100%;margin-top:10px;padding:10px;background:linear-gradient(135deg,var(--blue),var(--purple));border:none;border-radius:6px;color:#fff;font-size:13px;font-weight:600;cursor:pointer;transition:opacity .15s,transform .1s;font-family:var(--font)}
+#run-btn:hover{opacity:.9}
+#run-btn:active{transform:scale(.98)}
+#run-btn:disabled{opacity:.45;cursor:not-allowed}
+#sk-scroll{flex:1;overflow-y:auto;padding:6px}
+#sk-scroll::-webkit-scrollbar{width:4px}
+#sk-scroll::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px}
+.sk-btn{width:100%;display:flex;align-items:center;gap:10px;padding:8px 10px;background:transparent;border:1px solid transparent;border-radius:6px;cursor:pointer;transition:all .15s;text-align:left;margin-bottom:2px}
+.sk-btn:hover{background:var(--bg3);border-color:var(--border)}
+.sk-btn.active{background:var(--bg4);border-color:var(--blue)}
+.sk-ic{font-size:17px;width:24px;text-align:center;flex-shrink:0}
+.sk-n{font-size:12.5px;font-weight:600;color:var(--text);display:block}
+.sk-btn.active .sk-n{color:#60a5fa}
+.sk-d{font-size:11px;color:var(--td);display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sb-hist{border-top:1px solid var(--border);padding:10px;max-height:160px;overflow-y:auto}
+.hi{display:flex;align-items:center;gap:8px;padding:5px 8px;border-radius:5px;cursor:pointer;transition:background .1s;font-size:12px;color:var(--tm)}
+.hi:hover{background:var(--bg3);color:var(--text)}
+.hi-t{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* MAIN */
+#mn{grid-area:mn;display:flex;flex-direction:column;overflow:hidden}
+
+/* Welcome */
+#wc{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px;gap:28px}
+.wc-h h1{font-size:30px;font-weight:800;background:linear-gradient(90deg,#60a5fa,#a78bfa,#34d399);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:8px;text-align:center}
+.wc-h p{font-size:15px;color:var(--tm);max-width:480px;text-align:center}
+.wc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;max-width:880px;width:100%}
+.wc-card{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:14px;cursor:pointer;transition:all .15s}
+.wc-card:hover{background:var(--bg3);border-color:var(--blue);transform:translateY(-1px)}
+.wcc-ic{font-size:22px;margin-bottom:6px}
+.wcc-n{font-size:13px;font-weight:700;color:var(--text);margin-bottom:3px}
+.wcc-d{font-size:11px;color:var(--tm)}
+
+/* Output */
+#ow{flex:1;display:flex;flex-direction:column;overflow:hidden}
+.o-hd{padding:12px 20px;background:var(--bg2);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;flex-shrink:0}
+.o-title{font-size:14px;font-weight:600;color:var(--text);flex:1}
+.o-meta{font-size:11px;color:var(--td)}
+.btn-sm{padding:5px 11px;border-radius:5px;font-size:12px;font-weight:500;cursor:pointer;transition:all .15s;font-family:var(--font);white-space:nowrap}
+.btn-ol{background:transparent;border:1px solid var(--border);color:var(--tm)}
+.btn-ol:hover{border-color:var(--blue);color:var(--text)}
+.btn-ghost{background:transparent;border:none;color:var(--td);cursor:pointer;font-size:18px;padding:4px 6px;transition:color .15s}
+.btn-ghost:hover{color:var(--red)}
+#stbar{padding:7px 20px;background:var(--bg3);border-bottom:1px solid var(--border);font-size:12px;color:var(--tm);display:flex;align-items:center;gap:8px;flex-shrink:0}
+#stbar.hid{display:none}
+.spin{width:13px;height:13px;border:2px solid var(--border);border-top-color:var(--blue);border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0}
+@keyframes spin{to{transform:rotate(360deg)}}
+#o-scroll{flex:1;overflow-y:auto;padding:28px 36px}
+#o-scroll::-webkit-scrollbar{width:6px}
+#o-scroll::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px}
+#oc{max-width:860px;margin:0 auto}
+
+/* Markdown */
+#oc h1{font-size:23px;font-weight:800;color:#fff;margin-bottom:6px;padding-bottom:12px;border-bottom:2px solid var(--border)}
+#oc h2{font-size:16px;font-weight:700;color:#e2e8f0;margin-top:26px;margin-bottom:10px}
+#oc h3{font-size:14px;font-weight:700;color:#cbd5e1;margin-top:18px;margin-bottom:8px}
+#oc p{color:#cbd5e1;margin-bottom:12px;line-height:1.8}
+#oc ul,#oc ol{padding-left:20px;margin-bottom:12px;color:#cbd5e1;line-height:1.8}
+#oc li{margin-bottom:3px}
+#oc table{width:100%;border-collapse:collapse;margin-bottom:18px;font-size:13px}
+#oc th{background:var(--bg3);color:#94a3b8;font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;padding:8px 11px;text-align:left;border-bottom:2px solid var(--border)}
+#oc td{padding:8px 11px;border-bottom:1px solid var(--border);color:#cbd5e1;vertical-align:top}
+#oc tr:hover td{background:rgba(59,130,246,.04)}
+#oc code{background:var(--bg3);border:1px solid var(--border);border-radius:4px;padding:2px 6px;font-family:var(--mono);font-size:12px;color:#93c5fd}
+#oc pre{background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:14px;overflow-x:auto;margin-bottom:14px}
+#oc pre code{background:none;border:none;padding:0;font-size:12.5px;color:#e2e8f0}
+#oc blockquote{border-left:3px solid var(--blue);padding:8px 14px;margin-bottom:12px;background:rgba(59,130,246,.06);border-radius:0 6px 6px 0;color:#94a3b8}
+#oc hr{border:none;border-top:1px solid var(--border);margin:22px 0}
+#oc strong{color:#e2e8f0;font-weight:600}
+#oc em{color:#a5b4fc}
+.cursor{display:inline-block;width:2px;height:15px;background:var(--blue);margin-left:2px;animation:blink 1s step-end infinite;vertical-align:middle}
+@keyframes blink{50%{opacity:0}}
+
+/* MODAL */
+.mo{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:1000;align-items:center;justify-content:center}
+.mo.open{display:flex}
+.mo-box{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:26px;width:460px;max-width:95vw}
+.mo-box h2{font-size:18px;font-weight:700;margin-bottom:5px}
+.mo-box p{font-size:13px;color:var(--tm);margin-bottom:18px}
+.mo-box label{display:block;font-size:11px;font-weight:700;color:var(--tm);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px}
+.mo-box input,.mo-box select{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:6px;color:var(--text);font-size:13px;padding:9px 11px;outline:none;font-family:var(--font);margin-bottom:14px;transition:border-color .15s}
+.mo-box input:focus,.mo-box select:focus{border-color:var(--blue)}
+.key-st{display:flex;align-items:center;gap:8px;font-size:12px;padding:8px 11px;border-radius:6px;margin-bottom:14px}
+.key-st.ok{background:rgba(34,197,94,.1);color:var(--green)}
+.key-st.no{background:rgba(239,68,68,.1);color:#fca5a5}
+.mo-info{font-size:12px;color:var(--td);padding:9px 11px;background:var(--bg3);border-radius:6px;margin-bottom:14px;line-height:1.7}
+.mo-info a{color:var(--blue)}
+.mo-acts{display:flex;gap:10px;justify-content:flex-end}
+.btn-pr{padding:9px 20px;background:linear-gradient(135deg,var(--blue),var(--purple));border:none;border-radius:6px;color:#fff;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--font)}
+.btn-pr:hover{opacity:.9}
+.btn-ca{padding:9px 20px;background:transparent;border:1px solid var(--border);border-radius:6px;color:var(--tm);font-size:13px;cursor:pointer;font-family:var(--font)}
+.btn-ca:hover{border-color:var(--tm);color:var(--text)}
+
+/* TOAST */
+#toast{position:fixed;bottom:22px;right:22px;background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:10px 15px;font-size:13px;color:var(--text);z-index:9999;transform:translateY(80px);opacity:0;transition:all .3s;max-width:300px}
+#toast.show{transform:translateY(0);opacity:1}
+#toast.ok{border-color:var(--green)}
+#toast.err{border-color:var(--red)}
+
+@media(max-width:768px){#app{grid-template-columns:1fr;grid-template-areas:"hd""mn"}#sb{display:none}}
+</style>
+</head>
+<body>
+<div id="app">
+
+<!-- HEADER -->
+<header id="hd">
+  <div class="logo">
+    <div class="logo-ic">🎯</div>
+    <div>
+      <span class="logo-t">Pitcher AI Sales Team</span>
+      <span class="logo-s">by Ismail Egilmez · Pitcher AG</span>
+    </div>
+  </div>
+  <div class="hd-sp"></div>
+  <div class="hd-badge"><span class="dot" id="api-dot">●</span> <span id="api-st">No API Key</span></div>
+  <select class="hd-sel" id="mdl-sel">
+    <option value="claude-opus-4-5-20251001">Opus 4 — Best</option>
+    <option value="claude-sonnet-4-5-20251001" selected>Sonnet 4 — Fast</option>
+    <option value="claude-haiku-4-5-20251001">Haiku 4 — Fastest</option>
+  </select>
+  <button class="btn-ic" id="set-btn" title="Settings">⚙️</button>
+</header>
+
+<!-- SIDEBAR -->
+<aside id="sb">
+  <div class="sb-sec">
+    <div class="sb-lbl">Company or URL</div>
+    <input id="ti" type="text" placeholder="e.g. Salesforce or salesforce.com" autocomplete="off" spellcheck="false">
+    <textarea id="ctx" placeholder="Optional: paste any extra context (job posts, news, LinkedIn bio…)" rows="3"></textarea>
+    <button id="run-btn">▶ Analyze</button>
+  </div>
+  <div class="sb-lbl" style="padding:12px 14px 4px;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--td)">Skills</div>
+  <div id="sk-scroll"></div>
+  <div class="sb-hist">
+    <div class="sb-lbl">Recent</div>
+    <div id="hist-list"></div>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<main id="mn">
+  <div id="wc">
+    <div class="wc-h">
+      <h1>AI-Powered Sales Intelligence</h1>
+      <p>Enter any company name or URL, choose a skill, and get instant B2B intelligence — powered by Claude.</p>
+    </div>
+    <div class="wc-grid" id="wc-grid"></div>
+  </div>
+
+  <div id="ow" style="display:none">
+    <div class="o-hd">
+      <span id="o-ic" style="font-size:17px"></span>
+      <div>
+        <div class="o-title" id="o-title">Analysis</div>
+        <div class="o-meta" id="o-meta"></div>
+      </div>
+      <div style="flex:1"></div>
+      <button class="btn-sm btn-ol" onclick="doCopy()">📋 Copy</button>
+      <button class="btn-sm btn-ol" onclick="doExport()">💾 .md</button>
+      <button class="btn-ghost" onclick="showWelcome()">✕</button>
+    </div>
+    <div id="stbar" class="hid"><div class="spin"></div><span id="st-txt">Analyzing…</span></div>
+    <div id="o-scroll"><div id="oc"></div></div>
+  </div>
+</main>
+</div>
+
+<!-- SETTINGS MODAL -->
+<div class="mo" id="set-mo">
+  <div class="mo-box">
+    <h2>⚙️ Settings</h2>
+    <p>Add your Anthropic API key to start analyzing prospects.</p>
+    <div class="key-st no" id="key-banner">✗ No API key set</div>
+    <label>Anthropic API Key</label>
+    <input type="password" id="key-inp" placeholder="sk-ant-api03-…" autocomplete="off">
+    <label>Default Model</label>
+    <select id="mdl-sel-mo">
+      <option value="claude-opus-4-5-20251001">Claude Opus 4 — Most capable</option>
+      <option value="claude-sonnet-4-5-20251001" selected>Claude Sonnet 4 — Balanced (recommended)</option>
+      <option value="claude-haiku-4-5-20251001">Claude Haiku 4 — Fastest</option>
+    </select>
+    <div class="mo-info">🔒 Your API key is stored locally in your browser only — never sent anywhere except Anthropic's API.<br>
+    Get your key at <a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a></div>
+    <div class="mo-acts">
+      <button class="btn-ca" onclick="closeSettings()">Cancel</button>
+      <button class="btn-pr" onclick="saveSettings()">Save</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+// ── SKILLS ────────────────────────────────────────────────────────────────────
+const SKILLS = [
+  {
+    id:'prospect', icon:'🎯', label:'Full Prospect Audit', desc:'Complete scoring (5 dimensions)',
+    sys:`You are an elite B2B sales intelligence analyst at Pitcher AG (mobile sales enablement platform). Conduct a comprehensive prospect audit.
+
+Analyze the target across 5 weighted dimensions:
+1. Company Fit (25%) — size, industry, growth trajectory, tech sophistication, budget signals
+2. Contact Access (20%) — decision makers identified, org chart, personalization anchors
+3. Opportunity Quality (20%) — BANT scoring, pain points, buying signals
+4. Competitive Position (15%) — current vendors, switching costs, positioning gaps
+5. Outreach Readiness (20%) — trigger events, personalization depth, channel strategy
+
+Use this EXACT output structure:
+
+# 🎯 Prospect Analysis: [Company Name]
+**Score: [X]/100 · Grade: [A+/A/B/C/D] · [Hot Lead / Strong Prospect / Qualified Lead / Lukewarm / Poor Fit]**
+
+---
+## 📊 Score Breakdown
+| Dimension | Score | Key Finding |
+|-----------|-------|------------|
+| Company Fit | [X]/100 | [one-liner] |
+| Contact Access | [X]/100 | [one-liner] |
+| Opportunity Quality | [X]/100 | [one-liner] |
+| Competitive Position | [X]/100 | [one-liner] |
+| Outreach Readiness | [X]/100 | [one-liner] |
+
+---
+## 🏢 Company Profile
+[Overview, business model, size estimate, funding, products, growth stage, recent news]
+
+---
+## 👥 Decision Maker Map
+| Name | Title | Buying Role | Personalization Anchor |
+|------|-------|------------|----------------------|
+
+**Top 3 Priority Contacts:**
+[Detailed profile for each — background, approach strategy, first message angle]
+
+---
+## 💰 Opportunity Assessment (BANT)
+| Dimension | Score | Evidence |
+|-----------|-------|---------|
+| Budget | [X]/25 | |
+| Authority | [X]/25 | |
+| Need | [X]/25 | |
+| Timeline | [X]/25 | |
+
+**MEDDIC:** [Metrics / Economic Buyer / Decision Criteria / Decision Process / Identify Pain / Champion]
+
+**Buying Signals:** [bulleted]
+**Red Flags:** [bulleted]
+
+---
+## ⚔️ Competitive Landscape
+[Current solutions they likely use, switching costs, how to position Pitcher]
+
+---
+## 📧 Recommended Outreach Strategy
+[Framework + channels + top 3 personalization hooks]
+
+---
+## ⚡ Action Plan
+**Immediate (24-48h):**
+1. [action] 2. [action] 3. [action]
+**This Week:** 1. [action] 2. [action]
+
+---
+## ✉️ Ready-to-Send First Email
+**To:** [Name, Title]
+**Subject A:** [subject]
+**Subject B:** [subject]
+
+---
+[Email body — under 100 words, personalized, copy-paste ready]
+---
+**CTA:** [ask]`,
+    usr:(t,c)=>`Analyze this prospect for Pitcher AG:\n\nTarget: ${t}${c?'\n\nExtra context:\n'+c:''}\n\nBe specific, data-driven, and immediately actionable.`
+  },
+  {
+    id:'quick', icon:'⚡', label:'Quick Snapshot', desc:'60-second prospect snapshot',
+    sys:`You are a B2B sales analyst at Pitcher AG. Deliver fast, punchy prospect snapshots. Max 300 words total.
+
+Format:
+# ⚡ Quick Snapshot: [Company]
+**Fit Score: [X]/100 · Grade: [letter] · [verdict in 5 words]**
+
+| | |
+|-|-|
+| **Industry** | |
+| **Size** | |
+| **Key Decision Maker** | |
+| **Top Pain Point** | |
+| **Current Solution** | |
+| **Best Pitcher Angle** | |
+
+## 🎯 Top 3 Reasons to Pursue
+1. 2. 3.
+
+## ⚠️ Biggest Risk
+[one sentence]
+
+## ✉️ Subject Lines to Test
+- "[A]"
+- "[B]"
+
+## ▶️ Next Step
+[Single most important action — be hyper-specific]`,
+    usr:(t,c)=>`Quick snapshot for: ${t}${c?'\n\nContext:\n'+c:''}\n\nUnder 300 words.`
+  },
+  {
+    id:'research', icon:'🔬', label:'Company Research', desc:'Firmographics & deep intel',
+    sys:`You are a B2B research analyst at Pitcher AG. Produce comprehensive company research reports.
+
+# 🔬 Company Research: [Company]
+
+## At a Glance
+| Founded | HQ | Employees | Revenue Est | Funding | Business Model |
+|---------|-----|-----------|-------------|---------|----------------|
+
+## Business Model & Products
+[How they make money, core products/services, pricing model]
+
+## Market Position
+[Competitive position, key differentiators, market share signals]
+
+## Technology Stack
+[Tools and platforms detected — from job posts, integrations, press releases]
+
+## Leadership Team
+[Key executives: name, title, background, LinkedIn signals]
+
+## Financial Signals
+[Funding history, revenue estimates, growth indicators, burn signals]
+
+## Recent Developments (Last 12 Months)
+[News, launches, expansions, leadership changes]
+
+## Growth Signals
+[Hiring velocity, geographic expansion, product roadmap signals]
+
+## Risks & Concerns
+[Red flags, market headwinds, competitive threats]
+
+## Sales Intelligence Summary
+[2-3 paragraphs for a sales rep — what matters most for outreach to this company]`,
+    usr:(t,c)=>`Research this company for Pitcher AG's sales team:\n\n${t}${c?'\n\nExtra context:\n'+c:''}\n\nFocus on B2B sales intelligence: decision makers, budget signals, pain points, current tools.`
+  },
+  {
+    id:'qualify', icon:'📊', label:'Lead Qualification', desc:'BANT + MEDDIC scoring',
+    sys:`You are a lead qualification specialist at Pitcher AG. Apply BANT and MEDDIC rigorously.
+
+# 📊 Lead Qualification: [Company]
+
+## Qualification Verdict
+**BANT Score: [X]/100 · MEDDIC Completeness: [X]% · Verdict: [Qualified / Conditional / Disqualified]**
+
+---
+## BANT Scoring
+| Dimension | Score | Evidence | Confidence |
+|-----------|-------|---------|------------|
+| Budget | [X]/25 | | High/Med/Low |
+| Authority | [X]/25 | | High/Med/Low |
+| Need | [X]/25 | | High/Med/Low |
+| Timeline | [X]/25 | | High/Med/Low |
+| **TOTAL** | **[X]/100** | | |
+
+[Detailed narrative for each dimension]
+
+---
+## MEDDIC Assessment
+| Element | Status | Evidence |
+|---------|--------|---------|
+| Metrics | ✅/⚠️/❌ | |
+| Economic Buyer | ✅/⚠️/❌ | |
+| Decision Criteria | ✅/⚠️/❌ | |
+| Decision Process | ✅/⚠️/❌ | |
+| Identify Pain | ✅/⚠️/❌ | |
+| Champion | ✅/⚠️/❌ | |
+
+---
+## Recommendation
+**Verdict:** [Qualified / Needs More Info / Not Qualified]
+**Confidence:** [High / Medium / Low]
+**Next Step:** [specific action]
+**Key Discovery Questions:** [5 questions to close MEDDIC gaps]`,
+    usr:(t,c)=>`Qualify this lead for Pitcher AG (sales enablement):\n\n${t}${c?'\n\nContext:\n'+c:''}\n\nBe honest about knowledge gaps — mark low confidence where data is inferred.`
+  },
+  {
+    id:'contacts', icon:'👥', label:'Decision Makers', desc:'Buying committee & org chart',
+    sys:`You are a contact intelligence specialist at Pitcher AG. Map buying committees precisely.
+
+# 👥 Decision Maker Map: [Company]
+
+## Buying Committee
+| Name | Title | Buying Role | Personalization Anchor | Priority |
+|------|-------|------------|----------------------|---------|
+(Economic Buyer / Champion / Technical Evaluator / End User / Blocker)
+
+## Org Chart
+\`\`\`
+[CEO] — CEO
+├── [Name] — CRO (Economic Buyer)
+│   └── [Name] — VP Sales (Champion)
+├── [Name] — CTO (Technical Evaluator)
+└── [Name] — CMO
+\`\`\`
+
+## Priority Contacts (Top 3)
+For each: Name · Title · Buying Role · Background · Personalization Anchors · Recommended Approach · First Message Angle
+
+## Multi-Threading Strategy
+[How to engage multiple stakeholders simultaneously]
+
+## Warm Path Analysis
+[Any shared communities, events, warm intro opportunities]`,
+    usr:(t,c)=>`Map the buying committee at ${t} for Pitcher AG (sales enablement platform).${c?'\n\nContext:\n'+c:''}\n\nFocus on who would buy: field sales enablement, mobile CRM, content management.`
+  },
+  {
+    id:'outreach', icon:'📧', label:'Outreach Sequence', desc:'5-email cold sequence',
+    sys:`You are a B2B outreach specialist at Pitcher AG. Write personalized cold sequences that get replies.
+
+Outreach frameworks:
+- Observation + Connection + Ask
+- Problem + Insight + Solution
+- Trigger Event + Relevance + Value
+- Social Proof + Parallel + Ask
+
+# 📧 Cold Outreach Sequence: [Company/Contact]
+
+**Framework:** [chosen + rationale]
+
+---
+## Email 1 — Day 1
+**To:** [Name, Title]
+**Subject:** [subject]
+
+[Body — max 75 words, ultra-personalized, one clear CTA]
+
+---
+## Email 2 — Day 3
+**Subject:** [subject]
+[Different angle — add value, reference something specific]
+
+---
+## Email 3 — Day 7
+**Subject:** [subject]
+[Trigger event or insight angle]
+
+---
+## Email 4 — Day 14
+**Subject:** [subject]
+[Resource or case study]
+
+---
+## Email 5 — Day 21 (Breakup)
+**Subject:** [subject]
+[Permission-based close]
+
+---
+## LinkedIn Touchpoints
+[2-3 LinkedIn actions to complement the email sequence]`,
+    usr:(t,c)=>`Write a cold outreach sequence for Pitcher AG targeting:\n\n${t}${c?'\n\nContext:\n'+c:''}\n\nMake every email specific and personalized. Value prop: mobile-first sales enablement for field sales teams.`
+  },
+  {
+    id:'followup', icon:'🔄', label:'Follow-Up Sequence', desc:'Post-meeting emails',
+    sys:`You are a B2B sales specialist at Pitcher AG. Create follow-up sequences that maintain momentum.
+
+# 🔄 Follow-Up Sequence: [Prospect]
+
+## Situation Summary
+[Previous interaction + current deal stage + what was discussed]
+
+---
+## Follow-Up 1 — Same Day
+**Subject:** [subject]
+[Recap key points, confirm next steps, thank them]
+
+---
+## Follow-Up 2 — Day 3 (if no response)
+**Subject:** [subject]
+[Add value — share relevant resource or insight]
+
+---
+## Follow-Up 3 — Day 7
+**Subject:** [subject]
+[New angle or relevant news]
+
+---
+## Follow-Up 4 — Day 14 (Final)
+**Subject:** [subject]
+[Permission-based close]
+
+---
+## Key Messages to Reinforce
+[Top 3 themes to weave through]`,
+    usr:(t,c)=>`Create a follow-up sequence for Pitcher AG after interacting with:\n\n${t}${c?'\n\nContext:\n'+c:''}`
+  },
+  {
+    id:'prep', icon:'📋', label:'Meeting Prep', desc:'Brief & discovery questions',
+    sys:`You are a strategic sales advisor at Pitcher AG. Create meeting briefs that ensure reps walk in confident.
+
+# 📋 Meeting Prep Brief: [Company]
+
+## Meeting Overview
+| | |
+|-|-|
+| **Company** | |
+| **Meeting Type** | Discovery / Demo / Proposal / Negotiation |
+| **Key Attendees** | [names + titles] |
+| **Our Goal** | |
+| **Their Likely Goal** | |
+
+## Company Snapshot (5 bullets)
+[Most important context for the meeting]
+
+## Attendee Profiles
+[Quick profile on each expected attendee]
+
+---
+## Discovery Questions (10)
+
+**Understanding Their World (1-3)**
+**Understanding the Problem (4-6)**
+**Understanding the Process (7-8)**
+**Impact & Timeline (9-10)**
+
+---
+## Key Talking Points
+[Top 5 messages mapped to their specific situation]
+
+## Objection Prep
+| Likely Objection | Response |
+|-----------------|---------|
+
+## Demo Sequence (if applicable)
+[Which features to show, in what order, and why]
+
+## Desired Outcomes
+- **Best case:** [close on X]
+- **Good case:** [leave with Y]
+- **Minimum:** [Z]`,
+    usr:(t,c)=>`Prep brief for Pitcher AG reps meeting with:\n\n${t}${c?'\n\nContext:\n'+c:''}\n\nPitcher sells: mobile CRM + content management + guided selling for field sales teams.`
+  },
+  {
+    id:'proposal', icon:'📄', label:'Client Proposal', desc:'Tailored proposal document',
+    sys:`You are a senior sales executive at Pitcher AG. Write compelling, customized client proposals.
+
+# 📄 Client Proposal: [Client Name]
+**Prepared by:** Pitcher AG | **Date:** [date]
+
+---
+## Executive Summary
+[3 paragraphs: their situation → our solution → expected outcomes]
+
+## Understanding Your Situation
+**Current Challenges:** [bulleted, specific to their context]
+**Business Impact:** [quantify the cost of inaction]
+**Success Criteria:** [what good looks like for them]
+
+## Proposed Solution
+**How Pitcher Addresses Your Needs:**
+[Map specific Pitcher capabilities to each pain point]
+
+**Implementation Approach:** [Discovery → Setup → Training → Go-live → Optimization]
+**Timeline:** [realistic milestones]
+
+## Why Pitcher AG
+**Key Differentiators:** [3-5 specific to this client]
+**Comparable Customer Outcomes:** [2-3 analogous results]
+**ROI Framework:** [time saved / revenue increase / cost reduction estimates]
+
+## Pricing & Packages
+| Package | Price | Key Inclusions |
+|---------|-------|----------------|
+
+## Next Steps
+1. [Step with owner + timeline]
+2. [Step]
+3. [Step]`,
+    usr:(t,c)=>`Write a proposal for Pitcher AG selling to:\n\n${t}${c?'\n\nContext:\n'+c:''}\n\nPitcher: mobile-first sales enablement — CRM, content mgmt, guided selling, analytics.`
+  },
+  {
+    id:'objections', icon:'🛡️', label:'Objection Handling', desc:'Full objection playbook',
+    sys:`You are a sales trainer at Pitcher AG. Create practical objection handling playbooks.
+
+# 🛡️ Objection Handling Playbook
+
+For each objection use: **Acknowledge → Clarify → Reframe → Advance**
+
+## 1. "We already use [competitor]"
+**Psychology:** [why they say this]
+**Response:**
+> Acknowledge: "…"
+> Bridge: "…"
+> Differentiate: "…"
+> Advance: "…"
+**Trap to avoid:** [common mistake]
+
+## 2. "No budget right now"
+[same structure]
+
+## 3. "Not a priority / bad timing"
+[same structure]
+
+## 4. "We need to involve IT/Legal"
+[same structure]
+
+## 5. "Send me some information"
+[same structure]
+
+## 6. "Too expensive"
+[same structure]
+
+## 7. "We need to think about it"
+[same structure]
+
+## 8. "We're happy with our current setup"
+[same structure]
+
+---
+## Objection Prevention
+[How to eliminate objections before they arise]`,
+    usr:(t)=>`Objection handling playbook for Pitcher AG.\n\nContext/Topic: ${t}\n\nFocus on real enterprise software sales objections. Make every response conversational and concrete.`
+  },
+  {
+    id:'icp', icon:'🏆', label:'ICP Builder', desc:'Ideal Customer Profile',
+    sys:`You are a revenue strategy advisor at Pitcher AG. Build precise, actionable Ideal Customer Profiles.
+
+# 🏆 Ideal Customer Profile: [Segment]
+
+## ICP Summary
+[2-3 sentence definition]
+
+## Firmographic Criteria
+| Dimension | Ideal | Acceptable | Disqualify |
+|-----------|-------|-----------|-----------|
+| Industry | | | |
+| Company Size | | | |
+| Revenue | | | |
+| Geography | | | |
+| Business Model | | | |
+| Growth Stage | | | |
+
+## Technographic Signals
+[What tech stack signals readiness for Pitcher]
+
+## Trigger Events (Buy-Now Signals)
+[Events that indicate immediate buying readiness — with urgency level]
+
+## Buying Committee Profile
+| Role | Typical Titles | Priorities | How to Engage |
+|------|--------------|-----------|---------------|
+
+## Account Scoring Rubric
+[Point-based system to rank accounts 0-100]
+
+## Anti-ICP — Who to Avoid
+[Specific disqualification signals — save time early]
+
+## ICP Validation Questions
+[5 discovery questions that quickly determine fit]`,
+    usr:(t)=>`Build an ICP for Pitcher AG.\n\nDescription: ${t}\n\nPitcher: mobile sales enablement for field sales teams (10+ reps), mid-market to enterprise B2B.`
+  },
+  {
+    id:'competitors', icon:'⚔️', label:'Competitive Intel', desc:'Battle cards & win strategy',
+    sys:`You are a competitive intelligence analyst at Pitcher AG. Deliver practical competitive intel that helps reps win.
+
+# ⚔️ Competitive Analysis: [Competitor/Market]
+
+## Landscape Overview
+[Who the main players are and how they position]
+
+---
+## [Main Competitor] Deep Dive
+
+### Overview
+[What they do, market position, funding, size]
+
+### Genuine Strengths
+[Be honest — what they're actually good at]
+
+### Real Weaknesses
+[Actual limitations, not just Pitcher talking points]
+
+### How to Beat Them
+**When they come up:**
+1. [Tactic]  2. [Tactic]  3. [Tactic]
+
+**Key differentiators to emphasize:**
+- [Pitcher vs. them]
+
+**Discovery questions to expose their weakness:**
+- "[question]"
+
+**Proof points:**
+- [metric or customer story]
+
+**What NOT to say:**
+- [common mistake / FUD to avoid]
+
+---
+## Battle Card Summary
+| | Pitcher AG | [Competitor] |
+|-|-----------|-------------|
+| Best For | | |
+| Mobile-First | ✅ | |
+| Offline Mode | ✅ | |
+| Implementation | | |
+| Price Point | | |
+
+---
+## Counter-Positioning Strategy
+[How to reframe the evaluation to favor Pitcher]`,
+    usr:(t,c)=>`Competitive analysis for Pitcher AG:\n\nTopic: ${t}${c?'\n\nContext:\n'+c:''}\n\nPitcher competes with Showpad, Seismic, Highspot, Salesforce, various CRM/CPQ tools. Be direct and give reps practical tactics.`
+  },
+  {
+    id:'report', icon:'📈', label:'Pipeline Report', desc:'Pipeline analysis & forecast',
+    sys:`You are a sales ops analyst at Pitcher AG. Generate insightful pipeline reports.
+
+# 📈 Sales Pipeline Report
+**Period:** [period] | **Generated:** [date]
+
+## Pipeline Summary
+| Stage | Deals | Value | Avg Size | Close % |
+|-------|-------|-------|---------|---------|
+| S0 MQL | | | | |
+| S1 Discovery | | | | |
+| S2 Demo | | | | |
+| S3 Proposal | | | | |
+| S4 Negotiation | | | | |
+| **Total** | | | | |
+
+## Forecast
+| Category | Deals | Value |
+|----------|-------|-------|
+| Commit (90%+) | | |
+| Likely (70-89%) | | |
+| Possible (40-69%) | | |
+| Pipeline (20-39%) | | |
+
+**Quota Coverage:** [X]%
+
+## 🔥 Hot Deals (Top 5)
+[Most likely to close + recommended action for each]
+
+## ⚠️ At-Risk Deals
+[Deals in danger of slipping + recovery action]
+
+## Pipeline Health
+[Velocity, age by stage, conversion rates, quality signals]
+
+## Recommended Actions
+[Top 5 to maximize this period]`,
+    usr:(t)=>`Pipeline report for Pitcher AG.\n\nData/Context: ${t}\n\nIf no specific data, create a best-practice template structure.`
+  }
+];
+
+// ── STATE ──────────────────────────────────────────────────────────────────────
+const S = {
+  skill: 'prospect',
+  output: '',
+  streaming: false,
+  history: JSON.parse(localStorage.getItem('p_hist')||'[]')
+};
+
+// ── INIT ───────────────────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  renderSkills();
+  renderHistory();
+  updateAPIStatus();
+
+  document.getElementById('ti').addEventListener('keydown', e => { if(e.key==='Enter' && !S.streaming) run(); });
+  document.getElementById('run-btn').addEventListener('click', () => { if(!S.streaming) run(); });
+  document.getElementById('set-btn').addEventListener('click', openSettings);
+  document.getElementById('set-mo').addEventListener('click', e => { if(e.target===e.currentTarget) closeSettings(); });
+  document.addEventListener('keydown', e => {
+    if(e.key==='Escape') closeSettings();
+    if((e.metaKey||e.ctrlKey) && e.key==='k'){ e.preventDefault(); const t=document.getElementById('ti'); t.focus(); t.select(); }
+  });
+});
+
+// ── RENDER SKILLS ──────────────────────────────────────────────────────────────
+function renderSkills() {
+  const scroll = document.getElementById('sk-scroll');
+  const grid = document.getElementById('wc-grid');
+  scroll.innerHTML = '';
+  grid.innerHTML = '';
+
+  SKILLS.forEach((sk, i) => {
+    const btn = document.createElement('button');
+    btn.className = `sk-btn${sk.id===S.skill?' active':''}`;
+    btn.dataset.id = sk.id;
+    btn.innerHTML = `<span class="sk-ic">${sk.icon}</span><span><span class="sk-n">${sk.label}</span><span class="sk-d">${sk.desc}</span></span>`;
+    btn.onclick = () => selectSkill(sk.id);
+    scroll.appendChild(btn);
+
+    if(i < 8) {
+      const card = document.createElement('div');
+      card.className = 'wc-card';
+      card.innerHTML = `<div class="wcc-ic">${sk.icon}</div><div class="wcc-n">${sk.label}</div><div class="wcc-d">${sk.desc}</div>`;
+      card.onclick = () => { selectSkill(sk.id); document.getElementById('ti').focus(); };
+      grid.appendChild(card);
+    }
+  });
+}
+
+function selectSkill(id) {
+  S.skill = id;
+  document.querySelectorAll('.sk-btn').forEach(b => b.classList.toggle('active', b.dataset.id===id));
+}
+
+// ── API STATUS ─────────────────────────────────────────────────────────────────
+function updateAPIStatus() {
+  const key = localStorage.getItem('p_key');
+  const dot = document.getElementById('api-dot');
+  const st = document.getElementById('api-st');
+  const banner = document.getElementById('key-banner');
+  if(key) {
+    dot.style.color = '#22c55e';
+    st.textContent = 'API Key Set';
+    if(banner){ banner.className='key-st ok'; banner.textContent=`✓ Key saved (…${key.slice(-4)})`; }
+  } else {
+    dot.style.color = '#ef4444';
+    st.textContent = 'No API Key';
+    if(banner){ banner.className='key-st no'; banner.textContent='✗ No API key set'; }
+  }
+}
+
+// ── MAIN ANALYSIS ──────────────────────────────────────────────────────────────
+async function run() {
+  const target = document.getElementById('ti').value.trim();
+  const context = document.getElementById('ctx').value.trim();
+  const apiKey = localStorage.getItem('p_key');
+  const model = document.getElementById('mdl-sel').value;
+
+  if(!target) { toast('Enter a company name or URL','err'); document.getElementById('ti').focus(); return; }
+  if(!apiKey) { toast('Add your API key in ⚙️ Settings first','err'); openSettings(); return; }
+
+  const sk = SKILLS.find(s => s.id === S.skill);
+  S.streaming = true;
+  S.output = '';
+
+  showOutput(sk, target);
+  setStatus('Preparing analysis…');
+
+  const runBtn = document.getElementById('run-btn');
+  runBtn.disabled = true;
+  runBtn.textContent = '⏳ Analyzing…';
+
+  try {
+    const resp = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'x-api-key': apiKey,
+        'anthropic-version': '2023-06-01',
+        'content-type': 'application/json',
+        'anthropic-dangerous-allow-browser': 'true'
+      },
+      body: JSON.stringify({
+        model,
+        max_tokens: 8096,
+        stream: true,
+        system: sk.sys,
+        messages: [{ role: 'user', content: sk.usr(target, context) }]
+      })
+    });
+
+    if(!resp.ok) {
+      const err = await resp.json();
+      hideStatus();
+      showError(err.error?.message || `API error ${resp.status}`);
+      return;
+    }
+
+    const reader = resp.body.getReader();
+    const dec = new TextDecoder();
+    let buf = '';
+
+    hideStatus();
+
+    while(true) {
+      const {done, value} = await reader.read();
+      if(done) break;
+      buf += dec.decode(value, {stream:true});
+      const lines = buf.split('\n');
+      buf = lines.pop();
+
+      for(const line of lines) {
+        if(!line.startsWith('data: ')) continue;
+        const raw = line.slice(6).trim();
+        if(raw === '[DONE]') continue;
+        try {
+          const msg = JSON.parse(raw);
+          if(msg.type==='content_block_delta' && msg.delta?.type==='text_delta') {
+            S.output += msg.delta.text;
+            renderMD(S.output, true);
+          }
+          if(msg.type==='message_stop') {
+            renderMD(S.output, false);
+            saveHistory(sk, target);
+            setMeta(sk, target);
+            toast(`${sk.icon} Done!`, 'ok');
+          }
+          if(msg.type==='error') { showError(msg.error?.message || 'API error'); }
+        } catch(e) {}
+      }
+    }
+
+  } catch(e) {
+    hideStatus();
+    showError(e.message || 'Network error — check your connection.');
+  }
+
+  S.streaming = false;
+  runBtn.disabled = false;
+  runBtn.textContent = '▶ Analyze';
+}
+
+// ── OUTPUT ─────────────────────────────────────────────────────────────────────
+function showOutput(sk, target) {
+  document.getElementById('wc').style.display = 'none';
+  document.getElementById('ow').style.display = 'flex';
+  document.getElementById('o-ic').textContent = sk.icon;
+  document.getElementById('o-title').textContent = `${sk.label}: ${target}`;
+  document.getElementById('o-meta').textContent = '';
+  document.getElementById('oc').innerHTML = '';
+}
+
+function showWelcome() {
+  document.getElementById('wc').style.display = 'flex';
+  document.getElementById('ow').style.display = 'none';
+  S.output = '';
+}
+
+function renderMD(md, streaming) {
+  const oc = document.getElementById('oc');
+  const scroll = document.getElementById('o-scroll');
+  let html = marked.parse(md);
+  if(streaming) html += '<span class="cursor"></span>';
+  oc.innerHTML = html;
+  if(streaming) scroll.scrollTop = scroll.scrollHeight;
+}
+
+function showError(msg) {
+  const oc = document.getElementById('oc');
+  oc.innerHTML = `<div style="padding:22px;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.3);border-radius:10px;color:#fca5a5">
+    <strong style="font-size:15px">⚠️ Error</strong>
+    <p style="margin-top:8px;color:#fca5a5">${msg}</p>
+    ${!localStorage.getItem('p_key')?'<p style="margin-top:10px;font-size:12px">👉 Click ⚙️ to add your Anthropic API key.</p>':''}
+  </div>`;
+  document.getElementById('run-btn').disabled = false;
+  document.getElementById('run-btn').textContent = '▶ Analyze';
+}
+
+function setMeta(sk, target) {
+  const t = new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+  document.getElementById('o-meta').textContent = `${sk.label} · ${target} · ${t}`;
+}
+
+// ── STATUS ─────────────────────────────────────────────────────────────────────
+function setStatus(msg) { const b=document.getElementById('stbar'); b.classList.remove('hid'); document.getElementById('st-txt').textContent=msg; }
+function hideStatus() { document.getElementById('stbar').classList.add('hid'); }
+
+// ── HISTORY ────────────────────────────────────────────────────────────────────
+function saveHistory(sk, target) {
+  S.history.unshift({id:sk.id, icon:sk.icon, label:sk.label, target, output:S.output, ts:Date.now()});
+  if(S.history.length>20) S.history=S.history.slice(0,20);
+  localStorage.setItem('p_hist', JSON.stringify(S.history));
+  renderHistory();
+}
+
+function renderHistory() {
+  const el = document.getElementById('hist-list');
+  if(!el) return;
+  if(!S.history.length) { el.innerHTML='<div style="font-size:12px;color:var(--td);padding:4px 8px">No recent analyses</div>'; return; }
+  el.innerHTML = S.history.slice(0,8).map((h,i)=>`<div class="hi" onclick="loadHistory(${i})"><span>${h.icon}</span><span class="hi-t">${h.target}</span></div>`).join('');
+}
+
+function loadHistory(i) {
+  const h = S.history[i];
+  if(!h) return;
+  const sk = SKILLS.find(s=>s.id===h.id) || {icon:h.icon,label:h.label};
+  S.output = h.output;
+  S.skill = h.id;
+  selectSkill(h.id);
+  document.getElementById('ti').value = h.target;
+  showOutput(sk, h.target);
+  hideStatus();
+  renderMD(h.output, false);
+  setMeta(sk, h.target);
+}
+
+// ── COPY / EXPORT ──────────────────────────────────────────────────────────────
+function doCopy() {
+  if(!S.output) return;
+  navigator.clipboard.writeText(S.output).then(()=>toast('Copied!','ok'));
+}
+
+function doExport() {
+  if(!S.output) return;
+  const name = document.getElementById('ti').value.trim().replace(/[^a-zA-Z0-9]/g,'-').replace(/-+/g,'-').toLowerCase()||'analysis';
+  const blob = new Blob([S.output],{type:'text/markdown'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `Pitcher-${S.skill}-${name}.md`;
+  a.click();
+  toast('Exported!','ok');
+}
+
+// ── SETTINGS ───────────────────────────────────────────────────────────────────
+function openSettings() {
+  const key = localStorage.getItem('p_key')||'';
+  const inp = document.getElementById('key-inp');
+  inp.value = key ? '●'.repeat(24)+key.slice(-4) : '';
+  inp.dataset.orig = key;
+  inp.addEventListener('focus', function h(){ if(this.value.includes('●')) this.value=''; inp.removeEventListener('focus',h); }, {once:true});
+  document.getElementById('set-mo').classList.add('open');
+  updateAPIStatus();
+}
+
+function closeSettings() { document.getElementById('set-mo').classList.remove('open'); }
+
+function saveSettings() {
+  const raw = document.getElementById('key-inp').value.trim();
+  const key = raw.includes('●') ? (document.getElementById('key-inp').dataset.orig||'') : raw;
+  const mdl = document.getElementById('mdl-sel-mo').value;
+  document.getElementById('mdl-sel').value = mdl;
+  if(key) { localStorage.setItem('p_key',key); toast('Settings saved ✓','ok'); }
+  else { localStorage.removeItem('p_key'); toast('API key cleared','ok'); }
+  closeSettings();
+  updateAPIStatus();
+}
+
+// ── TOAST ──────────────────────────────────────────────────────────────────────
+function toast(msg, type='') {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.className = `show${type?' '+type:''}`;
+  setTimeout(()=>el.className='', 3000);
+}
+</script>
+</body>
+</html>
